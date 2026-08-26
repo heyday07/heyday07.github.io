@@ -10,6 +10,9 @@
 <meta property="og:description" content="A one-person Android studio building study apps for Hanja, Korean, Japanese and English.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://heyday07.github.io/">
+<meta property="og:image" content="https://heyday07.github.io/assets/og-logo.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;800&display=swap" rel="stylesheet">
@@ -57,7 +60,7 @@ a{color:inherit}
 header{border-bottom:1px solid var(--rule)}
 .bar{display:flex;align-items:center;gap:14px;height:64px}
 .mark{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.01em;text-decoration:none}
-.moon{width:13px;height:13px;border-radius:50%;background:var(--seal);flex:none}
+.moon{width:22px;height:22px;border-radius:50%;flex:none;display:block}
 .bar nav{margin-left:auto;display:flex;gap:6px}
 .lang{
   font-family:var(--mono);font-size:12px;letter-spacing:.06em;
@@ -146,7 +149,7 @@ footer{padding:34px 0 60px;font-size:13px;color:var(--dim);display:flex;flex-wra
 
 <header>
   <div class="wrap bar">
-    <a class="mark" href="/"><span class="moon" aria-hidden="true"></span>RedMoon Lab</a>
+    <a class="mark" href="/"><img class="moon" src="assets/logo-moon.png" alt="" width="22" height="22">RedMoon Lab</a>
     <nav aria-label="Language">
       <button class="lang" data-set="en" aria-pressed="true">EN</button>
       <button class="lang" data-set="ko" aria-pressed="false">KO</button>
@@ -180,7 +183,7 @@ footer{padding:34px 0 60px;font-size:13px;color:var(--dim);display:flex;flex-wra
 
     <div class="apps">
 
-      <a class="app" href="https://play.google.com/store/apps/details?id=com.redmoon.hanjamaster">
+      <a class="app" href="hanjamaster.html">
         <div class="cell" aria-hidden="true"><span>漢</span></div>
         <div>
           <h3><span class="en">Hanja Master</span><span class="ko">한자마스터</span></h3>
@@ -189,7 +192,7 @@ footer{padding:34px 0 60px;font-size:13px;color:var(--dim);display:flex;flex-wra
             <span class="en">Every character on the syllabus, grouped by exam level, with readings, meanings and stroke order. Built for people actually sitting the test.</span>
             <span class="ko">급수별 배정한자 전체를 훈음·획순과 함께 정리했습니다. 실제로 시험을 준비하는 사람을 위한 구성입니다.</span>
           </p>
-          <span class="get"><span class="en">Google Play</span><span class="ko">구글플레이</span></span>
+          <span class="get"><span class="en">About this app</span><span class="ko">앱 자세히 보기</span></span>
           <div class="pkg">com.redmoon.hanjamaster</div>
         </div>
       </a>

@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy — RedMoon Lab</title>
 <meta name="description" content="Privacy policy for all RedMoon Lab Android applications.">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@600;800&display=swap" rel="stylesheet">
@@ -19,7 +21,7 @@ a{color:inherit}
 header{border-bottom:1px solid var(--rule)}
 .bar{display:flex;align-items:center;gap:14px;height:64px}
 .mark{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
-.moon{width:13px;height:13px;border-radius:50%;background:var(--seal);flex:none}
+.moon{width:22px;height:22px;border-radius:50%;flex:none;display:block}
 .bar nav{margin-left:auto;display:flex;gap:6px}
 .lang{font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:none;border:1px solid var(--rule);color:var(--dim);padding:5px 10px;cursor:pointer}
 .lang[aria-pressed="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink)}
@@ -39,7 +41,7 @@ footer{margin-top:56px;padding:26px 0 60px;border-top:1px solid var(--rule);font
 
 <header>
   <div class="wrap bar">
-    <a class="mark" href="index.html"><span class="moon" aria-hidden="true"></span>RedMoon Lab</a>
+    <a class="mark" href="index.html"><img class="moon" src="assets/logo-moon.png" alt="" width="22" height="22">RedMoon Lab</a>
     <nav aria-label="Language">
       <button class="lang" data-set="en" aria-pressed="true">EN</button>
       <button class="lang" data-set="ko" aria-pressed="false">KO</button>
