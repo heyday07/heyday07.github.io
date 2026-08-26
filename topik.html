@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TOPIK Korean — 11,071 vocabulary cards for TOPIK levels 1–6 | RedMoon Lab</title>
+<meta name="description" content="TOPIK Korean is an Android app with all 11,071 TOPIK vocabulary words across levels 1 to 6, defined from the Standard Korean Dictionary and reviewed with FSRS spaced repetition. Study in any of 14 languages, including English, Japanese, Chinese and Vietnamese.">
+<link rel="canonical" href="https://heyday07.github.io/topik.html">
+<meta property="og:title" content="TOPIK Korean — 11,071 vocabulary cards for TOPIK 1–6">
+<meta property="og:description" content="Every word on the TOPIK vocabulary list, defined from the Standard Korean Dictionary, reviewed with FSRS spaced repetition.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://heyday07.github.io/topik.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E6E8EA;--panel:#EFF1F2;--ink:#14171B;--dim:#5C636B;--rule:#C6CBD0;--seal:#A8231E;
+  --sans:"IBM Plex Sans KR",system-ui,sans-serif;--serif:"Noto Serif KR",serif;--mono:"IBM Plex Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}
+a{color:inherit}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+[data-lang="en"] .ko,[data-lang="ko"] .en{display:none}
+
+.cell{position:relative;display:grid;place-items:center;border:1px solid var(--rule);background:var(--panel);
+  font-family:var(--serif);font-weight:600;line-height:1;color:var(--ink)}
+.cell::before,.cell::after{content:"";position:absolute;border-color:var(--rule);border-style:dashed;border-width:0}
+.cell::before{left:0;right:0;top:50%;border-top-width:1px}
+.cell::after{top:0;bottom:0;left:50%;border-left-width:1px}
+.cell > span{position:relative;z-index:1;background:var(--panel);padding:0 .04em}
+
+header{border-bottom:1px solid var(--rule)}
+.bar{display:flex;align-items:center;gap:14px;height:64px}
+.mark{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
+.moon{width:13px;height:13px;border-radius:50%;background:var(--seal);flex:none}
+.bar nav{margin-left:auto;display:flex;gap:6px;align-items:center}
+.back{font-size:13.5px;color:var(--dim);text-decoration:none;margin-right:10px}
+.back:hover{color:var(--ink)}
+.lang{font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:none;border:1px solid var(--rule);color:var(--dim);padding:5px 10px;cursor:pointer}
+.lang[aria-pressed="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink)}
+.lang:focus-visible,a:focus-visible,.cta:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+
+/* hero */
+.hero{display:grid;grid-template-columns:200px 1fr;gap:44px;align-items:center;padding:72px 0 60px}
+.glyphbox{width:200px;height:200px;font-size:132px}
+.eyebrow-app{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
+h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4.8vw,46px);line-height:1.25;margin:0 0 18px;letter-spacing:-.015em}
+.lede{max-width:50ch;color:var(--dim);margin:0 0 28px}
+.cta{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:var(--paper);
+  text-decoration:none;padding:13px 22px;font-weight:500;font-size:15px;transition:background .16s}
+.cta:hover{background:var(--seal)}
+.cta::after{content:"→"}
+
+/* stat strip */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
+.stat{background:var(--paper);padding:24px 20px}
+.stat b{display:block;font-family:var(--serif);font-weight:800;font-size:clamp(26px,3.4vw,34px);line-height:1.1;letter-spacing:-.02em}
+.stat span{display:block;margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+
+section{padding:62px 0;border-top:1px solid var(--rule)}
+.eyebrow{display:flex;align-items:baseline;gap:12px;margin:0 0 26px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.eyebrow s{flex:1;height:1px;background:var(--rule);text-decoration:none}
+.eyebrow em{font-style:normal;color:var(--ink)}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(22px,3vw,28px);line-height:1.35;margin:0 0 14px;letter-spacing:-.01em}
+.body{max-width:60ch;color:var(--dim)}
+.body p{margin:0 0 14px}
+.body strong{color:var(--ink);font-weight:600}
+
+/* level ladder — the page's signature */
+.ladder{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:32px 0 10px}
+.lvl{background:var(--paper);padding:20px 14px 18px;text-align:center}
+.lvl .cell{width:46px;height:46px;font-size:24px;margin:0 auto 12px;background:var(--paper)}
+.lvl .cell > span{background:transparent}
+.lvl .cell.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.lvl .cell.on::before,.lvl .cell.on::after{border-color:#3A3F46}
+.lvl b{display:block;font-size:13.5px;font-weight:600}
+.lvl span.t{display:block;font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:3px;letter-spacing:.04em}
+.note{font-family:var(--mono);font-size:11.5px;color:var(--dim);letter-spacing:.03em}
+
+/* two-column feature */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:30px}
+.col{background:var(--paper);padding:28px 26px}
+.col h3{font-family:var(--serif);font-size:17px;font-weight:600;margin:0 0 9px}
+.col p{margin:0;font-size:14.5px;color:var(--dim);line-height:1.6}
+
+/* languages */
+.langs{display:flex;flex-wrap:wrap;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:26px}
+.lg{background:var(--paper);padding:18px 24px;flex:1 1 150px}
+.lg b{display:block;font-size:15px;font-weight:600}
+.lg span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+
+/* faq */
+.faq{border-top:1px solid var(--rule);margin-top:8px}
+details{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;padding:17px 2px;font-weight:500;font-size:15.5px;list-style:none;display:flex;gap:14px;align-items:baseline}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";font-family:var(--mono);color:var(--seal);flex:none}
+details[open] summary::before{content:"−"}
+details p{margin:0 0 18px 26px;color:var(--dim);font-size:15px;max-width:62ch}
+
+.tail{text-align:center;padding:70px 0 80px;border-top:1px solid var(--rule)}
+.tail h2{margin-bottom:22px}
+footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color:var(--dim);display:flex;flex-wrap:wrap;gap:6px 20px}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:28px;padding:48px 0}
+  .glyphbox{width:128px;height:128px;font-size:84px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .ladder{grid-template-columns:repeat(3,1fr)}
+  .cols{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="mark" href="index.html"><span class="moon" aria-hidden="true"></span>RedMoon Lab</a>
+    <nav aria-label="Language">
+      <a class="back" href="index.html"><span class="en">All apps</span><span class="ko">전체 앱</span></a>
+      <button class="lang" data-set="en" aria-pressed="true">EN</button>
+      <button class="lang" data-set="ko" aria-pressed="false">KO</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <div class="cell glyphbox" aria-hidden="true"><span>한</span></div>
+    <div>
+      <p class="eyebrow-app">TOPIK Korean · Android</p>
+      <h1>
+        <span class="en">Every word on the TOPIK<br>vocabulary list. All 11,071.</span>
+        <span class="ko">TOPIK 어휘 목록 전량.<br>11,071개.</span>
+      </h1>
+      <p class="lede">
+        <span class="en">Levels 1 through 6, defined from Korea's Standard Korean Dictionary, and scheduled by the FSRS spaced-repetition algorithm so you review a word right before you would have forgotten it.</span>
+        <span class="ko">1급부터 6급까지, 표준국어대사전 뜻풀이를 기반으로 정리했습니다. FSRS 간격 반복 알고리즘이 잊어버리기 직전 시점에 복습을 배치합니다.</span>
+      </p>
+      <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.topikvocab">
+        <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>11,071</b><span class="en">vocabulary cards</span><span class="ko">어휘 카드</span></div>
+    <div class="stat"><b>6</b><span class="en">TOPIK levels</span><span class="ko">TOPIK 급수</span></div>
+    <div class="stat"><b>98.5%</b><span class="en">dictionary coverage</span><span class="ko">사전 뜻풀이 적용률</span></div>
+    <div class="stat"><b>14</b><span class="en">study languages</span><span class="ko">학습 언어</span></div>
+  </div>
+
+  <section>
+    <p class="eyebrow"><em><span class="en">Coverage</span><span class="ko">수록 범위</span></em> <s></s></p>
+    <h2><span class="en">The whole list, not a selection of it.</span><span class="ko">선별본이 아니라 목록 전체.</span></h2>
+    <div class="body">
+      <p>
+        <span class="en">Most Korean vocabulary apps ship a few hundred "essential" words and stop. This one carries the complete TOPIK vocabulary list across all six levels — <strong>11,071 entries</strong> — so beginner and advanced study happen in the same app and nothing drops out between levels.</span>
+        <span class="ko">대부분의 한국어 단어 앱은 '필수 단어' 수백 개만 담고 끝납니다. 이 앱은 6개 급수의 TOPIK 어휘 목록을 <strong>11,071개 전량</strong> 수록해, 초급과 고급 학습이 한 앱 안에서 이어지고 급수 사이에서 빠지는 단어가 없습니다.</span>
+      </p>
+    </div>
+
+    <div class="ladder">
+      <div class="lvl"><div class="cell on" aria-hidden="true"><span>1</span></div><b><span class="en">Level 1</span><span class="ko">1급</span></b><span class="t">TOPIK I</span></div>
+      <div class="lvl"><div class="cell on" aria-hidden="true"><span>2</span></div><b><span class="en">Level 2</span><span class="ko">2급</span></b><span class="t">TOPIK I</span></div>
+      <div class="lvl"><div class="cell on" aria-hidden="true"><span>3</span></div><b><span class="en">Level 3</span><span class="ko">3급</span></b><span class="t">TOPIK II</span></div>
+      <div class="lvl"><div class="cell on" aria-hidden="true"><span>4</span></div><b><span class="en">Level 4</span><span class="ko">4급</span></b><span class="t">TOPIK II</span></div>
+      <div class="lvl"><div class="cell on" aria-hidden="true"><span>5</span></div><b><span class="en">Level 5</span><span class="ko">5급</span></b><span class="t">TOPIK II</span></div>
+      <div class="lvl"><div class="cell on" aria-hidden="true"><span>6</span></div><b><span class="en">Level 6</span><span class="ko">6급</span></b><span class="t">TOPIK II</span></div>
+    </div>
+    <p class="note"><span class="en">All six levels included. No level is sold separately.</span><span class="ko">6개 급수 전체 수록. 급수별 개별 판매 없음.</span></p>
+  </section>
+
+  <section>
+    <p class="eyebrow"><em><span class="en">Where the definitions come from</span><span class="ko">뜻풀이의 출처</span></em> <s></s></p>
+    <h2><span class="en">Definitions from the Standard Korean Dictionary, not from a scrape.</span><span class="ko">긁어모은 뜻이 아니라 표준국어대사전 뜻풀이.</span></h2>
+    <div class="body">
+      <p>
+        <span class="en">Each entry's Korean definition is drawn from <strong>표준국어대사전</strong>, the standard dictionary published by the National Institute of Korean Language, covering <strong>98.5%</strong> of the word list. Word-frequency data is layered on top so common senses come first instead of archaic ones.</span>
+        <span class="ko">각 표제어의 한국어 뜻풀이는 국립국어원 <strong>표준국어대사전</strong>에서 가져왔고, 어휘 목록의 <strong>98.5%</strong>에 적용되어 있습니다. 여기에 사용 빈도 데이터를 얹어 옛 뜻이 아니라 실제로 자주 쓰이는 뜻이 먼저 보이도록 했습니다.</span>
+      </p>
+      <p>
+        <span class="en">Translations into each study language are then checked pass by pass, level by level, against the Korean definition and the example sentence — not machine-translated once and shipped.</span>
+        <span class="ko">각 학습 언어 번역은 한국어 뜻풀이와 예문에 대조해 급수 단위로 여러 차례 검수합니다. 기계 번역 한 번 돌리고 배포하지 않습니다.</span>
+      </p>
+    </div>
+
+    <div class="cols">
+      <div class="col">
+        <h3><span class="en">Hanja shown where it matters</span><span class="ko">완전 한자어에는 한자 표기</span></h3>
+        <p><span class="en">Fully Sino-Korean entries carry their Hanja, so a word you meet in level 5 connects to one you learned in level 2 instead of arriving as a new shape.</span>
+           <span class="ko">완전 한자어에는 해당 한자를 함께 표시합니다. 5급에서 만난 단어가 2급에서 배운 단어와 연결되어, 매번 새로운 형태로 다가오지 않습니다.</span></p>
+      </div>
+      <div class="col">
+        <h3><span class="en">One example sentence per entry</span><span class="ko">표제어마다 예문 하나</span></h3>
+        <p><span class="en">Every card carries an example that uses the word in the sense being taught, so the meaning is anchored in a sentence rather than a gloss.</span>
+           <span class="ko">모든 카드에 해당 뜻으로 쓰인 예문이 붙습니다. 뜻풀이 한 줄이 아니라 문장 안에서 의미가 잡힙니다.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow"><em><span class="en">Review</span><span class="ko">복습</span></em> <s></s></p>
+    <h2><span class="en">FSRS decides when you see a word again.</span><span class="ko">다시 볼 시점은 FSRS가 정합니다.</span></h2>
+    <div class="body">
+      <p>
+        <span class="en">The app schedules reviews with <strong>FSRS</strong> — the same open spaced-repetition algorithm used by modern Anki setups. It models how quickly each individual card is fading for you and places the next review just before recall fails, rather than on a fixed interval ladder.</span>
+        <span class="ko">복습 일정은 <strong>FSRS</strong>로 계산합니다. 최신 Anki 환경에서 쓰는 것과 같은 공개 간격 반복 알고리즘입니다. 카드별로 기억이 흐려지는 속도를 추정해, 고정된 간격표 대신 회상이 실패하기 직전에 다음 복습을 배치합니다.</span>
+      </p>
+      <p>
+        <span class="en">Your review history stays on your device. There is no account to create and no sign-in.</span>
+        <span class="ko">복습 기록은 기기에 남습니다. 가입할 계정도, 로그인도 없습니다.</span>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow"><em><span class="en">Study language</span><span class="ko">학습 언어</span></em> <s></s></p>
+    <h2><span class="en">Study Korean from your own language.</span><span class="ko">모국어로 한국어를 공부하세요.</span></h2>
+    <div class="body">
+      <p><span class="en">Definitions and example sentences are available in all 14 languages below — every one of the 11,071 entries is translated into each of them.</span>
+         <span class="ko">뜻풀이와 예문을 아래 14개 언어로 제공합니다. 11,071개 표제어 전량이 각 언어로 번역되어 있습니다.</span></p>
+    </div>
+    <div class="langs">
+      <div class="lg"><b>English</b><span>English</span></div>
+      <div class="lg"><b>日本語</b><span>Japanese</span></div>
+      <div class="lg"><b>简体中文</b><span>Chinese (Simplified)</span></div>
+      <div class="lg"><b>繁體中文</b><span>Chinese (Traditional)</span></div>
+      <div class="lg"><b>Tiếng Việt</b><span>Vietnamese</span></div>
+      <div class="lg"><b>ไทย</b><span>Thai</span></div>
+      <div class="lg"><b>Bahasa Indonesia</b><span>Indonesian</span></div>
+      <div class="lg"><b>Bahasa Melayu</b><span>Malay</span></div>
+      <div class="lg"><b>Español</b><span>Spanish</span></div>
+      <div class="lg"><b>Português</b><span>Portuguese</span></div>
+      <div class="lg"><b>Deutsch</b><span>German</span></div>
+      <div class="lg"><b>Français</b><span>French</span></div>
+      <div class="lg"><b>Русский</b><span>Russian</span></div>
+      <div class="lg"><b>العربية</b><span>Arabic</span></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow"><em>FAQ</em> <s></s></p>
+    <div class="faq">
+      <details>
+        <summary><span class="en">Does it cover TOPIK I and TOPIK II?</span><span class="ko">TOPIK I과 II를 모두 다루나요?</span></summary>
+        <p><span class="en">Yes. Levels 1–2 correspond to TOPIK I and levels 3–6 to TOPIK II. All six are in the app.</span>
+           <span class="ko">네. 1~2급이 TOPIK I, 3~6급이 TOPIK II에 해당하며 6개 급수 모두 수록되어 있습니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">Is it free?</span><span class="ko">무료인가요?</span></summary>
+        <p><span class="en">Yes. The app is free to install and is supported by ads (banner, interstitial, and optional rewarded ads). All six levels and all 11,071 vocabulary cards are free — no level or word is behind a paywall.</span>
+           <span class="ko">네. 앱은 무료로 설치되며 광고(배너·전면·선택형 보상형)로 운영됩니다. 6개 급수와 11,071개 어휘 카드 전체가 무료이고, 급수나 단어에 잠금이 없습니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">Do I need an account?</span><span class="ko">계정이 필요한가요?</span></summary>
+        <p><span class="en">No. There is no sign-up and no login. Progress is stored locally on your device, which also means it does not sync between devices.</span>
+           <span class="ko">아니요. 가입과 로그인이 없습니다. 학습 기록은 기기에 저장되며, 그래서 기기 간 동기화는 되지 않습니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">How is this different from an Anki deck?</span><span class="ko">Anki 덱과 무엇이 다른가요?</span></summary>
+        <p><span class="en">Same scheduling idea, different starting point. An Anki deck gives you cards and leaves the content to whoever built the deck. Here the definitions come from the Standard Korean Dictionary, the translations are reviewed level by level, and the whole TOPIK list is already assembled — nothing to import or maintain.</span>
+           <span class="ko">복습 방식은 같고 출발점이 다릅니다. Anki 덱은 카드만 주고 내용의 질은 제작자에게 달려 있습니다. 이 앱은 뜻풀이가 표준국어대사전에서 오고, 번역을 급수 단위로 검수하며, TOPIK 목록 전체가 이미 구성되어 있습니다. 가져오거나 관리할 것이 없습니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">Is it available on iPhone?</span><span class="ko">아이폰에서도 쓸 수 있나요?</span></summary>
+        <p><span class="en">Not at the moment. The app is Android only, on Google Play.</span>
+           <span class="ko">현재는 안드로이드 전용이며 구글플레이에서만 제공됩니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">I found a wrong definition. What do I do?</span><span class="ko">잘못된 뜻풀이를 발견했습니다.</span></summary>
+        <p><span class="en">Email the entry and what's wrong to teamstar13000@gmail.com. I read every report, and corrections go into the next data build.</span>
+           <span class="ko">해당 표제어와 문제점을 teamstar13000@gmail.com으로 보내주세요. 전부 읽고 다음 데이터 빌드에 반영합니다.</span></p>
+      </details>
+    </div>
+  </section>
+
+  <div class="tail">
+    <h2><span class="en">Start at level 1, or jump to level 6.</span><span class="ko">1급부터, 혹은 6급부터.</span></h2>
+    <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.topikvocab">
+      <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
+    </a>
+    <p class="note" style="margin-top:18px">com.redmoon.topikvocab</p>
+  </div>
+
+  <footer>
+    <span>© <span id="yr">2026</span> RedMoon Lab</span>
+    <a href="privacy.html"><span class="en">Privacy policy</span><span class="ko">개인정보처리방침</span></a>
+    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
+    <span class="en">TOPIK is a trademark of its respective owner. This app is not affiliated with or endorsed by the TOPIK administering body.</span>
+    <span class="ko">TOPIK은 해당 권리자의 상표이며, 본 앱은 TOPIK 주관 기관과 제휴하거나 승인받은 관계가 아닙니다.</span>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement, btns=document.querySelectorAll('.lang');
+  function setLang(l){
+    root.setAttribute('data-lang',l);
+    root.setAttribute('lang',l==='ko'?'ko':'en');
+    btns.forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.set===l)); });
+    try{ localStorage.setItem('rml-lang',l); }catch(e){}
+  }
+  btns.forEach(function(b){ b.addEventListener('click',function(){ setLang(b.dataset.set); }); });
+  var saved=null;
+  try{ saved=localStorage.getItem('rml-lang'); }catch(e){}
+  if(saved!=='ko'&&saved!=='en'){ saved=(navigator.language||'').toLowerCase().indexOf('ko')===0?'ko':'en'; }
+  setLang(saved);
+  document.getElementById('yr').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
