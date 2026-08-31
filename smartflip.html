@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Trivia — 5,950 trivia cards across 14 topics | RedMoon Lab</title>
+<meta name="description" content="Smart Trivia is an Android flashcard and quiz app with 5,950 general-knowledge cards across 14 topics, spaced repetition (your choice of FSRS or SM-2), EXP/level gamification, streak badges, and your own imported card decks.">
+<link rel="canonical" href="https://heyday07.github.io/smartflip.html">
+<meta property="og:title" content="Smart Trivia — 5,950 cards, 14 topics">
+<meta property="og:description" content="A daily 5-minute trivia workout across 14 topics, plus your own imported card decks.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://heyday07.github.io/smartflip.html">
+<meta property="og:image" content="https://heyday07.github.io/assets/og-logo.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E6E8EA;--panel:#EFF1F2;--ink:#14171B;--dim:#5C636B;--rule:#C6CBD0;--seal:#A8231E;
+  --sans:"IBM Plex Sans KR",system-ui,sans-serif;--serif:"Noto Serif KR",serif;--mono:"IBM Plex Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}
+a{color:inherit}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+[data-lang="en"] .ko,[data-lang="ko"] .en{display:none}
+
+.cell{position:relative;display:grid;place-items:center;border:1px solid var(--rule);background:var(--panel);
+  font-family:var(--serif);font-weight:600;line-height:1;color:var(--ink)}
+.cell::before,.cell::after{content:"";position:absolute;border-color:var(--rule);border-style:dashed;border-width:0}
+.cell::before{left:0;right:0;top:50%;border-top-width:1px}
+.cell::after{top:0;bottom:0;left:50%;border-left-width:1px}
+.cell > span{position:relative;z-index:1;background:var(--panel);padding:0 .04em}
+
+header{border-bottom:1px solid var(--rule)}
+.bar{display:flex;align-items:center;gap:14px;height:64px}
+.mark{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
+.moon{width:22px;height:22px;border-radius:50%;flex:none;display:block}
+.bar nav{margin-left:auto;display:flex;gap:6px;align-items:center}
+.back{font-size:13.5px;color:var(--dim);text-decoration:none;margin-right:10px}
+.back:hover{color:var(--ink)}
+.lang{font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:none;border:1px solid var(--rule);color:var(--dim);padding:5px 10px;cursor:pointer}
+.lang[aria-pressed="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink)}
+.lang:focus-visible,a:focus-visible,.cta:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+
+.hero{display:grid;grid-template-columns:200px 1fr;gap:44px;align-items:center;padding:72px 0 60px}
+.glyphbox{width:200px;height:200px;font-size:110px}
+.eyebrow-app{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
+h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4.8vw,46px);line-height:1.25;margin:0 0 18px;letter-spacing:-.015em}
+.lede{max-width:50ch;color:var(--dim);margin:0 0 28px}
+.cta{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:var(--paper);
+  text-decoration:none;padding:13px 22px;font-weight:500;font-size:15px;transition:background .16s}
+.cta:hover{background:var(--seal)}
+.cta::after{content:"→"}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
+.stat{background:var(--paper);padding:24px 20px}
+.stat b{display:block;font-family:var(--serif);font-weight:800;font-size:clamp(24px,3.2vw,32px);line-height:1.1;letter-spacing:-.02em}
+.stat span{display:block;margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+
+section{padding:62px 0;border-top:1px solid var(--rule)}
+.eyebrow{display:flex;align-items:baseline;gap:12px;margin:0 0 26px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.eyebrow s{flex:1;height:1px;background:var(--rule);text-decoration:none}
+.eyebrow em{font-style:normal;color:var(--ink)}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(22px,3vw,28px);line-height:1.35;margin:0 0 14px;letter-spacing:-.01em}
+.body{max-width:60ch;color:var(--dim)}
+.body p{margin:0 0 14px}
+.body strong{color:var(--ink);font-weight:600}
+
+.topics{display:flex;flex-wrap:wrap;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:26px}
+.tp{background:var(--paper);padding:12px 18px;flex:1 1 130px;text-align:center}
+.tp b{display:block;font-size:14px;font-weight:600}
+.tp span{font-family:var(--mono);font-size:11px;color:var(--dim)}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:30px}
+.col{background:var(--paper);padding:28px 26px}
+.col h3{font-family:var(--serif);font-size:17px;font-weight:600;margin:0 0 9px}
+.col p{margin:0;font-size:14.5px;color:var(--dim);line-height:1.6}
+
+.faq{border-top:1px solid var(--rule);margin-top:8px}
+details{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;padding:17px 2px;font-weight:500;font-size:15.5px;list-style:none;display:flex;gap:14px;align-items:baseline}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";font-family:var(--mono);color:var(--seal);flex:none}
+details[open] summary::before{content:"−"}
+details p{margin:0 0 18px 26px;color:var(--dim);font-size:15px;max-width:62ch}
+
+.tail{text-align:center;padding:70px 0 80px;border-top:1px solid var(--rule)}
+.tail h2{margin-bottom:22px}
+footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color:var(--dim);display:flex;flex-wrap:wrap;gap:6px 20px}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:28px;padding:48px 0}
+  .glyphbox{width:128px;height:128px;font-size:74px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .cols{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="mark" href="index.html"><img class="moon" src="assets/logo-moon.png" alt="" width="22" height="22">RedMoon Lab</a>
+    <nav aria-label="Language">
+      <a class="back" href="index.html"><span class="en">All apps</span><span class="ko">전체 앱</span></a>
+      <button class="lang" data-set="en" aria-pressed="true">EN</button>
+      <button class="lang" data-set="ko" aria-pressed="false">KO</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <div class="cell glyphbox" aria-hidden="true"><span>?</span></div>
+    <div>
+      <p class="eyebrow-app"><span class="en">Smart Trivia · Android</span><span class="ko">Smart Trivia · Android</span></p>
+      <h1>
+        <span class="en">A 5-minute trivia workout,<br>14 topics deep.</span>
+        <span class="ko">5분짜리 지식 운동,<br>14개 분야.</span>
+      </h1>
+      <p class="lede">
+        <span class="en">5,950 general-knowledge flashcards across 14 topics — animals, geography, science, history and more — reviewed with spaced repetition and tested with quizzes. Import your own cards from Excel, CSV or PDF when you want to study something the built-in decks don't cover.</span>
+        <span class="ko">동물·지리·과학·역사 등 14개 분야, 상식 플래시카드 5,950장을 간격 반복으로 복습하고 퀴즈로 점검합니다. 기본 덱에 없는 내용은 엑셀·CSV·PDF에서 직접 카드를 가져와 공부할 수 있습니다.</span>
+      </p>
+      <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.smartflip">
+        <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>5,950</b><span class="en">trivia cards</span><span class="ko">상식 카드</span></div>
+    <div class="stat"><b>14</b><span class="en">topics</span><span class="ko">분야</span></div>
+    <div class="stat"><b>2</b><span class="en">SRS algorithms</span><span class="ko">간격 반복 알고리즘</span></div>
+    <div class="stat"><b>100</b><span class="en">levels</span><span class="ko">레벨</span></div>
+  </div>
+
+  <section>
+    <p class="eyebrow"><em><span class="en">Topics</span><span class="ko">분야</span></em> <s></s></p>
+    <h2><span class="en">14 topics, from animals to the World Cup.</span><span class="ko">동물부터 월드컵까지, 14개 분야.</span></h2>
+    <div class="topics">
+      <div class="tp"><b><span class="en">Animals</span><span class="ko">동물</span></b><span>500</span></div>
+      <div class="tp"><b><span class="en">Environment</span><span class="ko">환경</span></b><span>500</span></div>
+      <div class="tp"><b><span class="en">Flags</span><span class="ko">국기</span></b><span>200</span></div>
+      <div class="tp"><b><span class="en">Food</span><span class="ko">음식</span></b><span>500</span></div>
+      <div class="tp"><b><span class="en">Geography</span><span class="ko">지리</span></b><span>500</span></div>
+      <div class="tp"><b><span class="en">Health</span><span class="ko">건강</span></b><span>500</span></div>
+      <div class="tp"><b><span class="en">Heritage</span><span class="ko">유산</span></b><span>500</span></div>
+      <div class="tp"><b><span class="en">History</span><span class="ko">역사</span></b><span>500</span></div>
+      <div class="tp"><b>IT</b><span>500</span></div>
+      <div class="tp"><b><span class="en">Ocean</span><span class="ko">해양</span></b><span>500</span></div>
+      <div class="tp"><b><span class="en">Science</span><span class="ko">과학</span></b><span>500</span></div>
+      <div class="tp"><b><span class="en">Space</span><span class="ko">우주</span></b><span>50</span></div>
+      <div class="tp"><b><span class="en">Sports</span><span class="ko">스포츠</span></b><span>500</span></div>
+      <div class="tp"><b><span class="en">World Cup</span><span class="ko">월드컵</span></b><span>200</span></div>
+    </div>
+
+    <div class="cols" style="margin-top:36px">
+      <div class="col">
+        <h3><span class="en">Choose your algorithm</span><span class="ko">알고리즘 선택</span></h3>
+        <p><span class="en">Switch between FSRS and SM-2 spaced repetition in settings. Cards already in progress keep their existing schedule; only new cards pick up the new algorithm.</span>
+           <span class="ko">설정에서 FSRS와 SM-2 중 골라 쓸 수 있습니다. 이미 진행 중인 카드는 기존 일정을 유지하고, 새 카드부터 바뀐 알고리즘이 적용됩니다.</span></p>
+      </div>
+      <div class="col">
+        <h3><span class="en">EXP, levels, streak badges</span><span class="ko">경험치·레벨·스트릭 배지</span></h3>
+        <p><span class="en">Studying and quizzing earn EXP toward a level (1–100), and daily streaks unlock badges at 7, 14, 30, 60, 100 and 365 days.</span>
+           <span class="ko">학습·퀴즈로 경험치를 얻어 레벨(1~100)이 오르고, 7·14·30·60·100·365일 연속 학습마다 배지가 열립니다.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow"><em><span class="en">Your own cards</span><span class="ko">나만의 카드</span></em> <s></s></p>
+    <h2><span class="en">Import from Excel, CSV or PDF, and study them the same way.</span><span class="ko">엑셀·CSV·PDF에서 가져와 똑같이 학습합니다.</span></h2>
+    <div class="body">
+      <p>
+        <span class="en">Bring in your own material with column mapping for spreadsheets, or plain text extraction from a PDF. Imported cards go through a review screen before they're studyable, and a finished deck can be shared as a single file to another Smart Trivia user.</span>
+        <span class="ko">엑셀·CSV는 어느 열이 질문·답변인지 매핑하고, PDF는 텍스트를 추출해 가져옵니다. 가져온 카드는 검수 화면을 거쳐야 학습에 사용되며, 완성된 덱은 파일 하나로 다른 Smart Trivia 사용자에게 공유할 수 있습니다.</span>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow"><em>FAQ</em> <s></s></p>
+    <div class="faq">
+      <details>
+        <summary><span class="en">Is it free?</span><span class="ko">무료인가요?</span></summary>
+        <p><span class="en">Yes. The app is free to install and supported by ads. All 14 built-in topics, both SRS algorithms, and card importing are free.</span>
+           <span class="ko">네. 무료로 설치되며 광고로 운영됩니다. 기본 14개 분야, 두 간격 반복 알고리즘, 카드 가져오기 전부 무료입니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">Do I need an account?</span><span class="ko">계정이 필요한가요?</span></summary>
+        <p><span class="en">No sign-up is required to play. The app signs you in anonymously in the background for cloud backup of your progress; no name, email or phone number is collected.</span>
+           <span class="ko">가입 없이 이용할 수 있습니다. 학습 기록 클라우드 백업을 위해 백그라운드에서 익명으로 로그인되며, 이름·이메일·전화번호는 수집하지 않습니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">Is it available on iPhone?</span><span class="ko">아이폰에서도 쓸 수 있나요?</span></summary>
+        <p><span class="en">Not at the moment. The app is Android only, on Google Play.</span>
+           <span class="ko">현재는 안드로이드 전용이며 구글플레이에서만 제공됩니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">I found a wrong answer in a built-in card.</span><span class="ko">기본 카드에서 잘못된 답을 발견했습니다.</span></summary>
+        <p><span class="en">Email the card's topic and content to teamstar13000@gmail.com. I read every report, and corrections go into the next update.</span>
+           <span class="ko">해당 카드의 분야와 내용을 teamstar13000@gmail.com으로 보내주세요. 전부 읽고 다음 업데이트에 반영합니다.</span></p>
+      </details>
+    </div>
+  </section>
+
+  <div class="tail">
+    <h2><span class="en">Five minutes. Fourteen topics.</span><span class="ko">5분, 14개 분야.</span></h2>
+    <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.smartflip">
+      <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
+    </a>
+    <p class="note" style="margin-top:18px;font-family:var(--mono);font-size:11.5px;color:var(--dim)">com.redmoon.smartflip</p>
+  </div>
+
+  <footer>
+    <span>© <span id="yr">2026</span> RedMoon Lab</span>
+    <a href="privacy.html"><span class="en">Privacy policy</span><span class="ko">개인정보처리방침</span></a>
+    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement, btns=document.querySelectorAll('.lang');
+  function setLang(l){
+    root.setAttribute('data-lang',l);
+    root.setAttribute('lang',l==='ko'?'ko':'en');
+    btns.forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.set===l)); });
+    try{ localStorage.setItem('rml-lang',l); }catch(e){}
+  }
+  btns.forEach(function(b){ b.addEventListener('click',function(){ setLang(b.dataset.set); }); });
+  var saved=null;
+  try{ saved=localStorage.getItem('rml-lang'); }catch(e){}
+  if(saved!=='ko'&&saved!=='en'){ saved=(navigator.language||'').toLowerCase().indexOf('ko')===0?'ko':'en'; }
+  setLang(saved);
+  document.getElementById('yr').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>

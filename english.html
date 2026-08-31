@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily English Words — 13,567 words organized by CEFR and Korean school level | RedMoon Lab</title>
+<meta name="description" content="Daily English Words is an Android app with 13,567 headwords, 20,568 senses and 41,136 example sentences, organized by CEFR level and by Korean school-system levels (elementary, middle, high, CSAT, TOEIC, TOEFL), reviewed with spaced repetition.">
+<link rel="canonical" href="https://heyday07.github.io/english.html">
+<meta property="og:title" content="Daily English Words — 13,567 words, CEFR + Korean school levels">
+<meta property="og:description" content="13,567 headwords and 41,136 example sentences, organized the way Korean schools and exams grade English.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://heyday07.github.io/english.html">
+<meta property="og:image" content="https://heyday07.github.io/assets/og-logo.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E6E8EA;--panel:#EFF1F2;--ink:#14171B;--dim:#5C636B;--rule:#C6CBD0;--seal:#A8231E;
+  --sans:"IBM Plex Sans KR",system-ui,sans-serif;--serif:"Noto Serif KR",serif;--mono:"IBM Plex Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}
+a{color:inherit}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+[data-lang="en"] .ko,[data-lang="ko"] .en{display:none}
+
+.cell{position:relative;display:grid;place-items:center;border:1px solid var(--rule);background:var(--panel);
+  font-family:var(--serif);font-weight:600;line-height:1;color:var(--ink)}
+.cell::before,.cell::after{content:"";position:absolute;border-color:var(--rule);border-style:dashed;border-width:0}
+.cell::before{left:0;right:0;top:50%;border-top-width:1px}
+.cell::after{top:0;bottom:0;left:50%;border-left-width:1px}
+.cell > span{position:relative;z-index:1;background:var(--panel);padding:0 .04em}
+
+header{border-bottom:1px solid var(--rule)}
+.bar{display:flex;align-items:center;gap:14px;height:64px}
+.mark{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
+.moon{width:22px;height:22px;border-radius:50%;flex:none;display:block}
+.bar nav{margin-left:auto;display:flex;gap:6px;align-items:center}
+.back{font-size:13.5px;color:var(--dim);text-decoration:none;margin-right:10px}
+.back:hover{color:var(--ink)}
+.lang{font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:none;border:1px solid var(--rule);color:var(--dim);padding:5px 10px;cursor:pointer}
+.lang[aria-pressed="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink)}
+.lang:focus-visible,a:focus-visible,.cta:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+
+.hero{display:grid;grid-template-columns:200px 1fr;gap:44px;align-items:center;padding:72px 0 60px}
+.glyphbox{width:200px;height:200px;font-size:132px}
+.eyebrow-app{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
+h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4.8vw,46px);line-height:1.25;margin:0 0 18px;letter-spacing:-.015em}
+.lede{max-width:50ch;color:var(--dim);margin:0 0 28px}
+.cta{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:var(--paper);
+  text-decoration:none;padding:13px 22px;font-weight:500;font-size:15px;transition:background .16s}
+.cta:hover{background:var(--seal)}
+.cta::after{content:"→"}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
+.stat{background:var(--paper);padding:24px 20px}
+.stat b{display:block;font-family:var(--serif);font-weight:800;font-size:clamp(24px,3.2vw,32px);line-height:1.1;letter-spacing:-.02em}
+.stat span{display:block;margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+
+section{padding:62px 0;border-top:1px solid var(--rule)}
+.eyebrow{display:flex;align-items:baseline;gap:12px;margin:0 0 26px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.eyebrow s{flex:1;height:1px;background:var(--rule);text-decoration:none}
+.eyebrow em{font-style:normal;color:var(--ink)}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(22px,3vw,28px);line-height:1.35;margin:0 0 14px;letter-spacing:-.01em}
+.body{max-width:60ch;color:var(--dim)}
+.body p{margin:0 0 14px}
+.body strong{color:var(--ink);font-weight:600}
+
+.ladder{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:32px 0 10px}
+.lvl{background:var(--paper);padding:16px 8px 14px;text-align:center}
+.lvl b{display:block;font-size:14px;font-weight:600}
+.lvl span.t{display:block;font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:3px;letter-spacing:.04em}
+.note{font-family:var(--mono);font-size:11.5px;color:var(--dim);letter-spacing:.03em}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:30px}
+.col{background:var(--paper);padding:28px 26px}
+.col h3{font-family:var(--serif);font-size:17px;font-weight:600;margin:0 0 9px}
+.col p{margin:0;font-size:14.5px;color:var(--dim);line-height:1.6}
+
+.faq{border-top:1px solid var(--rule);margin-top:8px}
+details{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;padding:17px 2px;font-weight:500;font-size:15.5px;list-style:none;display:flex;gap:14px;align-items:baseline}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";font-family:var(--mono);color:var(--seal);flex:none}
+details[open] summary::before{content:"−"}
+details p{margin:0 0 18px 26px;color:var(--dim);font-size:15px;max-width:62ch}
+
+.tail{text-align:center;padding:70px 0 80px;border-top:1px solid var(--rule)}
+.tail h2{margin-bottom:22px}
+footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color:var(--dim);display:flex;flex-wrap:wrap;gap:6px 20px}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:28px;padding:48px 0}
+  .glyphbox{width:128px;height:128px;font-size:84px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .ladder{grid-template-columns:repeat(3,1fr)}
+  .cols{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="mark" href="index.html"><img class="moon" src="assets/logo-moon.png" alt="" width="22" height="22">RedMoon Lab</a>
+    <nav aria-label="Language">
+      <a class="back" href="index.html"><span class="en">All apps</span><span class="ko">전체 앱</span></a>
+      <button class="lang" data-set="en" aria-pressed="true">EN</button>
+      <button class="lang" data-set="ko" aria-pressed="false">KO</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <div class="cell glyphbox" aria-hidden="true"><span>A</span></div>
+    <div>
+      <p class="eyebrow-app"><span class="en">Daily English Words · Android</span><span class="ko">매일매일 영단어 · Android</span></p>
+      <h1>
+        <span class="en">13,567 words, graded<br>the way Korean schools grade them.</span>
+        <span class="ko">한국 학교가 나누는 방식 그대로<br>13,567개 영단어.</span>
+      </h1>
+      <p class="lede">
+        <span class="en">Every word carries a CEFR level and a Korean school-system level — elementary, middle school, high school, CSAT, TOEIC, TOEFL — so you can study toward the exam you actually have, not an abstract global scale.</span>
+        <span class="ko">모든 단어에 CEFR 등급과 한국 학제 기준(초등·중등·고등·수능·토익·토플)이 함께 붙어 있어, 막연한 국제 기준이 아니라 실제로 앞둔 시험 기준으로 공부할 수 있습니다.</span>
+      </p>
+      <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.english_vocab">
+        <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>13,567</b><span class="en">headwords</span><span class="ko">표제어</span></div>
+    <div class="stat"><b>20,568</b><span class="en">senses</span><span class="ko">의미(sense)</span></div>
+    <div class="stat"><b>41,136</b><span class="en">example sentences</span><span class="ko">예문</span></div>
+    <div class="stat"><b>1,076</b><span class="en">idioms &amp; phrases</span><span class="ko">숙어·구동사</span></div>
+  </div>
+
+  <section>
+    <p class="eyebrow"><em><span class="en">Graded two ways</span><span class="ko">두 가지 기준</span></em> <s></s></p>
+    <h2><span class="en">CEFR for the world, Korean school levels for the exam in front of you.</span><span class="ko">세계 기준은 CEFR, 눈앞의 시험은 한국 학제 기준.</span></h2>
+    <div class="body">
+      <p>
+        <span class="en">Every one of the 13,567 headwords carries a CEFR level (A1 through C2) and a set of Korean school-system sub-levels — elementary basic, middle school, high school, CSAT (수능), TOEIC starter, TOEFL basic — so the same word list serves a middle schooler and a TOEIC test-taker without either one wading through the wrong tier.</span>
+        <span class="ko">13,567개 표제어 전부에 CEFR 등급(A1~C2)과 한국 학제 세부 등급(초등 기초·중등·고등·수능·토익 스타터·토플 기초)이 함께 붙어 있습니다. 같은 단어 목록으로 중학생과 토익 준비생이 각자 맞는 단계만 골라 공부할 수 있습니다.</span>
+      </p>
+    </div>
+
+    <div class="ladder">
+      <div class="lvl"><b>A1</b><span class="t">1,115</span></div>
+      <div class="lvl"><b>A2</b><span class="t">1,919</span></div>
+      <div class="lvl"><b>B1</b><span class="t">3,465</span></div>
+      <div class="lvl"><b>B2</b><span class="t">5,615</span></div>
+      <div class="lvl"><b>C1</b><span class="t">1,402</span></div>
+      <div class="lvl"><b>C2</b><span class="t">51</span></div>
+    </div>
+    <p class="note"><span class="en">CEFR distribution across all 13,567 headwords.</span><span class="ko">13,567개 표제어의 CEFR 등급 분포.</span></p>
+
+    <div class="cols">
+      <div class="col">
+        <h3><span class="en">One word, every sense</span><span class="ko">한 단어, 모든 의미</span></h3>
+        <p><span class="en">20,568 senses across 13,567 words — a word with more than one meaning gets more than one card, each with its own example.</span>
+           <span class="ko">13,567개 단어에 의미(sense) 20,568개. 뜻이 여러 개인 단어는 카드도 여러 장으로 나뉘고, 각각 자기 예문을 갖습니다.</span></p>
+      </div>
+      <div class="col">
+        <h3><span class="en">1,076 idioms and phrasal verbs</span><span class="ko">숙어·구동사 1,076개</span></h3>
+        <p><span class="en">A separate idiom set — "back to square one," "give up," and the like — each anchored to a base word and an example sentence.</span>
+           <span class="ko">별도 숙어 세트가 있습니다 — "back to square one", "give up" 같은 표현이 기본 단어와 예문에 함께 묶여 있습니다.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow"><em><span class="en">Review</span><span class="ko">복습</span></em> <s></s></p>
+    <h2><span class="en">A daily portion, reviewed on an FSRS schedule.</span><span class="ko">하루 분량을 FSRS 일정으로 복습.</span></h2>
+    <div class="body">
+      <p>
+        <span class="en">Words arrive in a fixed daily portion and come back for review right before you'd forget them, using the same FSRS spaced-repetition engine used across RedMoon Lab's vocabulary apps. Your review history stays on your device.</span>
+        <span class="ko">단어는 하루 분량씩 나오고, 잊어버리기 직전 시점에 복습이 돌아옵니다 — RedMoon Lab의 다른 어휘 앱과 동일한 FSRS 간격 반복 엔진입니다. 복습 기록은 기기에 남습니다.</span>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow"><em>FAQ</em> <s></s></p>
+    <div class="faq">
+      <details>
+        <summary><span class="en">Is it free?</span><span class="ko">무료인가요?</span></summary>
+        <p><span class="en">Yes. The app is free to install and supported by ads. All 13,567 words across every level are free. An optional ad-removal pass (a purchase, not an auto-renewing subscription) removes the ads.</span>
+           <span class="ko">네. 무료로 설치되며 광고로 운영됩니다. 전체 등급 13,567개 단어가 무료입니다. 광고 없이 쓰고 싶으면 광고 제거 이용권(구매형, 자동갱신 구독 아님)이 있습니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">Which exam does the Korean level track cover?</span><span class="ko">한국 학제 등급은 어떤 시험 기준인가요?</span></summary>
+        <p><span class="en">Six sub-levels mapped to how English is actually taught and tested in Korea: elementary, middle school, high school, the CSAT (수능), TOEIC, and TOEFL.</span>
+           <span class="ko">초등·중등·고등·수능·토익·토플, 총 6단계로 실제 한국 교육·시험 체계에 맞췄습니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">Do I need an account?</span><span class="ko">계정이 필요한가요?</span></summary>
+        <p><span class="en">No. There is no sign-up and no login. Progress is stored locally on your device.</span>
+           <span class="ko">아니요. 가입과 로그인이 없습니다. 학습 기록은 기기에 저장됩니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">Is it available on iPhone?</span><span class="ko">아이폰에서도 쓸 수 있나요?</span></summary>
+        <p><span class="en">Not at the moment. The app is Android only, on Google Play.</span>
+           <span class="ko">현재는 안드로이드 전용이며 구글플레이에서만 제공됩니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">I found a wrong definition or example.</span><span class="ko">잘못된 뜻풀이나 예문을 발견했습니다.</span></summary>
+        <p><span class="en">Email the word and what's wrong to teamstar13000@gmail.com. I read every report, and corrections go into the next update.</span>
+           <span class="ko">해당 단어와 문제점을 teamstar13000@gmail.com으로 보내주세요. 전부 읽고 다음 업데이트에 반영합니다.</span></p>
+      </details>
+    </div>
+  </section>
+
+  <div class="tail">
+    <h2><span class="en">Start where your exam starts.</span><span class="ko">당신의 시험이 시작되는 곳에서.</span></h2>
+    <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.english_vocab">
+      <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
+    </a>
+    <p class="note" style="margin-top:18px">com.redmoon.english_vocab</p>
+  </div>
+
+  <footer>
+    <span>© <span id="yr">2026</span> RedMoon Lab</span>
+    <a href="privacy.html"><span class="en">Privacy policy</span><span class="ko">개인정보처리방침</span></a>
+    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement, btns=document.querySelectorAll('.lang');
+  function setLang(l){
+    root.setAttribute('data-lang',l);
+    root.setAttribute('lang',l==='ko'?'ko':'en');
+    btns.forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.set===l)); });
+    try{ localStorage.setItem('rml-lang',l); }catch(e){}
+  }
+  btns.forEach(function(b){ b.addEventListener('click',function(){ setLang(b.dataset.set); }); });
+  var saved=null;
+  try{ saved=localStorage.getItem('rml-lang'); }catch(e){}
+  if(saved!=='ko'&&saved!=='en'){ saved=(navigator.language||'').toLowerCase().indexOf('ko')===0?'ko':'en'; }
+  setLang(saved);
+  document.getElementById('yr').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>

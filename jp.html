@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Japanese Words — 9,511 words ranked by how easy they are for Korean speakers | RedMoon Lab</title>
+<meta name="description" content="Daily Japanese Words is an Android app with 9,511 Japanese vocabulary cards and 1,809 kanji, delivered in small daily batches, ranked by how close each word is to its Korean Sino-Korean cognate, with spaced repetition and Korean Hanja-reading cross-reference.">
+<link rel="canonical" href="https://heyday07.github.io/jp.html">
+<meta property="og:title" content="Daily Japanese Words — 9,511 words, ranked for Korean speakers">
+<meta property="og:description" content="A daily batch of Japanese vocabulary, ranked by how close each word is to its Korean Hanja cognate.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://heyday07.github.io/jp.html">
+<meta property="og:image" content="https://heyday07.github.io/assets/og-logo.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E6E8EA;--panel:#EFF1F2;--ink:#14171B;--dim:#5C636B;--rule:#C6CBD0;--seal:#A8231E;
+  --sans:"IBM Plex Sans KR",system-ui,sans-serif;--serif:"Noto Serif KR",serif;--mono:"IBM Plex Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}
+a{color:inherit}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+[data-lang="en"] .ko,[data-lang="ko"] .en{display:none}
+
+.cell{position:relative;display:grid;place-items:center;border:1px solid var(--rule);background:var(--panel);
+  font-family:var(--serif);font-weight:600;line-height:1;color:var(--ink)}
+.cell::before,.cell::after{content:"";position:absolute;border-color:var(--rule);border-style:dashed;border-width:0}
+.cell::before{left:0;right:0;top:50%;border-top-width:1px}
+.cell::after{top:0;bottom:0;left:50%;border-left-width:1px}
+.cell > span{position:relative;z-index:1;background:var(--panel);padding:0 .04em}
+
+header{border-bottom:1px solid var(--rule)}
+.bar{display:flex;align-items:center;gap:14px;height:64px}
+.mark{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
+.moon{width:22px;height:22px;border-radius:50%;flex:none;display:block}
+.bar nav{margin-left:auto;display:flex;gap:6px;align-items:center}
+.back{font-size:13.5px;color:var(--dim);text-decoration:none;margin-right:10px}
+.back:hover{color:var(--ink)}
+.lang{font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:none;border:1px solid var(--rule);color:var(--dim);padding:5px 10px;cursor:pointer}
+.lang[aria-pressed="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink)}
+.lang:focus-visible,a:focus-visible,.cta:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+
+.hero{display:grid;grid-template-columns:200px 1fr;gap:44px;align-items:center;padding:72px 0 60px}
+.glyphbox{width:200px;height:200px;font-size:132px}
+.eyebrow-app{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
+h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4.8vw,46px);line-height:1.25;margin:0 0 18px;letter-spacing:-.015em}
+.lede{max-width:50ch;color:var(--dim);margin:0 0 28px}
+.cta{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:var(--paper);
+  text-decoration:none;padding:13px 22px;font-weight:500;font-size:15px;transition:background .16s}
+.cta:hover{background:var(--seal)}
+.cta::after{content:"→"}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
+.stat{background:var(--paper);padding:24px 20px}
+.stat b{display:block;font-family:var(--serif);font-weight:800;font-size:clamp(24px,3.2vw,32px);line-height:1.1;letter-spacing:-.02em}
+.stat span{display:block;margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+
+section{padding:62px 0;border-top:1px solid var(--rule)}
+.eyebrow{display:flex;align-items:baseline;gap:12px;margin:0 0 26px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.eyebrow s{flex:1;height:1px;background:var(--rule);text-decoration:none}
+.eyebrow em{font-style:normal;color:var(--ink)}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(22px,3vw,28px);line-height:1.35;margin:0 0 14px;letter-spacing:-.01em}
+.body{max-width:60ch;color:var(--dim)}
+.body p{margin:0 0 14px}
+.body strong{color:var(--ink);font-weight:600}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:30px}
+.col{background:var(--paper);padding:28px 26px}
+.col h3{font-family:var(--serif);font-size:17px;font-weight:600;margin:0 0 9px}
+.col p{margin:0;font-size:14.5px;color:var(--dim);line-height:1.6}
+
+.faq{border-top:1px solid var(--rule);margin-top:8px}
+details{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;padding:17px 2px;font-weight:500;font-size:15.5px;list-style:none;display:flex;gap:14px;align-items:baseline}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";font-family:var(--mono);color:var(--seal);flex:none}
+details[open] summary::before{content:"−"}
+details p{margin:0 0 18px 26px;color:var(--dim);font-size:15px;max-width:62ch}
+
+.tail{text-align:center;padding:70px 0 80px;border-top:1px solid var(--rule)}
+.tail h2{margin-bottom:22px}
+footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color:var(--dim);display:flex;flex-wrap:wrap;gap:6px 20px}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:28px;padding:48px 0}
+  .glyphbox{width:128px;height:128px;font-size:84px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .cols{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="mark" href="index.html"><img class="moon" src="assets/logo-moon.png" alt="" width="22" height="22">RedMoon Lab</a>
+    <nav aria-label="Language">
+      <a class="back" href="index.html"><span class="en">All apps</span><span class="ko">전체 앱</span></a>
+      <button class="lang" data-set="en" aria-pressed="true">EN</button>
+      <button class="lang" data-set="ko" aria-pressed="false">KO</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <div class="cell glyphbox" aria-hidden="true"><span>あ</span></div>
+    <div>
+      <p class="eyebrow-app"><span class="en">Daily Japanese Words · Android</span><span class="ko">매일매일 일본어 단어 · Android</span></p>
+      <h1>
+        <span class="en">Japanese vocabulary, ranked by how much<br>you already know.</span>
+        <span class="ko">이미 알고 있는 만큼<br>순서를 매긴 일본어 단어.</span>
+      </h1>
+      <p class="lede">
+        <span class="en">9,511 words and 1,809 kanji, delivered a day's portion at a time. Every word is graded by how close it sits to a Korean Sino-Korean cognate — so the words you'd guess right on sound come first.</span>
+        <span class="ko">단어 9,511개와 한자 1,809자를 하루 분량씩 내어줍니다. 모든 단어는 한국어 한자어와 발음이 얼마나 가까운지로 등급이 매겨져 있어, 소리만 듣고도 뜻이 짐작되는 단어부터 먼저 나옵니다.</span>
+      </p>
+      <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.jpvocab">
+        <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>9,511</b><span class="en">vocabulary cards</span><span class="ko">어휘 카드</span></div>
+    <div class="stat"><b>1,809</b><span class="en">kanji</span><span class="ko">한자</span></div>
+    <div class="stat"><b>29</b><span class="en">chapters</span><span class="ko">챕터</span></div>
+    <div class="stat"><b>1,808</b><span class="en">kanji with Korean reading</span><span class="ko">한국 한자음 대조</span></div>
+  </div>
+
+  <section>
+    <p class="eyebrow"><em><span class="en">Why Korean speakers learn Japanese fast</span><span class="ko">한국어 화자가 일본어를 빨리 배우는 이유</span></em> <s></s></p>
+    <h2><span class="en">A huge share of Japanese vocabulary is Sino-Japanese — and so is Korean.</span><span class="ko">일본어 어휘의 상당수는 한자어이고, 한국어도 그렇습니다.</span></h2>
+    <div class="body">
+      <p>
+        <span class="en">The app ranks every word by a five-tier "transfer grade" — how close its sound and meaning sit to the Korean word built from the same Chinese characters. Words in the easiest tier (T1) already make up <strong>5,310 of the 9,511</strong> cards, so more than half the vocabulary arrives sounding like something you already half-know.</span>
+        <span class="ko">모든 단어에 5단계 '전이 등급'을 매겨, 같은 한자로 만들어진 한국어 단어와 소리·뜻이 얼마나 가까운지 보여줍니다. 가장 쉬운 등급(T1)만 해도 <strong>9,511개 중 5,310개</strong> — 절반 넘는 단어가 이미 반쯤 아는 것처럼 들립니다.</span>
+      </p>
+      <p>
+        <span class="en">Each of the 1,809 kanji also carries its Korean Hanja sound side by side with its Japanese on'yomi — <strong>1,808 of them</strong> — so you see directly why 年 sounds like "년" in Korean and "ネン" in Japanese, instead of memorizing the two as unrelated facts.</span>
+        <span class="ko">한자 1,809자 중 <strong>1,808자</strong>에는 일본어 음독과 나란히 한국 한자음이 붙어 있습니다. 年이 한국어로 '년', 일본어로 'ネン'인 이유를 따로 외우지 않고 바로 눈으로 확인합니다.</span>
+      </p>
+    </div>
+
+    <div class="cols">
+      <div class="col">
+        <h3><span class="en">A day's portion, not an endless list</span><span class="ko">하루 분량, 끝없는 목록 아님</span></h3>
+        <p><span class="en">Words come out of 29 chapters in small daily batches instead of one long list, so a session fits on the train.</span>
+           <span class="ko">29개 챕터에서 하루치씩만 꺼내 오므로, 지하철에서 끝낼 만큼 짧게 학습합니다.</span></p>
+      </div>
+      <div class="col">
+        <h3><span class="en">Spaced repetition, English and Korean glosses</span><span class="ko">간격 반복 + 영어·한국어 뜻풀이</span></h3>
+        <p><span class="en">Every card carries an example sentence and both an English and Korean gloss, and comes back on an FSRS spaced-repetition schedule.</span>
+           <span class="ko">모든 카드에 예문과 영어·한국어 뜻풀이가 함께 있고, FSRS 간격 반복 일정에 따라 다시 나옵니다.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow"><em>FAQ</em> <s></s></p>
+    <div class="faq">
+      <details>
+        <summary><span class="en">Is it free?</span><span class="ko">무료인가요?</span></summary>
+        <p><span class="en">Yes. The app is free to install and supported by ads. All 9,511 words and 1,809 kanji are free. An optional ad-removal pass (monthly or yearly — a purchase, not an auto-renewing subscription) removes the ads.</span>
+           <span class="ko">네. 무료로 설치되며 광고로 운영됩니다. 9,511개 단어와 1,809자 한자 전체가 무료입니다. 광고 없이 쓰고 싶으면 광고 제거 이용권(월/년 — 구매형, 자동갱신 구독 아님)이 있습니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">Do I need to know Hangul or basic grammar first?</span><span class="ko">한글이나 기초 문법을 먼저 알아야 하나요?</span></summary>
+        <p><span class="en">The app assumes you can already read hiragana/katakana and focuses purely on vocabulary — it's not a from-scratch beginner course.</span>
+           <span class="ko">히라가나·가타카나를 이미 읽을 수 있다고 전제하고 어휘에만 집중합니다. 처음부터 배우는 입문 강의는 아닙니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">Do I need an account?</span><span class="ko">계정이 필요한가요?</span></summary>
+        <p><span class="en">No. There is no sign-up and no login. Progress is stored locally on your device.</span>
+           <span class="ko">아니요. 가입과 로그인이 없습니다. 학습 기록은 기기에 저장됩니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">Is it available on iPhone?</span><span class="ko">아이폰에서도 쓸 수 있나요?</span></summary>
+        <p><span class="en">Not at the moment. The app is Android only, on Google Play.</span>
+           <span class="ko">현재는 안드로이드 전용이며 구글플레이에서만 제공됩니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">I found a wrong word or reading.</span><span class="ko">잘못된 단어나 독음을 발견했습니다.</span></summary>
+        <p><span class="en">Email the word and what's wrong to teamstar13000@gmail.com. I read every report, and corrections go into the next update.</span>
+           <span class="ko">해당 단어와 문제점을 teamstar13000@gmail.com으로 보내주세요. 전부 읽고 다음 업데이트에 반영합니다.</span></p>
+      </details>
+    </div>
+  </section>
+
+  <div class="tail">
+    <h2><span class="en">A day's words. Nine thousand five hundred to go.</span><span class="ko">하루치 단어, 9,511개 중.</span></h2>
+    <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.jpvocab">
+      <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
+    </a>
+    <p class="note" style="margin-top:18px;font-family:var(--mono);font-size:11.5px;color:var(--dim)">com.redmoon.jpvocab</p>
+  </div>
+
+  <footer>
+    <span>© <span id="yr">2026</span> RedMoon Lab</span>
+    <a href="privacy.html"><span class="en">Privacy policy</span><span class="ko">개인정보처리방침</span></a>
+    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement, btns=document.querySelectorAll('.lang');
+  function setLang(l){
+    root.setAttribute('data-lang',l);
+    root.setAttribute('lang',l==='ko'?'ko':'en');
+    btns.forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.set===l)); });
+    try{ localStorage.setItem('rml-lang',l); }catch(e){}
+  }
+  btns.forEach(function(b){ b.addEventListener('click',function(){ setLang(b.dataset.set); }); });
+  var saved=null;
+  try{ saved=localStorage.getItem('rml-lang'); }catch(e){}
+  if(saved!=='ko'&&saved!=='en'){ saved=(navigator.language||'').toLowerCase().indexOf('ko')===0?'ko':'en'; }
+  setLang(saved);
+  document.getElementById('yr').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>

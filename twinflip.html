@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Memory Game — Brain Training — 150 stages across 5 worlds | RedMoon Lab</title>
+<meta name="description" content="Memory Game - Brain Training is an Android card-matching puzzle with 150 stages across 5 worlds, gimmick mechanics, a weekly challenge, and a local two-player versus mode, in Korean, English and Japanese.">
+<link rel="canonical" href="https://heyday07.github.io/twinflip.html">
+<meta property="og:title" content="Memory Game — 150 stages, 5 worlds">
+<meta property="og:description" content="A card-matching puzzle with 150 stages, weekly challenges and local versus mode.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://heyday07.github.io/twinflip.html">
+<meta property="og:image" content="https://heyday07.github.io/assets/og-logo.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E6E8EA;--panel:#EFF1F2;--ink:#14171B;--dim:#5C636B;--rule:#C6CBD0;--seal:#A8231E;
+  --sans:"IBM Plex Sans KR",system-ui,sans-serif;--serif:"Noto Serif KR",serif;--mono:"IBM Plex Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}
+a{color:inherit}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+[data-lang="en"] .ko,[data-lang="ko"] .en{display:none}
+
+.cell{position:relative;display:grid;place-items:center;border:1px solid var(--rule);background:var(--panel);
+  font-family:var(--serif);font-weight:600;line-height:1;color:var(--ink)}
+.cell::before,.cell::after{content:"";position:absolute;border-color:var(--rule);border-style:dashed;border-width:0}
+.cell::before{left:0;right:0;top:50%;border-top-width:1px}
+.cell::after{top:0;bottom:0;left:50%;border-left-width:1px}
+.cell > span{position:relative;z-index:1;background:var(--panel);padding:0 .04em}
+
+header{border-bottom:1px solid var(--rule)}
+.bar{display:flex;align-items:center;gap:14px;height:64px}
+.mark{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
+.moon{width:22px;height:22px;border-radius:50%;flex:none;display:block}
+.bar nav{margin-left:auto;display:flex;gap:6px;align-items:center}
+.back{font-size:13.5px;color:var(--dim);text-decoration:none;margin-right:10px}
+.back:hover{color:var(--ink)}
+.lang{font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:none;border:1px solid var(--rule);color:var(--dim);padding:5px 10px;cursor:pointer}
+.lang[aria-pressed="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink)}
+.lang:focus-visible,a:focus-visible,.cta:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+
+.hero{display:grid;grid-template-columns:200px 1fr;gap:44px;align-items:center;padding:72px 0 60px}
+.glyphbox{width:200px;height:200px;font-size:96px}
+.eyebrow-app{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
+h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4.8vw,46px);line-height:1.25;margin:0 0 18px;letter-spacing:-.015em}
+.lede{max-width:50ch;color:var(--dim);margin:0 0 28px}
+.cta{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:var(--paper);
+  text-decoration:none;padding:13px 22px;font-weight:500;font-size:15px;transition:background .16s}
+.cta:hover{background:var(--seal)}
+.cta::after{content:"→"}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
+.stat{background:var(--paper);padding:24px 20px}
+.stat b{display:block;font-family:var(--serif);font-weight:800;font-size:clamp(24px,3.2vw,32px);line-height:1.1;letter-spacing:-.02em}
+.stat span{display:block;margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+
+section{padding:62px 0;border-top:1px solid var(--rule)}
+.eyebrow{display:flex;align-items:baseline;gap:12px;margin:0 0 26px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.eyebrow s{flex:1;height:1px;background:var(--rule);text-decoration:none}
+.eyebrow em{font-style:normal;color:var(--ink)}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(22px,3vw,28px);line-height:1.35;margin:0 0 14px;letter-spacing:-.01em}
+.body{max-width:60ch;color:var(--dim)}
+.body p{margin:0 0 14px}
+.body strong{color:var(--ink);font-weight:600}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:30px}
+.col{background:var(--paper);padding:28px 26px}
+.col h3{font-family:var(--serif);font-size:17px;font-weight:600;margin:0 0 9px}
+.col p{margin:0;font-size:14.5px;color:var(--dim);line-height:1.6}
+
+.faq{border-top:1px solid var(--rule);margin-top:8px}
+details{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;padding:17px 2px;font-weight:500;font-size:15.5px;list-style:none;display:flex;gap:14px;align-items:baseline}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";font-family:var(--mono);color:var(--seal);flex:none}
+details[open] summary::before{content:"−"}
+details p{margin:0 0 18px 26px;color:var(--dim);font-size:15px;max-width:62ch}
+
+.tail{text-align:center;padding:70px 0 80px;border-top:1px solid var(--rule)}
+.tail h2{margin-bottom:22px}
+footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color:var(--dim);display:flex;flex-wrap:wrap;gap:6px 20px}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:28px;padding:48px 0}
+  .glyphbox{width:128px;height:128px;font-size:64px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .cols{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="mark" href="index.html"><img class="moon" src="assets/logo-moon.png" alt="" width="22" height="22">RedMoon Lab</a>
+    <nav aria-label="Language">
+      <a class="back" href="index.html"><span class="en">All apps</span><span class="ko">전체 앱</span></a>
+      <button class="lang" data-set="en" aria-pressed="true">EN</button>
+      <button class="lang" data-set="ko" aria-pressed="false">KO</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <div class="cell glyphbox" aria-hidden="true"><span>♣</span></div>
+    <div>
+      <p class="eyebrow-app"><span class="en">Memory Game — Brain Training · Android</span><span class="ko">Memory Game — Brain Training · Android</span></p>
+      <h1>
+        <span class="en">150 stages.<br>5 worlds. One memory.</span>
+        <span class="ko">150스테이지,<br>5개 월드, 하나의 기억력.</span>
+      </h1>
+      <p class="lede">
+        <span class="en">Flip cards to find matching pairs across 150 stages in 5 themed worlds, each adding new gimmicks — reshuffling, fading cards, traps, locked tiles. Play solo, race the weekly challenge, or go head-to-head on the same phone.</span>
+        <span class="ko">150개 스테이지, 5개 테마 월드를 거치며 카드를 뒤집어 짝을 맞춥니다. 월드마다 재섞기·페이드·함정·잠금 같은 새 기믹이 추가됩니다. 혼자 하거나, 주간 챌린지에 도전하거나, 같은 폰으로 마주 앉아 2인 대전도 할 수 있습니다.</span>
+      </p>
+      <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.twinflip">
+        <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>150</b><span class="en">stages</span><span class="ko">스테이지</span></div>
+    <div class="stat"><b>5</b><span class="en">worlds</span><span class="ko">월드</span></div>
+    <div class="stat"><b>3</b><span class="en">languages</span><span class="ko">지원 언어</span></div>
+    <div class="stat"><b>2</b><span class="en">local versus mode</span><span class="ko">2인 대전</span></div>
+  </div>
+
+  <section>
+    <p class="eyebrow"><em><span class="en">Gimmicks</span><span class="ko">기믹</span></em> <s></s></p>
+    <h2><span class="en">Each world adds a new way to trip you up.</span><span class="ko">월드마다 새로운 방해 요소가 추가됩니다.</span></h2>
+    <div class="body">
+      <p>
+        <span class="en">Beyond the first world's plain matching, later stages add reshuffle (cards move after a flip), fade (a matched pair briefly disappears from memory), traps, locked cards that need a key pair first, dark tiles, and rotating boards — sometimes combined on the same stage.</span>
+        <span class="ko">첫 월드의 단순 매칭을 지나면 재섞기(뒤집은 뒤 카드 위치가 바뀜), 페이드(맞춘 짝이 잠깐 사라짐), 함정, 열쇠 짝이 먼저 필요한 잠금 카드, 암전 타일, 회전 보드가 추가되고, 한 스테이지에 여러 개가 겹치기도 합니다.</span>
+      </p>
+    </div>
+
+    <div class="cols">
+      <div class="col">
+        <h3><span class="en">Weekly challenge</span><span class="ko">주간 챌린지</span></h3>
+        <p><span class="en">Three gimmick types are randomly picked each week for a challenge mode that rotates without repeating the same combination.</span>
+           <span class="ko">매주 6종 기믹 중 3개를 무작위로 뽑아 챌린지를 구성해, 같은 조합이 반복되지 않고 매주 새롭게 돌아갑니다.</span></p>
+      </div>
+      <div class="col">
+        <h3><span class="en">Local two-player versus</span><span class="ko">로컬 2인 대전</span></h3>
+        <p><span class="en">Take turns on the same device — a correct match earns you another turn, just like the tabletop version of the game.</span>
+           <span class="ko">한 기기로 번갈아 플레이합니다. 짝을 맞추면 한 턴을 더 받는, 원래 카드 게임 방식 그대로입니다.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow"><em>FAQ</em> <s></s></p>
+    <div class="faq">
+      <details>
+        <summary><span class="en">Is it free?</span><span class="ko">무료인가요?</span></summary>
+        <p><span class="en">Yes. The app is free to install and supported by ads. There is no in-app purchase — every stage, world and mode is free.</span>
+           <span class="ko">네. 무료로 설치되며 광고로 운영됩니다. 인앱결제가 없고, 모든 스테이지·월드·모드가 무료입니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">Do I need an account?</span><span class="ko">계정이 필요한가요?</span></summary>
+        <p><span class="en">No sign-up is required to play. The game signs you in anonymously in the background so daily challenge scores can appear on a ranking; no name, email or phone number is collected.</span>
+           <span class="ko">플레이에 가입이 필요하지 않습니다. 데일리 챌린지 순위를 위해 백그라운드에서 익명으로 로그인되며, 이름·이메일·전화번호는 수집하지 않습니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">Which languages does it support?</span><span class="ko">어떤 언어를 지원하나요?</span></summary>
+        <p><span class="en">Korean, English and Japanese.</span>
+           <span class="ko">한국어, 영어, 일본어를 지원합니다.</span></p>
+      </details>
+      <details>
+        <summary><span class="en">Is it available on iPhone?</span><span class="ko">아이폰에서도 쓸 수 있나요?</span></summary>
+        <p><span class="en">Not at the moment. The app is Android only, on Google Play.</span>
+           <span class="ko">현재는 안드로이드 전용이며 구글플레이에서만 제공됩니다.</span></p>
+      </details>
+    </div>
+  </section>
+
+  <div class="tail">
+    <h2><span class="en">Flip the first card. 150 stages to go.</span><span class="ko">첫 카드를 뒤집으세요. 150스테이지가 기다립니다.</span></h2>
+    <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.twinflip">
+      <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
+    </a>
+    <p class="note" style="margin-top:18px;font-family:var(--mono);font-size:11.5px;color:var(--dim)">com.redmoon.twinflip</p>
+  </div>
+
+  <footer>
+    <span>© <span id="yr">2026</span> RedMoon Lab</span>
+    <a href="privacy.html"><span class="en">Privacy policy</span><span class="ko">개인정보처리방침</span></a>
+    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement, btns=document.querySelectorAll('.lang');
+  function setLang(l){
+    root.setAttribute('data-lang',l);
+    root.setAttribute('lang',l==='ko'?'ko':'en');
+    btns.forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.set===l)); });
+    try{ localStorage.setItem('rml-lang',l); }catch(e){}
+  }
+  btns.forEach(function(b){ b.addEventListener('click',function(){ setLang(b.dataset.set); }); });
+  var saved=null;
+  try{ saved=localStorage.getItem('rml-lang'); }catch(e){}
+  if(saved!=='ko'&&saved!=='en'){ saved=(navigator.language||'').toLowerCase().indexOf('ko')===0?'ko':'en'; }
+  setLang(saved);
+  document.getElementById('yr').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
