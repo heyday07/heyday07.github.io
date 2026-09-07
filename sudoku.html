@@ -56,7 +56,7 @@ h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4.8vw,46px);lin
 .cta:hover{background:var(--seal)}
 .cta::after{content:"→"}
 
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
 .stat{background:var(--paper);padding:24px 20px}
 .stat b{display:block;font-family:var(--serif);font-weight:800;font-size:clamp(24px,3.2vw,32px);line-height:1.1;letter-spacing:-.02em}
 .stat span{display:block;margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
@@ -90,7 +90,7 @@ footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color
 @media (max-width:860px){
   .hero{grid-template-columns:1fr;gap:28px;padding:48px 0}
   .glyphbox{width:128px;height:128px;font-size:70px}
-  .stats{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(3,1fr)}
   .cols{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
