@@ -56,6 +56,7 @@ h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4.8vw,46px);lin
   text-decoration:none;padding:13px 22px;font-weight:500;font-size:15px;transition:background .16s}
 .cta:hover{background:var(--seal)}
 .cta::after{content:"→"}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
 
 /* stat strip */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
@@ -136,7 +137,7 @@ footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color
   <div class="hero">
     <div class="cell glyphbox" aria-hidden="true"><span>한</span></div>
     <div>
-      <p class="eyebrow-app">TOPIK Korean · Android</p>
+      <p class="eyebrow-app">TOPIK Korean · Android · iOS</p>
       <h1>
         <span class="en">Every word on the TOPIK<br>vocabulary list. All 11,071.</span>
         <span class="ko">TOPIK 어휘 목록 전량.<br>11,071개.</span>
@@ -145,9 +146,14 @@ footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color
         <span class="en">Levels 1 through 6, defined from Korea's Standard Korean Dictionary, and scheduled by the FSRS spaced-repetition algorithm so you review a word right before you would have forgotten it.</span>
         <span class="ko">1급부터 6급까지, 표준국어대사전 뜻풀이를 기반으로 정리했습니다. FSRS 간격 반복 알고리즘이 잊어버리기 직전 시점에 복습을 배치합니다.</span>
       </p>
-      <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.topikvocab">
-        <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
-      </a>
+      <div class="cta-row">
+        <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.topikvocab">
+          <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
+        </a>
+        <a class="cta" href="https://apps.apple.com/app/topik-korean-learn-korean/id6814852323">
+          <span class="en">Download on the App Store</span><span class="ko">App Store에서 받기</span>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -303,9 +309,14 @@ footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color
 
   <div class="tail">
     <h2><span class="en">Start at level 1, or jump to level 6.</span><span class="ko">1급부터, 혹은 6급부터.</span></h2>
-    <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.topikvocab">
-      <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
-    </a>
+    <div class="cta-row">
+      <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.topikvocab">
+        <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
+      </a>
+      <a class="cta" href="https://apps.apple.com/app/topik-korean-learn-korean/id6814852323">
+        <span class="en">Download on the App Store</span><span class="ko">App Store에서 받기</span>
+      </a>
+    </div>
     <p class="note" style="margin-top:18px">com.redmoon.topikvocab</p>
   </div>
 
