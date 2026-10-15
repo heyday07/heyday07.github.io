@@ -55,6 +55,7 @@ h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4.8vw,46px);lin
   text-decoration:none;padding:13px 22px;font-weight:500;font-size:15px;transition:background .16s}
 .cta:hover{background:var(--seal)}
 .cta::after{content:"→"}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
 
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
 .stat{background:var(--paper);padding:24px 20px}
@@ -114,7 +115,7 @@ footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color
   <div class="hero">
     <div class="cell glyphbox" aria-hidden="true"><img src="assets/icon-sudoku.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
     <div>
-      <p class="eyebrow-app"><span class="en">Daily Sudoku · Android</span><span class="ko">Daily Sudoku · Android</span></p>
+      <p class="eyebrow-app"><span class="en">Daily Sudoku · Android · iOS</span><span class="ko">Daily Sudoku · Android · iOS</span></p>
       <h1>
         <span class="en">A sudoku a day,<br>tuned to your level.</span>
         <span class="ko">매일 한 판,<br>내 수준에 맞게.</span>
@@ -123,9 +124,14 @@ footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color
         <span class="en">Four difficulty tiers — Easy, Medium, Hard, Expert — each generated to a target number of given cells, plus a daily challenge everyone gets the same puzzle for.</span>
         <span class="ko">쉬움·보통·어려움·전문가 4단계 난이도가 목표 힌트 칸 수에 맞춰 생성되고, 모두가 같은 날 같은 문제를 받는 데일리 챌린지도 있습니다.</span>
       </p>
-      <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.sudoku">
-        <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
-      </a>
+      <div class="cta-row">
+        <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.sudoku">
+          <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
+        </a>
+        <a class="cta" href="https://apps.apple.com/app/id6819275133">
+          <span class="en">Download on the App Store</span><span class="ko">App Store에서 받기</span>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -174,17 +180,22 @@ footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color
       </details>
       <details>
         <summary><span class="en">Is it available on iPhone?</span><span class="ko">아이폰에서도 쓸 수 있나요?</span></summary>
-        <p><span class="en">Not at the moment. The app is Android only, on Google Play.</span>
-           <span class="ko">현재는 안드로이드 전용이며 구글플레이에서만 제공됩니다.</span></p>
+        <p><span class="en">Yes. Daily Sudoku is available on both Google Play and the App Store.</span>
+           <span class="ko">네. 구글플레이와 앱스토어 모두에서 받을 수 있습니다.</span></p>
       </details>
     </div>
   </section>
 
   <div class="tail">
     <h2><span class="en">Today's puzzle is waiting.</span><span class="ko">오늘의 퍼즐이 기다립니다.</span></h2>
-    <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.sudoku">
-      <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
-    </a>
+    <div class="cta-row" style="justify-content:center">
+      <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.sudoku">
+        <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
+      </a>
+      <a class="cta" href="https://apps.apple.com/app/id6819275133">
+        <span class="en">Download on the App Store</span><span class="ko">App Store에서 받기</span>
+      </a>
+    </div>
     <p class="note" style="margin-top:18px;font-family:var(--mono);font-size:11.5px;color:var(--dim)">com.redmoon.sudoku</p>
   </div>
 
