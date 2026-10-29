@@ -208,8 +208,8 @@ p{margin:0}
 @media (max-width:760px){.plans{grid-template-columns:1fr}}
 
 /* language chips */
-.lang-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
-@media (max-width:1060px){.lang-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
+.lang-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px} /* 15 languages = 3 full rows */
+@media (max-width:900px){.lang-grid{grid-template-columns:repeat(3,1fr)}} /* 5 rows */
 .lang-grid div{background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:12px 14px}
 .lang-grid b{display:block;font-weight:700;font-size:15px}
 .lang-grid span{display:block;font-size:12.5px;color:var(--faint)}
@@ -314,7 +314,9 @@ p{margin:0}
   .faq details{padding:0 18px}
   .faq summary{font-size:15.5px;padding:16px 0}
   .cta-band{margin-bottom:56px;border-radius:24px;padding:32px 22px}
-  .lang-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .lang-grid{gap:8px}
+  .lang-grid div{padding:10px 10px}
+  .lang-grid b{font-size:13.5px}
 }
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
