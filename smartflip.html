@@ -44,17 +44,21 @@ header{border-bottom:1px solid var(--rule)}
 .back:hover{color:var(--ink)}
 .lang{font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:none;border:1px solid var(--rule);color:var(--dim);padding:5px 10px;cursor:pointer}
 .lang[aria-pressed="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink)}
-.lang:focus-visible,a:focus-visible,.cta:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+.lang:focus-visible,a:focus-visible,.badge:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
 
 .hero{display:grid;grid-template-columns:200px 1fr;gap:44px;align-items:center;padding:72px 0 60px}
 .glyphbox{width:200px;height:200px;font-size:110px}
 .eyebrow-app{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
 h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4.8vw,46px);line-height:1.25;margin:0 0 18px;letter-spacing:-.015em}
 .lede{max-width:50ch;color:var(--dim);margin:0 0 28px}
-.cta{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:var(--paper);
-  text-decoration:none;padding:13px 22px;font-weight:500;font-size:15px;transition:background .16s}
-.cta:hover{background:var(--seal)}
-.cta::after{content:"→"}
+/* official store badges — Google PNG has transparent padding, cropped so both read at the same height */
+.badges{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.tail .badges{justify-content:center}
+.badge{--bh:44px;display:inline-block;height:var(--bh);overflow:hidden;line-height:0;border-radius:7px;transition:opacity .16s}
+.badge:hover{opacity:.8}
+.badge img{display:block;height:var(--bh);width:auto}
+.badge.gp img.en{height:calc(var(--bh)*250/168);margin:calc(var(--bh)*-41/168)}
+.badge.gp img.ko{height:calc(var(--bh)*250/192);margin:calc(var(--bh)*-29/192) 0}
 
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
 .stat{background:var(--paper);padding:24px 20px}
@@ -128,9 +132,7 @@ footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color
         <span class="en">5,950 general-knowledge flashcards across 14 topics — animals, geography, science, history and more — reviewed with spaced repetition and tested with quizzes. Import your own cards from Excel, CSV or PDF when you want to study something the built-in decks don't cover.</span>
         <span class="ko">동물·지리·과학·역사 등 14개 분야, 상식 플래시카드 5,950장을 간격 반복으로 복습하고 퀴즈로 점검합니다. 기본 덱에 없는 내용은 엑셀·CSV·PDF에서 직접 카드를 가져와 공부할 수 있습니다.</span>
       </p>
-      <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.smartflip">
-        <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
-      </a>
+      <div class="badges"><a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.smartflip"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"></a></div>
     </div>
   </div>
 
@@ -214,9 +216,7 @@ footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color
 
   <div class="tail">
     <h2><span class="en">Five minutes. Fourteen topics.</span><span class="ko">하루 5분, 14개 분야 상식.</span></h2>
-    <a class="cta" href="https://play.google.com/store/apps/details?id=com.redmoon.smartflip">
-      <span class="en">Get it on Google Play</span><span class="ko">구글플레이에서 받기</span>
-    </a>
+    <div class="badges"><a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.smartflip"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"></a></div>
     <p class="note" style="margin-top:18px;font-family:var(--mono);font-size:11.5px;color:var(--dim)">com.redmoon.smartflip</p>
   </div>
 
