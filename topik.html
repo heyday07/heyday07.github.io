@@ -3,348 +3,345 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TOPIK Korean — 11,071 vocabulary cards for TOPIK levels 1–6 | RedMoon Lab</title>
-<meta name="description" content="TOPIK Korean is an Android app with all 11,071 TOPIK vocabulary words across levels 1 to 6, defined from the Standard Korean Dictionary and reviewed with FSRS spaced repetition. Study in any of 14 languages, including English, Japanese, Chinese and Vietnamese.">
+<script src="assets/lang.js?v=2"></script>
+<title>TOPIK Korean — Korean for TOPIK levels 1–6 | RedMoon Lab</title>
+<meta name="description" content="TOPIK Korean is an Android and iOS app for learning Korean: 11,071 TOPIK vocabulary cards with Standard Korean Dictionary definitions, 228 essential grammar points, 60 conversations with natural voices, a 40-lesson foundation course and TOPIK mock exams — with definitions in 14 languages.">
 <link rel="canonical" href="https://heyday07.github.io/topik.html">
-<meta property="og:title" content="TOPIK Korean — 11,071 vocabulary cards for TOPIK 1–6">
-<meta property="og:description" content="Every word on the TOPIK vocabulary list, defined from the Standard Korean Dictionary, reviewed with FSRS spaced repetition.">
+<meta property="og:title" content="TOPIK Korean — everything for TOPIK 1–6 in one app">
+<meta property="og:description" content="11,071 words, 228 grammar points, 60 conversations and mock exams, with definitions in 14 languages.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://heyday07.github.io/topik.html">
 <meta property="og:image" content="https://heyday07.github.io/assets/og-logo.png">
+<meta name="theme-color" content="#129A72">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-:root{
-  --paper:#E6E8EA;--panel:#EFF1F2;--ink:#14171B;--dim:#5C636B;--rule:#C6CBD0;--seal:#A8231E;
-  --sans:"IBM Plex Sans KR",system-ui,sans-serif;--serif:"Noto Serif KR",serif;--mono:"IBM Plex Mono",monospace;
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}
-a{color:inherit}
-.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
-[data-lang="en"] .ko,[data-lang="ko"] .en{display:none}
-
-.cell{position:relative;display:grid;place-items:center;border:1px solid var(--rule);background:var(--panel);
-  font-family:var(--serif);font-weight:600;line-height:1;color:var(--ink)}
-.cell::before,.cell::after{content:"";position:absolute;border-color:var(--rule);border-style:dashed;border-width:0}
-.cell::before{left:0;right:0;top:50%;border-top-width:1px}
-.cell::after{top:0;bottom:0;left:50%;border-left-width:1px}
-.cell > span{position:relative;z-index:1;background:var(--panel);padding:0 .04em}
-
-header{border-bottom:1px solid var(--rule)}
-.bar{display:flex;align-items:center;gap:14px;height:64px}
-.mark{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
-.moon{width:22px;height:22px;border-radius:50%;flex:none;display:block}
-.bar nav{margin-left:auto;display:flex;gap:6px;align-items:center}
-.back{font-size:13.5px;color:var(--dim);text-decoration:none;margin-right:10px}
-.back:hover{color:var(--ink)}
-.lang{font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:none;border:1px solid var(--rule);color:var(--dim);padding:5px 10px;cursor:pointer}
-.lang[aria-pressed="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink)}
-.lang:focus-visible,a:focus-visible,.badge:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
-
-/* hero */
-.hero{display:grid;grid-template-columns:200px 1fr;gap:44px;align-items:center;padding:72px 0 60px}
-.glyphbox{width:200px;height:200px;font-size:132px}
-.eyebrow-app{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
-h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4.8vw,46px);line-height:1.25;margin:0 0 18px;letter-spacing:-.015em}
-.lede{max-width:50ch;color:var(--dim);margin:0 0 28px}
-/* official store badges — Google PNG has transparent padding, cropped so both read at the same height */
-.badges{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.tail .badges{justify-content:center}
-.badge{--bh:44px;display:inline-block;height:var(--bh);overflow:hidden;line-height:0;border-radius:7px;transition:opacity .16s}
-.badge:hover{opacity:.8}
-.badge img{display:block;height:var(--bh);width:auto}
-.badge.gp img.en{height:calc(var(--bh)*250/168);width:calc(var(--bh)*646/168);margin:calc(var(--bh)*-41/168)}
-.badge.gp img.ko{height:calc(var(--bh)*250/192);width:calc(var(--bh)*646/192);margin:calc(var(--bh)*-29/192) 0}
-/* fixed widths so the row does not shift while badges load */
-.badge.as img.en{width:calc(var(--bh)*119.66/40)}
-.badge.as img.ko{width:calc(var(--bh)*129.7/40)}
-
-/* stat strip */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
-.stat{background:var(--paper);padding:24px 20px}
-.stat b{display:block;font-family:var(--serif);font-weight:800;font-size:clamp(26px,3.4vw,34px);line-height:1.1;letter-spacing:-.02em}
-.stat span{display:block;margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
-
-section{padding:62px 0;border-top:1px solid var(--rule)}
-.eyebrow{display:flex;align-items:baseline;gap:12px;margin:0 0 26px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-.eyebrow s{flex:1;height:1px;background:var(--rule);text-decoration:none}
-.eyebrow em{font-style:normal;color:var(--ink)}
-h2{font-family:var(--serif);font-weight:600;font-size:clamp(22px,3vw,28px);line-height:1.35;margin:0 0 14px;letter-spacing:-.01em}
-.body{max-width:60ch;color:var(--dim)}
-.body p{margin:0 0 14px}
-.body strong{color:var(--ink);font-weight:600}
-
-/* level ladder — the page's signature */
-.ladder{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:32px 0 10px}
-.lvl{background:var(--paper);padding:20px 14px 18px;text-align:center}
-.lvl .cell{width:46px;height:46px;font-size:24px;margin:0 auto 12px;background:var(--paper)}
-.lvl .cell > span{background:transparent}
-.lvl .cell.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
-.lvl .cell.on::before,.lvl .cell.on::after{border-color:#3A3F46}
-.lvl b{display:block;font-size:13.5px;font-weight:600}
-.lvl span.t{display:block;font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:3px;letter-spacing:.04em}
-.note{font-family:var(--mono);font-size:11.5px;color:var(--dim);letter-spacing:.03em}
-
-/* two-column feature */
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:30px}
-.col{background:var(--paper);padding:28px 26px}
-.col h3{font-family:var(--serif);font-size:17px;font-weight:600;margin:0 0 9px}
-.col p{margin:0;font-size:14.5px;color:var(--dim);line-height:1.6}
-
-/* languages */
-.langs{display:flex;flex-wrap:wrap;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:26px}
-.lg{background:var(--paper);padding:18px 24px;flex:1 1 150px}
-.lg b{display:block;font-size:15px;font-weight:600}
-.lg span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
-
-/* faq */
-.faq{border-top:1px solid var(--rule);margin-top:8px}
-details{border-bottom:1px solid var(--rule)}
-summary{cursor:pointer;padding:17px 2px;font-weight:500;font-size:15.5px;list-style:none;display:flex;gap:14px;align-items:baseline}
-summary::-webkit-details-marker{display:none}
-summary::before{content:"+";font-family:var(--mono);color:var(--seal);flex:none}
-details[open] summary::before{content:"−"}
-details p{margin:0 0 18px 26px;color:var(--dim);font-size:15px;max-width:62ch}
-
-.tail{text-align:center;padding:70px 0 80px;border-top:1px solid var(--rule)}
-.tail h2{margin-bottom:22px}
-footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color:var(--dim);display:flex;flex-wrap:wrap;gap:6px 20px}
-
-@media (max-width:860px){
-  .hero{grid-template-columns:1fr;gap:28px;padding:48px 0}
-  .glyphbox{width:128px;height:128px;font-size:84px}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .ladder{grid-template-columns:repeat(3,1fr)}
-  .cols{grid-template-columns:1fr}
-}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=3">
 </head>
-<body>
+<body style="--accent:#129A72">
 
-<header>
-  <div class="wrap bar">
-    <a class="mark" href="index.html"><img class="moon" src="assets/logo-moon.png" alt="" width="22" height="22">RedMoon Lab</a>
-    <nav aria-label="Language">
-      <a class="back" href="index.html"><span class="en">All apps</span><span class="ko">전체 앱</span></a>
-      <button class="lang" data-set="en" aria-pressed="true">EN</button>
-      <button class="lang" data-set="ko" aria-pressed="false">KO</button>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="assets/logo-moon.png" alt="" width="26" height="26">RedMoon Lab</a>
+    <nav class="head-nav" aria-label="Site">
+      <a class="hide-sm" href="index.html"><span class="ko">전체 앱</span><span class="en">All apps</span><span class="ja">アプリ一覧</span></a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button data-set="ko" aria-pressed="false">KO</button>
+        <button data-set="en" aria-pressed="false">EN</button>
+        <button data-set="ja" aria-pressed="false">JP</button>
+      </div>
     </nav>
   </div>
 </header>
 
-<main class="wrap">
+<main>
 
-  <div class="hero">
-    <div class="cell glyphbox" aria-hidden="true"><span>한</span></div>
-    <div>
-      <p class="eyebrow-app">TOPIK Korean · Android · iOS</p>
-      <h1>
-        <span class="en">Every word on the TOPIK<br>vocabulary list. All 11,071.</span>
-        <span class="ko">TOPIK 어휘 11,071개,<br>하나도 빠짐없이.</span>
-      </h1>
-      <p class="lede">
-        <span class="en">Levels 1 through 6, defined from Korea's Standard Korean Dictionary, and scheduled by the FSRS spaced-repetition algorithm so you review a word right before you would have forgotten it.</span>
-        <span class="ko">1급부터 6급까지, 표준국어대사전 뜻풀이를 기반으로 정리했습니다. FSRS 간격 반복 알고리즘이 잊어버리기 직전에 복습하도록 일정을 잡아 줍니다.</span>
-      </p>
-      <div class="badges">
-        <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.topikvocab"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"></a>
-        <a class="badge as" href="https://apps.apple.com/app/topik-korean-learn-korean/id6814852323"><img class="en" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us" alt="Download on the App Store" loading="lazy"><img class="ko" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/ko-kr" alt="App Store에서 다운로드" loading="lazy"></a>
-      </div>
-    </div>
-  </div>
-
-  <div class="stats">
-    <div class="stat"><b>11,071</b><span class="en">vocabulary cards</span><span class="ko">어휘 카드</span></div>
-    <div class="stat"><b>6</b><span class="en">TOPIK levels</span><span class="ko">TOPIK 급수</span></div>
-    <div class="stat"><b>98.5%</b><span class="en">dictionary coverage</span><span class="ko">표준국어대사전 뜻풀이 비율</span></div>
-    <div class="stat"><b>14</b><span class="en">study languages</span><span class="ko">학습 언어</span></div>
-  </div>
-
-  <section>
-    <p class="eyebrow"><em><span class="en">Coverage</span><span class="ko">수록 범위</span></em> <s></s></p>
-    <h2><span class="en">The whole list, not a selection of it.</span><span class="ko">일부만 고른 것이 아니라 목록 전체를 담았습니다.</span></h2>
-    <div class="body">
-      <p>
-        <span class="en">Most Korean vocabulary apps ship a few hundred "essential" words and stop. This one carries the complete TOPIK vocabulary list across all six levels — <strong>11,071 entries</strong> — so beginner and advanced study happen in the same app and nothing drops out between levels.</span>
-        <span class="ko">대부분의 한국어 단어 앱은 '필수 단어' 수백 개만 담고 끝납니다. 이 앱은 6개 급수의 TOPIK 어휘 <strong>11,071개</strong>를 모두 담아, 초급부터 고급까지 한 앱에서 이어서 공부할 수 있고 급수 사이에 빠지는 단어가 없습니다.</span>
-      </p>
-    </div>
-
-    <div class="ladder">
-      <div class="lvl"><div class="cell on" aria-hidden="true"><span>1</span></div><b><span class="en">Level 1</span><span class="ko">1급</span></b><span class="t">TOPIK I</span></div>
-      <div class="lvl"><div class="cell on" aria-hidden="true"><span>2</span></div><b><span class="en">Level 2</span><span class="ko">2급</span></b><span class="t">TOPIK I</span></div>
-      <div class="lvl"><div class="cell on" aria-hidden="true"><span>3</span></div><b><span class="en">Level 3</span><span class="ko">3급</span></b><span class="t">TOPIK II</span></div>
-      <div class="lvl"><div class="cell on" aria-hidden="true"><span>4</span></div><b><span class="en">Level 4</span><span class="ko">4급</span></b><span class="t">TOPIK II</span></div>
-      <div class="lvl"><div class="cell on" aria-hidden="true"><span>5</span></div><b><span class="en">Level 5</span><span class="ko">5급</span></b><span class="t">TOPIK II</span></div>
-      <div class="lvl"><div class="cell on" aria-hidden="true"><span>6</span></div><b><span class="en">Level 6</span><span class="ko">6급</span></b><span class="t">TOPIK II</span></div>
-    </div>
-    <p class="note"><span class="en">All six levels included. No level is sold separately.</span><span class="ko">6개 급수가 모두 들어 있습니다. 급수를 따로 구매할 필요가 없습니다.</span></p>
-  </section>
-
-  <section>
-    <p class="eyebrow"><em><span class="en">Where the definitions come from</span><span class="ko">뜻풀이의 출처</span></em> <s></s></p>
-    <h2><span class="en">Definitions from the Standard Korean Dictionary, not from a scrape.</span><span class="ko">인터넷에서 모은 뜻이 아니라 표준국어대사전 뜻풀이입니다.</span></h2>
-    <div class="body">
-      <p>
-        <span class="en">Each entry's Korean definition is drawn from <strong>표준국어대사전</strong>, the standard dictionary published by the National Institute of Korean Language, covering <strong>98.5%</strong> of the word list. Word-frequency data is layered on top so common senses come first instead of archaic ones.</span>
-        <span class="ko">각 표제어의 한국어 뜻풀이는 국립국어원 <strong>표준국어대사전</strong>에서 가져왔고, 전체 단어의 <strong>98.5%</strong>에 이 뜻풀이를 썼습니다. 여기에 사용 빈도 데이터를 더해, 옛 뜻보다 실제로 자주 쓰이는 뜻이 먼저 보이도록 했습니다.</span>
-      </p>
-      <p>
-        <span class="en">Translations into each study language are then checked pass by pass, level by level, against the Korean definition and the example sentence — not machine-translated once and shipped.</span>
-        <span class="ko">각 학습 언어의 번역은 한국어 뜻풀이와 예문에 맞춰 급수별로 여러 차례 검수합니다. 기계 번역을 한 번 돌리고 끝내지 않습니다.</span>
-      </p>
-    </div>
-
-    <div class="cols">
-      <div class="col">
-        <h3><span class="en">Hanja shown where it matters</span><span class="ko">한자어에는 한자를 함께 표시</span></h3>
-        <p><span class="en">Fully Sino-Korean entries carry their Hanja, so a word you meet in level 5 connects to one you learned in level 2 instead of arriving as a new shape.</span>
-           <span class="ko">한자로만 이루어진 단어에는 해당 한자를 함께 표시합니다. 5급에서 만난 단어가 2급에서 배운 단어와 이어져서, 처음 보는 단어처럼 느껴지지 않습니다.</span></p>
-      </div>
-      <div class="col">
-        <h3><span class="en">One example sentence per entry</span><span class="ko">단어마다 예문 하나</span></h3>
-        <p><span class="en">Every card carries an example that uses the word in the sense being taught, so the meaning is anchored in a sentence rather than a gloss.</span>
-           <span class="ko">모든 카드에 그 뜻으로 쓰인 예문이 있습니다. 뜻풀이 한 줄보다 문장 속에서 뜻을 더 확실하게 익힐 수 있습니다.</span></p>
-      </div>
-    </div>
-
-    <p class="note" style="margin:32px 0 10px"><span class="en">Two actual cards, level 1 and level 6:</span><span class="ko">실제 카드 두 장, 1급과 6급:</span></p>
-    <div class="cols">
-      <div class="col">
-        <h3>구십 <span style="color:var(--dim);font-weight:400">(九十) · <span class="en">Level 1</span><span class="ko">1급</span></span></h3>
-        <p>
-          <span class="en"><strong>ninety</strong> — the number nine times ten.<br>"Ninety of these bags are left."</span>
-          <span class="ko"><strong>십의 아홉 배가 되는 수.</strong><br>"이 가방은 구십 개가 남았어요."</span>
+  <section class="app-hero">
+    <div class="wrap">
+      <div>
+        <div class="app-id">
+          <img src="assets/icons/topik.webp" alt="" width="72" height="72">
+          <div>
+            <div class="name">TOPIK Korean</div>
+            <div class="chips"><span class="chip and">Android</span><span class="chip ios">iOS</span></div>
+          </div>
+        </div>
+        <h1>
+          <span class="ko">TOPIK 1~6급 한국어,<br><em>한 앱으로 끝까지</em></span>
+          <span class="en">Korean for TOPIK 1–6,<br><em>all in one app</em></span>
+          <span class="ja">TOPIK 1〜6級の韓国語を、<br><em>ひとつのアプリで</em></span>
+        </h1>
+        <p class="lede">
+          <span class="ko">단어 11,071개, 필수 문법 228개, 실생활 회화 60편, 실전 모의고사까지. 뜻풀이와 예문을 14개 언어로 보면서 공부하고, 잊어버리기 직전에 다시 나오도록 FSRS가 복습 일정을 잡아 줍니다.</span>
+          <span class="en">11,071 words, 228 essential grammar points, 60 real-life conversations and full mock exams. Read every definition and example in your own language — 14 to choose from — while FSRS brings each word back right before you'd forget it.</span>
+          <span class="ja">単語11,071語、必須文法228項目、実生活の会話60本、本番形式の模擬試験まで。意味と例文を14言語から選んだ母語で確認でき、忘れかけたタイミングでFSRSが復習を出してくれます。</span>
+        </p>
+        <div class="badges">
+          <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.topikvocab"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ja" src="https://play.google.com/intl/en_us/badges/static/images/badges/ja_badge_web_generic.png" alt="Google Play で手に入れよう" loading="lazy"></a>
+          <a class="badge as" href="https://apps.apple.com/app/topik-korean-learn-korean/id6814852323"><img class="ko" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/ko-kr" alt="App Store에서 다운로드" loading="lazy"><img class="en" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us" alt="Download on the App Store" loading="lazy"><img class="ja" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/ja-jp" alt="App Store からダウンロード" loading="lazy"></a>
+        </div>
+        <p class="fine">
+          <span class="ko">무료 · 광고 포함 · 프리미엄 이용권은 선택</span>
+          <span class="en">Free · Contains ads · Optional Premium pass</span>
+          <span class="ja">無料・広告あり・プレミアムパスは任意</span>
         </p>
       </div>
-      <div class="col">
-        <h3>극적 <span style="color:var(--dim);font-weight:400">(劇的) · <span class="en">Level 6</span><span class="ko">6급</span></span></h3>
-        <p>
-          <span class="en"><strong>dramatic</strong> — stirring great tension or emotion as if watching a play.<br>"That film had such taut dramatic conflict that the audience clutched their hands in suspense."</span>
-          <span class="ko"><strong>극을 보는 것처럼 큰 긴장·감동을 일으키는 것.</strong><br>"그 영화는 극적 갈등이 팽팽해서 관객들이 손에 땀을 쥐었어요."</span>
-        </p>
+      <div class="phones" aria-hidden="true">
+        <img class="p2 ko" src="assets/shots/topik/ko_02.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p2 en" src="assets/shots/topik/en_02.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p2 ja" src="assets/shots/topik/ja_02.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p1 ko" src="assets/shots/topik/ko_01.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p1 en" src="assets/shots/topik/en_01.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p1 ja" src="assets/shots/topik/ja_01.webp" alt="" width="600" height="1304" loading="lazy">
       </div>
     </div>
   </section>
 
-  <section>
-    <p class="eyebrow"><em><span class="en">Review</span><span class="ko">복습</span></em> <s></s></p>
-    <h2><span class="en">FSRS decides when you see a word again.</span><span class="ko">다시 볼 시점은 FSRS가 정합니다.</span></h2>
-    <div class="body">
-      <p>
-        <span class="en">The app schedules reviews with <strong>FSRS</strong> — the same open spaced-repetition algorithm used by modern Anki setups. It models how quickly each individual card is fading for you and places the next review just before recall fails, rather than on a fixed interval ladder.</span>
-        <span class="ko">복습 일정은 <strong>FSRS</strong>로 계산합니다. 최신 Anki 환경에서 쓰는 것과 같은 공개 간격 반복 알고리즘입니다. 카드마다 기억이 흐려지는 속도를 추정해, 정해진 간격 대신 잊어버리기 직전에 다음 복습을 잡아 줍니다.</span>
-      </p>
-      <p>
-        <span class="en">Your review history is stored on your device. No account is needed; signing in with Google or Apple is optional and only syncs your progress across your own devices.</span>
-        <span class="ko">복습 기록은 기기에 저장됩니다. 계정 없이 쓸 수 있고, 여러 기기에서 이어서 공부하고 싶을 때만 구글·애플 계정으로 로그인하면 됩니다.</span>
-      </p>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>11,071</b><span class="ko">TOPIK 어휘 카드</span><span class="en">TOPIK vocabulary cards</span><span class="ja">TOPIK語彙カード</span></div>
+      <div class="stat"><b>228</b><span class="ko">필수 문법 (공식 초·중급 목록)</span><span class="en">essential grammar points</span><span class="ja">必須文法(公式の初・中級リスト)</span></div>
+      <div class="stat"><b>60</b><span class="ko">실생활 회화 (원어민 음성)</span><span class="en">conversations with natural voices</span><span class="ja">実生活の会話(自然な音声)</span></div>
+      <div class="stat"><b>14</b><span class="ko">뜻풀이 언어</span><span class="en">languages for definitions</span><span class="ja">意味・例文の対応言語</span></div>
     </div>
-  </section>
-
-  <section>
-    <p class="eyebrow"><em><span class="en">Study language</span><span class="ko">학습 언어</span></em> <s></s></p>
-    <h2><span class="en">Study Korean from your own language.</span><span class="ko">모국어로 한국어를 공부하세요.</span></h2>
-    <div class="body">
-      <p><span class="en">Definitions and example sentences are available in all 14 languages below — every one of the 11,071 entries is translated into each of them.</span>
-         <span class="ko">뜻풀이와 예문을 아래 14개 언어로 제공합니다. 단어 11,071개가 모두 각 언어로 번역되어 있습니다.</span></p>
-    </div>
-    <div class="langs">
-      <div class="lg"><b>English</b><span>English</span></div>
-      <div class="lg"><b>日本語</b><span>Japanese</span></div>
-      <div class="lg"><b>简体中文</b><span>Chinese (Simplified)</span></div>
-      <div class="lg"><b>繁體中文</b><span>Chinese (Traditional)</span></div>
-      <div class="lg"><b>Tiếng Việt</b><span>Vietnamese</span></div>
-      <div class="lg"><b>ไทย</b><span>Thai</span></div>
-      <div class="lg"><b>Bahasa Indonesia</b><span>Indonesian</span></div>
-      <div class="lg"><b>Bahasa Melayu</b><span>Malay</span></div>
-      <div class="lg"><b>Español</b><span>Spanish</span></div>
-      <div class="lg"><b>Português</b><span>Portuguese</span></div>
-      <div class="lg"><b>Deutsch</b><span>German</span></div>
-      <div class="lg"><b>Français</b><span>French</span></div>
-      <div class="lg"><b>Русский</b><span>Russian</span></div>
-      <div class="lg"><b>العربية</b><span>Arabic</span></div>
-    </div>
-  </section>
-
-  <section>
-    <p class="eyebrow"><em>FAQ</em> <s></s></p>
-    <div class="faq">
-      <details>
-        <summary><span class="en">Does it cover TOPIK I and TOPIK II?</span><span class="ko">TOPIK I과 II를 모두 다루나요?</span></summary>
-        <p><span class="en">Yes. Levels 1–2 correspond to TOPIK I and levels 3–6 to TOPIK II. All six are in the app.</span>
-           <span class="ko">네. 1~2급이 TOPIK I, 3~6급이 TOPIK II에 해당하며 6개 급수 모두 수록되어 있습니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">Is it free?</span><span class="ko">무료인가요?</span></summary>
-        <p><span class="en">Yes. The app is free to install and is supported by ads (banner, interstitial, and optional rewarded ads). All six levels and all 11,071 vocabulary cards are free — no level or word is behind a paywall. An optional premium pass (a monthly or yearly period, not an auto-renewing subscription) removes ads and unlocks extras: unlimited cards per session, hands-free auto-repeat, bonus chapters for counters and honorifics, and an exam-day readiness forecast.</span>
-           <span class="ko">네. 무료로 설치해 쓸 수 있고, 광고(배너·전면, 원할 때만 보는 보상형)가 포함되어 있습니다. 6개 급수와 단어 카드 11,071개 모두 무료이며, 잠긴 급수나 단어가 없습니다. 원하면 프리미엄 이용권(월간·연간, 자동 갱신되지 않음)을 구매할 수 있습니다. 이용권이 있으면 광고가 사라지고, 세션당 카드 수 무제한, 자동 반복, 보너스 단원(수 세는 말·높임말), 시험일까지의 실력 도달 예측을 쓸 수 있습니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">Do I need an account?</span><span class="ko">계정이 필요한가요?</span></summary>
-        <p><span class="en">No. Every feature works without an account. If you want to continue on another device, you can optionally sign in with Google or Apple; the sign-in is used only for that sync.</span>
-           <span class="ko">아니요. 계정이 없어도 모든 기능을 바로 쓸 수 있습니다. 다른 기기에서 이어서 공부하고 싶다면 구글·애플 계정으로 로그인할 수 있으며, 로그인 정보는 이 동기화에만 쓰입니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">How is this different from an Anki deck?</span><span class="ko">Anki 덱과 무엇이 다른가요?</span></summary>
-        <p><span class="en">Same scheduling idea, different starting point. An Anki deck gives you cards and leaves the content to whoever built the deck. Here the definitions come from the Standard Korean Dictionary, the translations are reviewed level by level, and the whole TOPIK list is already assembled — nothing to import or maintain.</span>
-           <span class="ko">복습 방식은 같고 출발점이 다릅니다. Anki 덱은 카드만 주고 내용의 질은 제작자에게 달려 있습니다. 이 앱은 뜻풀이를 표준국어대사전에서 가져오고, 번역을 급수별로 검수하며, TOPIK 목록 전체가 이미 들어 있습니다. 따로 가져오거나 관리할 필요가 없습니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">Is it available on iPhone?</span><span class="ko">아이폰에서도 쓸 수 있나요?</span></summary>
-        <p><span class="en">Yes. TOPIK Korean is available on both Google Play and the App Store.</span>
-           <span class="ko">네. 구글플레이와 앱스토어 모두에서 받을 수 있습니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">I found a wrong definition. What do I do?</span><span class="ko">잘못된 뜻풀이를 발견했습니다.</span></summary>
-        <p><span class="en">Email the entry and what's wrong to teamstar13000@gmail.com. I read every report, and corrections go into the next data build.</span>
-           <span class="ko">해당 단어와 문제점을 teamstar13000@gmail.com으로 보내 주세요. 모두 읽고, 확인되면 다음 업데이트에 반영합니다.</span></p>
-      </details>
-    </div>
-  </section>
-
-  <div class="tail">
-    <h2><span class="en">Start at level 1, or jump to level 6.</span><span class="ko">1급부터 시작해도, 6급으로 바로 가도 됩니다.</span></h2>
-    <div class="badges">
-      <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.topikvocab"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"></a>
-      <a class="badge as" href="https://apps.apple.com/app/topik-korean-learn-korean/id6814852323"><img class="en" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us" alt="Download on the App Store" loading="lazy"><img class="ko" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/ko-kr" alt="App Store에서 다운로드" loading="lazy"></a>
-    </div>
-    <p class="note" style="margin-top:18px">com.redmoon.topikvocab</p>
   </div>
 
-  <footer>
-    <span>© <span id="yr">2026</span> RedMoon Lab</span>
-    <a href="privacy.html"><span class="en">Privacy policy</span><span class="ko">개인정보처리방침</span></a>
-    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
-    <span class="en">TOPIK is a trademark of its respective owner. This app is not affiliated with or endorsed by the TOPIK administering body.</span>
-    <span class="ko">TOPIK은 해당 권리자의 상표이며, 본 앱은 TOPIK 주관 기관과 제휴하거나 승인받은 관계가 아닙니다.</span>
-  </footer>
+  <section class="sec" style="padding-bottom:56px">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">앱 화면</span><span class="en">Inside the app</span><span class="ja">アプリ画面</span></span>
+        <h2><span class="ko">단어, 문법, 회화, 시험까지</span><span class="en">Words, grammar, conversation, exams</span><span class="ja">単語・文法・会話・試験まで</span></h2>
+        <p><span class="ko">옆으로 넘겨 실제 화면을 보세요.</span><span class="en">Swipe through the actual screens.</span><span class="ja">横にスクロールして実際の画面をご覧ください。</span></p>
+      </div>
+    </div>
+    <div class="gallery-wrap">
+      <div class="gallery" tabindex="0" aria-label="Screenshots">
+        <img class="ko" src="assets/shots/topik/ko_01.webp" alt="홈 — 오늘의 학습" width="600" height="1304" loading="lazy"><img class="ko" src="assets/shots/topik/ko_02.webp" alt="플래시카드" width="600" height="1304" loading="lazy"><img class="ko" src="assets/shots/topik/ko_03.webp" alt="요즘 한국어" width="600" height="1304" loading="lazy"><img class="ko" src="assets/shots/topik/ko_04.webp" alt="실력 테스트" width="600" height="1304" loading="lazy"><img class="ko" src="assets/shots/topik/ko_05.webp" alt="활용 연습" width="600" height="1304" loading="lazy"><img class="ko" src="assets/shots/topik/ko_06.webp" alt="회화" width="600" height="1304" loading="lazy"><img class="ko" src="assets/shots/topik/ko_07.webp" alt="연습 모드" width="600" height="1304" loading="lazy"><img class="ko" src="assets/shots/topik/ko_08.webp" alt="학습 통계" width="600" height="1304" loading="lazy"><img class="ko" src="assets/shots/topik/ko_09.webp" alt="실전 모의고사" width="600" height="1304" loading="lazy">
+        <img class="en" src="assets/shots/topik/en_01.webp" alt="Home — today's study" width="600" height="1304" loading="lazy"><img class="en" src="assets/shots/topik/en_02.webp" alt="Flashcards" width="600" height="1304" loading="lazy"><img class="en" src="assets/shots/topik/en_03.webp" alt="Trendy Korean" width="600" height="1304" loading="lazy"><img class="en" src="assets/shots/topik/en_04.webp" alt="Level test" width="600" height="1304" loading="lazy"><img class="en" src="assets/shots/topik/en_05.webp" alt="Conjugation practice" width="600" height="1304" loading="lazy"><img class="en" src="assets/shots/topik/en_06.webp" alt="Conversations" width="600" height="1304" loading="lazy"><img class="en" src="assets/shots/topik/en_07.webp" alt="Practice modes" width="600" height="1304" loading="lazy"><img class="en" src="assets/shots/topik/en_08.webp" alt="Study stats" width="600" height="1304" loading="lazy"><img class="en" src="assets/shots/topik/en_09.webp" alt="Mock exam" width="600" height="1304" loading="lazy">
+        <img class="ja" src="assets/shots/topik/ja_01.webp" alt="ホーム — 今日の学習" width="600" height="1304" loading="lazy"><img class="ja" src="assets/shots/topik/ja_02.webp" alt="フラッシュカード" width="600" height="1304" loading="lazy"><img class="ja" src="assets/shots/topik/ja_03.webp" alt="イマドキ韓国語" width="600" height="1304" loading="lazy"><img class="ja" src="assets/shots/topik/ja_04.webp" alt="実力テスト" width="600" height="1304" loading="lazy"><img class="ja" src="assets/shots/topik/ja_05.webp" alt="活用練習" width="600" height="1304" loading="lazy"><img class="ja" src="assets/shots/topik/ja_06.webp" alt="会話" width="600" height="1304" loading="lazy"><img class="ja" src="assets/shots/topik/ja_07.webp" alt="練習モード" width="600" height="1304" loading="lazy"><img class="ja" src="assets/shots/topik/ja_08.webp" alt="学習統計" width="600" height="1304" loading="lazy"><img class="ja" src="assets/shots/topik/ja_09.webp" alt="模擬試験" width="600" height="1304" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:32px">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">기능</span><span class="en">What's inside</span><span class="ja">機能</span></span>
+        <h2><span class="ko">시험 준비에 필요한 것을 한곳에</span><span class="en">Everything TOPIK asks of you, in one place</span><span class="ja">試験対策に必要なものを、ひとつに</span></h2>
+        <p><span class="ko">한글 자모부터 6급 고급 어휘까지. 읽기·듣기·쓰기·말하기를 고루 연습합니다.</span><span class="en">From the Korean alphabet to level-6 vocabulary — reading, listening, writing and speaking.</span><span class="ja">ハングルの子音・母音から6級の上級語彙まで。読む・聞く・書く・話すをバランスよく練習します。</span></p>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="13" height="14" rx="2.5"/><path d="M8 3h10.5A2.5 2.5 0 0 1 21 5.5V17"/></svg></div>
+          <h3><span class="ko">단어 플래시카드</span><span class="en">Vocabulary flashcards</span><span class="ja">単語フラッシュカード</span></h3>
+          <p><span class="ko">1~6급 어휘 11,071개를 카드로 익힙니다. 뜻·예문·발음을 한 화면에서 보고 '모름·애매·알아요'로 답하면 다음 복습일이 정해집니다.</span><span class="en">All 11,071 words for levels 1–6 as cards. See meaning, example and pronunciation on one screen, rate yourself, and the next review is scheduled for you.</span><span class="ja">1〜6級の語彙11,071語をカードで。意味・例文・発音を一画面で確認し、「わからない・あいまい・わかる」で答えると次の復習日が決まります。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h10a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"/><path d="M8 9h6M8 13h6"/></svg></div>
+          <h3><span class="ko">필수 문법 228</span><span class="en">228 grammar points</span><span class="ja">必須文法228</span></h3>
+          <p><span class="ko">TOPIK 공식 초·중급 문법 목록 228개를 예문과 함께 정리했습니다. 퀴즈로 바로 확인할 수 있습니다.</span><span class="en">The official TOPIK beginner and intermediate grammar list — 228 patterns with example sentences and quick quizzes.</span><span class="ja">TOPIK公式の初級・中級文法リスト228項目を例文つきで。クイズですぐに確認できます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></div>
+          <h3><span class="ko">실생활 회화 60편</span><span class="en">60 conversations</span><span class="ja">実生活の会話60本</span></h3>
+          <p><span class="ko">초급·중급·고급 상황별 대화. 남녀 목소리를 구분한 자연스러운 한국어 음성으로 듣고, 속도를 조절해 따라 말합니다.</span><span class="en">Everyday scenes at three levels, voiced by natural Korean male and female speakers. Slow them down and repeat after them.</span><span class="ja">初級・中級・上級のシーン別会話。男女の声を分けた自然な韓国語音声で聞き、速さを調整してシャドーイングできます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h9v9"/><path d="M18 4v16"/></svg></div>
+          <h3><span class="ko">한글부터 기초 과정 40강</span><span class="en">40-lesson foundation course</span><span class="ja">ハングルから基礎コース40講</span></h3>
+          <p><span class="ko">자음·모음 입문부터 실생활 표현까지 40강. 처음 배우는 사람도 순서대로 따라가면 됩니다.</span><span class="en">From consonants and vowels to everyday expressions in 40 lessons — start from zero and follow along.</span><span class="ja">子音・母音の入門から実生活の表現まで40講。はじめての方も順番に進めるだけです。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+          <h3><span class="ko">기출 단어</span><span class="en">Past exam words</span><span class="ja">過去問の単語</span></h3>
+          <p><span class="ko">실제 TOPIK 12회차에 자주 나온 단어를 모았습니다. 회차별 목록과 오디오 학습은 프리미엄에서 이용할 수 있습니다.</span><span class="en">Words that came up most across 12 real TOPIK tests. Lists by round and audio study come with Premium.</span><span class="ja">実際のTOPIK 12回分によく出た単語を集めました。回別リストとオーディオ学習はプレミアムで利用できます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="m10 14 2 2 4-4"/></svg></div>
+          <h3><span class="ko">실전 모의고사</span><span class="en">Full mock exams</span><span class="ja">本番形式の模擬試験</span> <span class="chip prem"><span class="ko">프리미엄</span><span class="en">Premium</span><span class="ja">プレミアム</span></span></h3>
+          <p><span class="ko">TOPIK I·II 형식 그대로 듣기·읽기·쓰기. 음성을 듣고 제한 시간 안에 풀어 영역별 점수를 확인합니다.</span><span class="en">TOPIK I and II in the real format — listening, reading and writing, timed, with a score for each section.</span><span class="ja">TOPIK I・IIの形式そのままのリスニング・読解・作文。制限時間内に解き、領域別のスコアを確認します。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="7" rx="1.5"/><rect x="17" y="14" width="4" height="7" rx="1.5"/></svg></div>
+          <h3><span class="ko">다양한 연습 모드</span><span class="en">Practice modes</span><span class="ja">多彩な練習モード</span></h3>
+          <p><span class="ko">듣기 퀴즈, 받아쓰기(한글 자판 내장), 손글씨, 말하기, 활용, 문장 배열, 단어 찾기 퍼즐, 오답 복습까지.</span><span class="en">Listening quizzes, dictation with a built-in Korean keyboard, handwriting, speaking, conjugation, sentence building, word search and mistake review.</span><span class="ja">リスニングクイズ、書き取り(ハングルキーボード内蔵)、手書き、発音、活用、文の並べ替え、単語探しパズル、間違い復習まで。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 17l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></div>
+          <h3><span class="ko">교과서 밖 한국어</span><span class="en">Korean beyond the textbook</span><span class="ja">教科書の外の韓国語</span></h3>
+          <p><span class="ko">드라마·SNS에서 쓰는 요즘 한국어, 관용구, 높임말, 수 세는 말까지. 관용구·높임말·수 분류사는 프리미엄 챕터입니다.</span><span class="en">Trendy Korean from dramas and social media, plus idioms, honorifics and counters. Idioms, honorifics and counters are Premium chapters.</span><span class="ja">ドラマやSNSで使うイマドキ韓国語、慣用句、敬語、助数詞まで。慣用句・敬語・助数詞はプレミアム章です。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M6 20v-7M11 20V5M16 20v-10"/></svg></div>
+          <h3><span class="ko">통계와 시험 D-day</span><span class="en">Stats and exam countdown</span><span class="ja">統計と試験D-day</span></h3>
+          <p><span class="ko">진도·활동·약점을 보여 주는 대시보드와 연속 학습일. 시험일을 등록하면 D-day를 세 주고, 프리미엄에서는 목표 도달 예측까지 계산합니다.</span><span class="en">A dashboard for progress, activity and weak spots, plus your streak. Add your test date for a countdown; Premium forecasts whether you'll reach your target level in time.</span><span class="ja">進度・活動・弱点のダッシュボードと連続学習日数。試験日を登録するとD-dayを表示し、プレミアムでは目標到達の予測まで計算します。</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="background:var(--surface);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)">
+    <div class="wrap split">
+      <div>
+        <span class="kicker"><span class="ko">뜻풀이의 출처</span><span class="en">Where definitions come from</span><span class="ja">意味の出典</span></span>
+        <div class="sec-head" style="margin:12px 0 0">
+          <h2><span class="ko">인터넷에서 긁어 온 뜻이 아니라 표준국어대사전</span><span class="en">The Standard Korean Dictionary, not a scrape</span><span class="ja">ネットから集めた意味ではなく、標準国語大辞典</span></h2>
+          <p>
+            <span class="ko">한국어 뜻풀이는 국립국어원 <strong>표준국어대사전</strong>에서 가져왔고, 전체 단어의 <strong>98.5%</strong>에 이 뜻풀이를 썼습니다. 사용 빈도 데이터를 더해 옛 뜻보다 실제로 자주 쓰이는 뜻이 먼저 보입니다.</span>
+            <span class="en">Korean definitions come from the <strong>Standard Korean Dictionary</strong> published by the National Institute of Korean Language — <strong>98.5%</strong> of the word list. Frequency data puts the senses people actually use ahead of archaic ones.</span>
+            <span class="ja">韓国語の意味は国立国語院の<strong>標準国語大辞典</strong>から取り、全単語の<strong>98.5%</strong>でこの語釈を使っています。使用頻度のデータを加え、古い意味より実際によく使われる意味が先に表示されます。</span>
+          </p>
+          <p style="margin-top:14px">
+            <span class="ko">각 언어 번역은 한국어 뜻풀이와 예문에 맞춰 급수별로 여러 차례 검수합니다. 한자어에는 한자를 함께 보여 줘서, 5급에서 만난 단어가 2급에서 배운 단어와 이어집니다.</span>
+            <span class="en">Translations are reviewed level by level against the Korean definition and example. Sino-Korean words show their Hanja, so a level-5 word connects to one you met at level 2.</span>
+            <span class="ja">各言語の翻訳は、韓国語の語釈と例文に合わせて級ごとに何度も検収しています。漢字語には漢字を併記するので、5級の単語が2級で学んだ単語とつながります。</span>
+          </p>
+        </div>
+      </div>
+      <div>
+        <div class="wordcard">
+          <span class="lv"><span class="ko">1급</span><span class="en">Level 1</span><span class="ja">1級</span></span>
+          <span class="w">구십</span><span class="h">九十</span>
+          <div class="d"><span class="ko">십의 아홉 배가 되는 수.</span><span class="en">ninety — the number nine times ten.</span><span class="ja">九十 — 十の九倍の数。</span></div>
+          <div class="ex">이 가방은 구십 개가 남았어요.<span class="en"><br>Ninety of these bags are left.</span><span class="ja"><br>このかばんは90個残っています。</span></div>
+        </div>
+        <div class="wordcard">
+          <span class="lv"><span class="ko">6급</span><span class="en">Level 6</span><span class="ja">6級</span></span>
+          <span class="w">극적</span><span class="h">劇的</span>
+          <div class="d"><span class="ko">극을 보는 것처럼 큰 긴장·감동을 일으키는 것.</span><span class="en">dramatic — stirring great tension or emotion, as if watching a play.</span><span class="ja">劇的 — 劇を見ているように大きな緊張や感動を呼び起こすこと。</span></div>
+          <div class="ex">그 영화는 극적 갈등이 팽팽해서 관객들이 손에 땀을 쥐었어요.<span class="en"><br>The film's dramatic conflict was so tense the audience held their breath.</span><span class="ja"><br>その映画は劇的な葛藤が張り詰めていて、観客は手に汗を握った。</span></div>
+        </div>
+        <p style="margin-top:12px;font-size:13.5px;color:var(--faint)"><span class="ko">앱에 있는 실제 카드 두 장</span><span class="en">Two actual cards from the app</span><span class="ja">アプリの実際のカード2枚</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">복습과 기록</span><span class="en">Review and sync</span><span class="ja">復習と記録</span></span>
+        <h2><span class="ko">다시 볼 때는 FSRS가 정합니다</span><span class="en">FSRS decides when you see a word again</span><span class="ja">次に見るタイミングはFSRSが決めます</span></h2>
+      </div>
+      <div class="split">
+        <div class="panel">
+          <h3><span class="ko">잊기 직전에 다시</span><span class="en">Right before you'd forget</span><span class="ja">忘れる直前にもう一度</span></h3>
+          <p><span class="ko">복습 일정은 최신 Anki에서도 쓰는 공개 간격 반복 알고리즘 <strong>FSRS</strong>로 계산합니다. 정해진 간격이 아니라, 카드마다 기억이 흐려지는 속도를 추정해 다음 복습을 잡습니다.</span><span class="en">Reviews are scheduled with <strong>FSRS</strong>, the open spaced-repetition algorithm used by modern Anki. Instead of fixed intervals, it estimates how fast each card is fading for you.</span><span class="ja">復習の日程は、最新のAnkiでも使われる公開の間隔反復アルゴリズム<strong>FSRS</strong>で計算します。決まった間隔ではなく、カードごとに記憶が薄れる速さを推定して次の復習を入れます。</span></p>
+        </div>
+        <div class="panel">
+          <h3><span class="ko">계정 없이 바로</span><span class="en">No account needed</span><span class="ja">アカウントなしですぐ</span></h3>
+          <p><span class="ko">학습 기록은 기기에 저장됩니다. 다른 기기에서 이어서 공부하고 싶을 때만 구글·애플 계정으로 로그인하면 되고, 로그인은 이 동기화에만 쓰입니다.</span><span class="en">Your history stays on your device. Sign in with Google or Apple only if you want to continue on another device — the sign-in is used for that sync and nothing else.</span><span class="ja">学習記録は端末に保存されます。別の端末で続けたいときだけGoogle・Appleでログインすればよく、ログインはこの同期にのみ使われます。</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">학습 언어</span><span class="en">Study language</span><span class="ja">学習言語</span></span>
+        <h2><span class="ko">내 언어로 한국어를</span><span class="en">Learn Korean from your own language</span><span class="ja">自分の言葉で韓国語を</span></h2>
+        <p><span class="ko">단어 11,071개의 뜻풀이와 예문이 아래 14개 언어로 모두 번역되어 있습니다. 앱 화면도 한국어를 포함한 15개 언어로 쓸 수 있습니다.</span><span class="en">All 11,071 definitions and examples are translated into each of these 14 languages. The app itself runs in 15 languages, Korean included.</span><span class="ja">11,071語すべての意味と例文が、下の14言語に翻訳されています。アプリの画面も韓国語を含む15言語に対応しています。</span></p>
+      </div>
+      <div class="lang-grid">
+        <div><b>English</b><span>English</span></div>
+        <div><b>日本語</b><span>Japanese</span></div>
+        <div><b>简体中文</b><span>Chinese (Simplified)</span></div>
+        <div><b>繁體中文</b><span>Chinese (Traditional)</span></div>
+        <div><b>Tiếng Việt</b><span>Vietnamese</span></div>
+        <div><b>ไทย</b><span>Thai</span></div>
+        <div><b>Bahasa Indonesia</b><span>Indonesian</span></div>
+        <div><b>Bahasa Melayu</b><span>Malay</span></div>
+        <div><b>Español</b><span>Spanish</span></div>
+        <div><b>Português</b><span>Portuguese</span></div>
+        <div><b>Deutsch</b><span>German</span></div>
+        <div><b>Français</b><span>French</span></div>
+        <div><b>Русский</b><span>Russian</span></div>
+        <div><b>العربية</b><span>Arabic</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">요금</span><span class="en">Pricing</span><span class="ja">料金</span></span>
+        <h2><span class="ko">핵심 학습은 무료입니다</span><span class="en">The core is free</span><span class="ja">基本の学習は無料です</span></h2>
+        <p><span class="ko">잠긴 급수나 단어는 없습니다. 프리미엄 이용권은 월간·연간 기간권이며 자동으로 갱신되지 않습니다.</span><span class="en">No level or word is locked. The Premium pass is a monthly or yearly period — it does not renew automatically.</span><span class="ja">ロックされた級や単語はありません。プレミアムパスは月間・年間の期間制で、自動更新されません。</span></p>
+      </div>
+      <div class="plans">
+        <div class="plan">
+          <h3><span class="ko">무료</span><span class="en">Free</span><span class="ja">無料</span></h3>
+          <p class="sub"><span class="ko">광고 포함</span><span class="en">With ads</span><span class="ja">広告あり</span></p>
+          <ul>
+            <li><span class="ko">1~6급 단어 11,071개 전부</span><span class="en">All 11,071 words, levels 1–6</span><span class="ja">1〜6級の単語11,071語すべて</span></li>
+            <li><span class="ko">필수 문법 228개 · 회화 60편 · 기초 과정 40강</span><span class="en">228 grammar points · 60 conversations · 40 foundation lessons</span><span class="ja">必須文法228・会話60本・基礎コース40講</span></li>
+            <li><span class="ko">퀴즈·받아쓰기·말하기 등 연습 모드</span><span class="en">Quizzes, dictation, speaking and other practice modes</span><span class="ja">クイズ・書き取り・発音などの練習モード</span></li>
+            <li><span class="ko">기출 단어 '자주 나온 단어'</span><span class="en">Past exam words — most frequent</span><span class="ja">過去問の単語「よく出る単語」</span></li>
+            <li><span class="ko">앱에서 모은 코인으로 광고 제거</span><span class="en">Remove ads with coins earned in the app</span><span class="ja">アプリで貯めたコインで広告を削除</span></li>
+          </ul>
+        </div>
+        <div class="plan pro">
+          <h3><span class="ko">프리미엄</span><span class="en">Premium</span><span class="ja">プレミアム</span></h3>
+          <p class="sub"><span class="ko">월간 · 연간 이용권</span><span class="en">Monthly or yearly pass</span><span class="ja">月間・年間パス</span></p>
+          <ul>
+            <li><span class="ko">배너·전면 광고 완전 제거</span><span class="en">No banner or interstitial ads</span><span class="ja">バナー・全面広告を完全に削除</span></li>
+            <li><span class="ko">실전 모의고사 · 관용구 · 높임말 · 수 분류사 챕터</span><span class="en">Mock exams, idioms, honorifics and counters chapters</span><span class="ja">模擬試験・慣用句・敬語・助数詞の章</span></li>
+            <li><span class="ko">기출 단어 회차별 12회차 + 오디오 학습</span><span class="en">Past exam words by round (12 rounds) + audio study</span><span class="ja">過去問の単語・回別(12回分)+オーディオ学習</span></li>
+            <li><span class="ko">세션당 카드 수 무제한 · 자동 반복 학습</span><span class="en">Unlimited cards per session · auto-repeat</span><span class="ja">セッションのカード数無制限・自動リピート</span></li>
+            <li><span class="ko">카드 방향 선택(뜻 → 단어 떠올리기)</span><span class="en">Card direction: meaning → word recall</span><span class="ja">カードの向き選択(意味→単語の想起)</span></li>
+            <li><span class="ko">시험 D-day 도달 예측 · 학습량 역산</span><span class="en">Exam-day goal forecast and daily workload</span><span class="ja">試験D-dayの到達予測・学習量の逆算</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">FAQ</span>
+        <h2><span class="ko">자주 묻는 질문</span><span class="en">Questions</span><span class="ja">よくある質問</span></h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary><span class="ko">TOPIK I과 II를 모두 다루나요?</span><span class="en">Does it cover TOPIK I and TOPIK II?</span><span class="ja">TOPIK IとIIの両方に対応していますか?</span></summary>
+          <p><span class="ko">네. 1~2급이 TOPIK I, 3~6급이 TOPIK II에 해당하며 6개 급수가 모두 들어 있습니다.</span><span class="en">Yes. Levels 1–2 correspond to TOPIK I and levels 3–6 to TOPIK II, and all six are included.</span><span class="ja">はい。1〜2級がTOPIK I、3〜6級がTOPIK IIにあたり、6つの級すべてを収録しています。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">한국어를 전혀 몰라도 쓸 수 있나요?</span><span class="en">Can I start with zero Korean?</span><span class="ja">韓国語がまったくわからなくても使えますか?</span></summary>
+          <p><span class="ko">네. 한글 자음·모음부터 시작하는 기초 과정 40강이 있고, 앱 화면과 뜻풀이를 내 언어로 볼 수 있습니다.</span><span class="en">Yes. The 40-lesson foundation course starts with the alphabet, and the app and its definitions are available in your own language.</span><span class="ja">はい。ハングルの子音・母音から始まる基礎コース40講があり、アプリの画面と意味を母語で表示できます。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">계정이 필요한가요?</span><span class="en">Do I need an account?</span><span class="ja">アカウントは必要ですか?</span></summary>
+          <p><span class="ko">아니요. 계정 없이 모든 기능을 쓸 수 있습니다. 다른 기기에서 이어서 공부하고 싶을 때만 구글·애플 계정으로 로그인하면 됩니다.</span><span class="en">No. Everything works without one. Sign in with Google or Apple only if you want to continue on another device.</span><span class="ja">いいえ。アカウントなしですべての機能を使えます。別の端末で続けたいときだけGoogle・Appleでログインしてください。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">Anki 덱과 무엇이 다른가요?</span><span class="en">How is this different from an Anki deck?</span><span class="ja">Ankiのデッキと何が違いますか?</span></summary>
+          <p><span class="ko">복습 방식은 같고 내용이 다릅니다. 뜻풀이는 표준국어대사전에서 가져오고, 번역은 급수별로 검수하며, 문법·회화·모의고사까지 이미 들어 있어 따로 만들거나 관리할 필요가 없습니다.</span><span class="en">Same scheduling idea, different content. Definitions come from the Standard Korean Dictionary, translations are reviewed level by level, and grammar, conversations and mock exams are already built in — nothing to import or maintain.</span><span class="ja">復習の仕組みは同じで、中身が違います。語釈は標準国語大辞典から、翻訳は級ごとに検収済みで、文法・会話・模擬試験まで最初から入っているので、自分で作ったり管理したりする必要がありません。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">잘못된 뜻풀이를 발견했어요.</span><span class="en">I found a wrong definition.</span><span class="ja">誤った意味を見つけました。</span></summary>
+          <p><span class="ko">해당 단어와 문제점을 teamstar13000@gmail.com으로 보내 주세요. 모두 읽고, 확인되면 다음 업데이트에 반영합니다.</span><span class="en">Email the word and what's wrong to teamstar13000@gmail.com. Every report is read, and confirmed fixes go into the next update.</span><span class="ja">該当の単語と問題点を teamstar13000@gmail.com までお送りください。すべて目を通し、確認できたものは次のアップデートで修正します。</span></p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="cta-band">
+      <img class="icon" src="assets/icons/topik.webp" alt="" width="112" height="112">
+      <div>
+        <h2><span class="ko">1급부터 시작해도, 6급으로 바로 가도 됩니다</span><span class="en">Start at level 1, or jump straight to level 6</span><span class="ja">1級から始めても、6級からでも</span></h2>
+        <p><span class="ko">무료로 설치하고 오늘 첫 카드를 넘겨 보세요.</span><span class="en">Install for free and turn your first card today.</span><span class="ja">無料でインストールして、今日最初のカードをめくりましょう。</span></p>
+        <div class="badges">
+          <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.topikvocab"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ja" src="https://play.google.com/intl/en_us/badges/static/images/badges/ja_badge_web_generic.png" alt="Google Play で手に入れよう" loading="lazy"></a>
+          <a class="badge as" href="https://apps.apple.com/app/topik-korean-learn-korean/id6814852323"><img class="ko" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/ko-kr" alt="App Store에서 다운로드" loading="lazy"><img class="en" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us" alt="Download on the App Store" loading="lazy"><img class="ja" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/ja-jp" alt="App Store からダウンロード" loading="lazy"></a>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </main>
 
-<script>
-(function(){
-  var root=document.documentElement, btns=document.querySelectorAll('.lang');
-  function setLang(l){
-    root.setAttribute('data-lang',l);
-    root.setAttribute('lang',l==='ko'?'ko':'en');
-    btns.forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.set===l)); });
-    try{ localStorage.setItem('rml-lang',l); }catch(e){}
-  }
-  btns.forEach(function(b){ b.addEventListener('click',function(){ setLang(b.dataset.set); }); });
-  var saved=null;
-  try{ saved=localStorage.getItem('rml-lang'); }catch(e){}
-  if(saved!=='ko'&&saved!=='en'){ saved=(navigator.language||'').toLowerCase().indexOf('ko')===0?'ko':'en'; }
-  setLang(saved);
-  document.getElementById('yr').textContent=new Date().getFullYear();
-})();
-</script>
-<script src="assets/store-links.js" defer></script>
+<footer class="site-foot">
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> RedMoon Lab</span>
+    <a href="index.html"><span class="ko">전체 앱</span><span class="en">All apps</span><span class="ja">アプリ一覧</span></a>
+    <a href="privacy.html"><span class="ko">개인정보처리방침</span><span class="en">Privacy policy</span><span class="ja">プライバシーポリシー</span></a>
+    <a href="topik-delete-account.html"><span class="ko">계정 삭제</span><span class="en">Delete account</span><span class="ja">アカウント削除</span></a>
+    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
+    <span class="legal">
+      <span class="ko">TOPIK은 해당 권리자의 상표이며, 이 앱은 TOPIK 주관 기관과 제휴하거나 승인받은 관계가 아닙니다. Google Play 및 Google Play 로고는 Google LLC의 상표이고, App Store는 Apple Inc.의 서비스 마크입니다.</span>
+      <span class="en">TOPIK is a trademark of its respective owner; this app is not affiliated with or endorsed by the TOPIK administering body. Google Play and the Google Play logo are trademarks of Google LLC. App Store is a service mark of Apple Inc.</span>
+      <span class="ja">TOPIKは各権利者の商標であり、本アプリはTOPIK主催機関と提携・承認された関係にはありません。Google Play および Google Play ロゴは Google LLC の商標です。App Store は Apple Inc. のサービスマークです。</span>
+    </span>
+  </div>
+</footer>
+
+<script src="assets/site.js?v=2" defer></script>
 </body>
 </html>
