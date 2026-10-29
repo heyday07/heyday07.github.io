@@ -57,8 +57,11 @@ h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4.8vw,46px);lin
 .badge{--bh:44px;display:inline-block;height:var(--bh);overflow:hidden;line-height:0;border-radius:7px;transition:opacity .16s}
 .badge:hover{opacity:.8}
 .badge img{display:block;height:var(--bh);width:auto}
-.badge.gp img.en{height:calc(var(--bh)*250/168);margin:calc(var(--bh)*-41/168)}
-.badge.gp img.ko{height:calc(var(--bh)*250/192);margin:calc(var(--bh)*-29/192) 0}
+.badge.gp img.en{height:calc(var(--bh)*250/168);width:calc(var(--bh)*646/168);margin:calc(var(--bh)*-41/168)}
+.badge.gp img.ko{height:calc(var(--bh)*250/192);width:calc(var(--bh)*646/192);margin:calc(var(--bh)*-29/192) 0}
+/* fixed widths so the row does not shift while badges load */
+.badge.as img.en{width:calc(var(--bh)*119.66/40)}
+.badge.as img.ko{width:calc(var(--bh)*129.7/40)}
 
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
 .stat{background:var(--paper);padding:24px 20px}
