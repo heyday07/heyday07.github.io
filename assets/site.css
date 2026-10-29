@@ -104,17 +104,27 @@ p{margin:0}
 .chip.prem{color:#9A6400;background:color-mix(in srgb,#F2A900 16%,var(--surface));border-color:color-mix(in srgb,#F2A900 40%,var(--rule))}
 @media (prefers-color-scheme:dark){.chip.and{color:#5BD394}.chip.prem{color:#F5C451}}
 
-/* ---------- store badges (official art; Google's PNG is cropped to Apple's height) ---------- */
+/* ---------- store badges ----------
+   Official Google/Apple art at the same height. The art's width differs by language (the
+   Japanese App Store art is ~30px shorter than Google's), so every badge sits in an identical
+   black frame and the art's own hairline outline is clipped off — the frame draws the outline.
+   Logo and wording are untouched. Google's PNG also carries transparent padding (en 41px,
+   ko/ja 29px at 646×250), cropped with negative margins. */
 .badges{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.badge{--bh:46px;display:inline-block;height:var(--bh);overflow:hidden;line-height:0;border-radius:8px;transition:transform .15s,opacity .15s}
+.badge{--bh:46px;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;
+  width:calc(var(--bh)*3.4);height:var(--bh);overflow:hidden;line-height:0;background:#000;
+  border:1px solid #A6A6A6;border-radius:calc(var(--bh)*.2);transition:transform .15s,opacity .15s}
 .badge:hover{transform:translateY(-1px);opacity:.88}
-.badge img{display:block;height:var(--bh);width:auto}
-.badge.gp img.en{height:calc(var(--bh)*250/168);width:calc(var(--bh)*646/168);max-width:none;margin:calc(var(--bh)*-41/168)}
-.badge.gp img.ko,.badge.gp img.ja{height:calc(var(--bh)*250/192);width:calc(var(--bh)*646/192);max-width:none;margin:calc(var(--bh)*-29/192) 0}
+/* Apple art is served from assets/badges/appstore-*.svg: Apple's own SVG with only its grey
+   outline and black backing removed (logo and wording paths untouched) — the frame replaces them. */
+.badge img{display:block;flex:none;max-width:none;height:var(--bh);width:auto}
+.badge.gp img.en{height:calc(var(--bh)*250/168);width:calc(var(--bh)*646/168);margin:calc(var(--bh)*-41/168);
+  clip-path:inset(calc(var(--bh)*41/168 + 1.5px))}
+.badge.gp img.ko,.badge.gp img.ja{height:calc(var(--bh)*250/192);width:calc(var(--bh)*646/192);margin:calc(var(--bh)*-29/192) 0;
+  clip-path:inset(calc(var(--bh)*29/192 + 1.5px) 1.5px)}
 .badge.as img.en{width:calc(var(--bh)*119.66/40)}
 .badge.as img.ko{width:calc(var(--bh)*129.7/40)}
 .badge.as img.ja{width:calc(var(--bh)*108.85/40)}
-@media (prefers-color-scheme:dark){.badge{box-shadow:0 0 0 1px rgb(255 255 255 / .18)}}
 
 /* ---------- app page: hero ---------- */
 .app-hero{position:relative;overflow:hidden;padding:56px 0 72px}
@@ -220,7 +230,6 @@ p{margin:0}
 .cta-band img.icon{width:112px;height:112px;border-radius:26px;box-shadow:0 10px 30px rgb(0 0 0 / .25)}
 .cta-band h2{font-size:clamp(26px,3.2vw,36px);font-weight:850;margin-bottom:10px}
 .cta-band p{opacity:.88;margin-bottom:22px;font-size:16.5px}
-.cta-band .badge{box-shadow:0 0 0 1px rgb(255 255 255 / .35)}
 @media (max-width:720px){.cta-band{grid-template-columns:1fr;padding:40px 26px;text-align:left}.cta-band img.icon{width:80px;height:80px;border-radius:20px}}
 
 /* ---------- footer ---------- */
