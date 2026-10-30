@@ -52,10 +52,13 @@
 }
 
 /* ---------- language: three copies of every string, one shown ---------- */
-html[data-lang="en"] .ko,html[data-lang="en"] .ja,
-html[data-lang="ko"] .en,html[data-lang="ko"] .ja,
-html[data-lang="ja"] .en,html[data-lang="ja"] .ko{display:none!important}
+html[data-lang="en"] .ko,html[data-lang="en"] .ja,html[data-lang="en"] .zh,
+html[data-lang="ko"] .en,html[data-lang="ko"] .ja,html[data-lang="ko"] .zh,
+html[data-lang="ja"] .en,html[data-lang="ja"] .ko,html[data-lang="ja"] .zh,
+html[data-lang="zh"] .en,html[data-lang="zh"] .ko,html[data-lang="zh"] .ja{display:none!important}
 html[data-lang="ja"] body{font-family:var(--font-ja)}
+/* Traditional Chinese (only pages that list zh in <html data-langs>) */
+html[data-lang="zh"] body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",var(--font)}
 
 /* ---------- base ---------- */
 *,*::before,*::after{box-sizing:border-box}
@@ -87,6 +90,13 @@ p{margin:0}
   padding:7px 10px;border-radius:9px;cursor:pointer}
 .lang-switch button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm)}
 @media (max-width:560px){.head-nav a.hide-sm{display:none}}
+/* narrow phones: room for the logo next to a 4-language switch */
+@media (max-width:400px){
+  .site-head .wrap{gap:10px}
+  .logo{font-size:15px;gap:8px}
+  .logo img{width:24px;height:24px}
+  .lang-switch button{padding:7px 8px;font-size:12px}
+}
 
 /* ---------- shared bits ---------- */
 .kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-text)}
@@ -124,7 +134,8 @@ p{margin:0}
   clip-path:inset(calc(var(--bh)*29/192 + 1.5px) 1.5px)}
 .badge.as img.en{width:calc(var(--bh)*119.66/40)}
 .badge.as img.ko{width:calc(var(--bh)*129.7/40)}
-.badge.as img.ja{width:calc(var(--bh)*108.85/40)}
+.badge.as img.ja,.badge.as img.zh{width:calc(var(--bh)*108.85/40)}
+.badge.gp img.zh{height:calc(var(--bh)*250/192);width:calc(var(--bh)*646/192);margin:calc(var(--bh)*-29/192) 0}
 
 /* ---------- app page: hero ---------- */
 .app-hero{position:relative;overflow:hidden;padding:56px 0 72px}

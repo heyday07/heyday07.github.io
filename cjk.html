@@ -1,248 +1,290 @@
 <!DOCTYPE html>
-<html lang="en" data-lang="en">
+<html lang="en" data-lang="en" data-langs="ko en ja zh">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CJK Characters — 20,000 characters across Korean, Chinese and Japanese | RedMoon Lab</title>
-<meta name="description" content="CJK Characters is an Android and iOS dictionary of 20,000 Chinese characters with Korean, Mandarin and Japanese readings side by side, 14,167 classical Chinese idioms, and traditional/simplified/shinjitai variant mapping.">
+<script src="assets/lang.js?v=3"></script>
+<title>CJK Characters (삼국한자 · 日中韓漢字 · 中日韓漢字) — 20,000 characters in Korean, Chinese and Japanese | RedMoon Lab</title>
+<meta name="description" content="CJK Characters is an Android and iOS dictionary of 20,000 Chinese characters with Korean, Mandarin and Japanese readings side by side, traditional/simplified/shinjitai comparison, 14,167 idioms, handwriting search and spaced-repetition quizzes — in Korean, English, Japanese and Chinese.">
 <link rel="canonical" href="https://heyday07.github.io/cjk.html">
-<meta property="og:title" content="CJK Characters — one character, three writing systems">
-<meta property="og:description" content="20,000 characters with Korean, Chinese and Japanese readings side by side, plus 14,167 classical idioms.">
+<meta property="og:title" content="CJK Characters — one character, three countries">
+<meta property="og:description" content="20,000 Chinese characters with Korean, Chinese and Japanese readings and forms side by side.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://heyday07.github.io/cjk.html">
 <meta property="og:image" content="https://heyday07.github.io/assets/og-logo.png">
+<meta name="theme-color" content="#1F4FA0">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&family=Noto+Sans+TC:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700&family=Noto+Serif+SC:wght@700&family=Noto+Serif+TC:wght@700&family=Noto+Serif+JP:wght@700&text=%E9%BE%8D%E9%BE%99%E7%AB%9C&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=10">
 <style>
-:root{
-  --paper:#E6E8EA;--panel:#EFF1F2;--ink:#14171B;--dim:#5C636B;--rule:#C6CBD0;--seal:#A8231E;
-  --sans:"IBM Plex Sans KR",system-ui,sans-serif;--serif:"Noto Serif KR",serif;--mono:"IBM Plex Mono",monospace;
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}
-a{color:inherit}
-.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
-[data-lang="en"] .ko,[data-lang="ko"] .en{display:none}
-
-.cell{position:relative;display:grid;place-items:center;border:1px solid var(--rule);background:var(--panel);
-  font-family:var(--serif);font-weight:600;line-height:1;color:var(--ink)}
-.cell::before,.cell::after{content:"";position:absolute;border-color:var(--rule);border-style:dashed;border-width:0}
-.cell::before{left:0;right:0;top:50%;border-top-width:1px}
-.cell::after{top:0;bottom:0;left:50%;border-left-width:1px}
-.cell > span{position:relative;z-index:1;background:var(--panel);padding:0 .04em}
-
-header{border-bottom:1px solid var(--rule)}
-.bar{display:flex;align-items:center;gap:14px;height:64px}
-.mark{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
-.moon{width:22px;height:22px;border-radius:50%;flex:none;display:block}
-.bar nav{margin-left:auto;display:flex;gap:6px;align-items:center}
-.back{font-size:13.5px;color:var(--dim);text-decoration:none;margin-right:10px}
-.back:hover{color:var(--ink)}
-.lang{font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:none;border:1px solid var(--rule);color:var(--dim);padding:5px 10px;cursor:pointer}
-.lang[aria-pressed="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink)}
-.lang:focus-visible,a:focus-visible,.badge:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
-
-.hero{display:grid;grid-template-columns:200px 1fr;gap:44px;align-items:center;padding:72px 0 60px}
-.glyphbox{width:200px;height:200px;font-size:132px}
-.eyebrow-app{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
-h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4.8vw,46px);line-height:1.25;margin:0 0 18px;letter-spacing:-.015em}
-.lede{max-width:50ch;color:var(--dim);margin:0 0 28px}
-/* official store badges — Google PNG has transparent padding, cropped so both read at the same height */
-.badges{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.tail .badges{justify-content:center}
-.badge{--bh:44px;display:inline-block;height:var(--bh);overflow:hidden;line-height:0;border-radius:7px;transition:opacity .16s}
-.badge:hover{opacity:.8}
-.badge img{display:block;height:var(--bh);width:auto}
-.badge.gp img.en{height:calc(var(--bh)*250/168);width:calc(var(--bh)*646/168);margin:calc(var(--bh)*-41/168)}
-.badge.gp img.ko{height:calc(var(--bh)*250/192);width:calc(var(--bh)*646/192);margin:calc(var(--bh)*-29/192) 0}
-/* fixed widths so the row does not shift while badges load */
-.badge.as img.en{width:calc(var(--bh)*119.66/40)}
-.badge.as img.ko{width:calc(var(--bh)*129.7/40)}
-
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
-.stat{background:var(--paper);padding:24px 20px}
-.stat b{display:block;font-family:var(--serif);font-weight:800;font-size:clamp(24px,3.2vw,32px);line-height:1.1;letter-spacing:-.02em}
-.stat span{display:block;margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
-
-section{padding:62px 0;border-top:1px solid var(--rule)}
-.eyebrow{display:flex;align-items:baseline;gap:12px;margin:0 0 26px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-.eyebrow s{flex:1;height:1px;background:var(--rule);text-decoration:none}
-.eyebrow em{font-style:normal;color:var(--ink)}
-h2{font-family:var(--serif);font-weight:600;font-size:clamp(22px,3vw,28px);line-height:1.35;margin:0 0 14px;letter-spacing:-.01em}
-.body{max-width:60ch;color:var(--dim)}
-.body p{margin:0 0 14px}
-.body strong{color:var(--ink);font-weight:600}
-
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:30px}
-.col{background:var(--paper);padding:28px 26px}
-.col h3{font-family:var(--serif);font-size:17px;font-weight:600;margin:0 0 9px}
-.col p{margin:0;font-size:14.5px;color:var(--dim);line-height:1.6}
-
-.faq{border-top:1px solid var(--rule);margin-top:8px}
-details{border-bottom:1px solid var(--rule)}
-summary{cursor:pointer;padding:17px 2px;font-weight:500;font-size:15.5px;list-style:none;display:flex;gap:14px;align-items:baseline}
-summary::-webkit-details-marker{display:none}
-summary::before{content:"+";font-family:var(--mono);color:var(--seal);flex:none}
-details[open] summary::before{content:"−"}
-details p{margin:0 0 18px 26px;color:var(--dim);font-size:15px;max-width:62ch}
-
-.tail{text-align:center;padding:70px 0 80px;border-top:1px solid var(--rule)}
-.tail h2{margin-bottom:22px}
-footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color:var(--dim);display:flex;flex-wrap:wrap;gap:6px 20px}
-
-@media (max-width:860px){
-  .hero{grid-template-columns:1fr;gap:28px;padding:48px 0}
-  .glyphbox{width:128px;height:128px;font-size:84px}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .cols{grid-template-columns:1fr}
-}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* page-only: the four forms of one character, each set in its own country's typeface */
+.forms{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.form{background:var(--surface);border:1px solid var(--rule);border-radius:20px;padding:18px 16px 16px;text-align:center}
+.form .g{display:block;font-size:72px;line-height:1.15;font-weight:700}
+.form .g:lang(ko){font-family:"Noto Serif KR",serif}
+.form .g:lang(zh-Hant){font-family:"Noto Serif TC",serif}
+.form .g:lang(zh-Hans){font-family:"Noto Serif SC",serif}
+.form .g:lang(ja){font-family:"Noto Serif JP",serif}
+.form b{display:block;margin-top:8px;font-size:15px;font-weight:750}
+.form span{display:block;margin-top:2px;font-size:13.5px;color:var(--dim)}
+.form.diff{border-color:var(--accent-line);background:var(--accent-soft)}
+.facts-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.facts-row div{background:var(--surface);border:1px solid var(--rule);border-radius:16px;padding:14px 16px}
+.facts-row b{display:block;font-size:22px;font-weight:850;font-variant-numeric:tabular-nums}
+.facts-row span{display:block;font-size:13.5px;color:var(--dim)}
+@media (max-width:760px){.forms{grid-template-columns:repeat(2,1fr)}.form .g{font-size:60px}.facts-row{grid-template-columns:1fr}}
 </style>
 </head>
-<body>
+<body style="--accent:#1F4FA0">
 
-<header>
-  <div class="wrap bar">
-    <a class="mark" href="index.html"><img class="moon" src="assets/logo-moon.png" alt="" width="22" height="22">RedMoon Lab</a>
-    <nav aria-label="Language">
-      <a class="back" href="index.html"><span class="en">All apps</span><span class="ko">전체 앱</span></a>
-      <button class="lang" data-set="en" aria-pressed="true">EN</button>
-      <button class="lang" data-set="ko" aria-pressed="false">KO</button>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="assets/logo-moon.png" alt="" width="26" height="26">RedMoon Lab</a>
+    <nav class="head-nav" aria-label="Site">
+      <a class="hide-sm" href="index.html"><span class="ko">전체 앱</span><span class="en">All apps</span><span class="ja">アプリ一覧</span><span class="zh">全部 App</span></a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button data-set="ko" aria-pressed="false">KO</button>
+        <button data-set="en" aria-pressed="false">EN</button>
+        <button data-set="ja" aria-pressed="false">JP</button>
+        <button data-set="zh" aria-pressed="false">中</button>
+      </div>
     </nav>
   </div>
 </header>
 
-<main class="wrap">
+<main>
 
-  <div class="hero">
-    <div class="cell glyphbox" aria-hidden="true"><span>字</span></div>
-    <div>
-      <p class="eyebrow-app"><span class="en">CJK Characters · Android · iOS</span><span class="ko">CJK Characters(삼국한자) · Android · iOS</span></p>
-      <h1>
-        <span class="en">One character.<br>Three writing systems.</span>
-        <span class="ko">한 글자,<br>세 나라 자형.</span>
-      </h1>
-      <p class="lede">
-        <span class="en">Look up a Chinese character and see its Korean, Mandarin and Japanese forms and readings side by side — plus a dictionary of 14,167 classical Chinese idioms with Korean readings.</span>
-        <span class="ko">한자 한 글자를 찾으면 한국·중국·일본의 자형과 독음을 나란히 비교합니다. 여기에 한국어 독음이 붙은 고사성어·숙어 14,167개 사전도 들어 있습니다.</span>
-      </p>
-      <div class="badges"><a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.cjkhanja"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"></a><a class="badge as" href="https://apps.apple.com/app/id6822160755"><img class="en" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us" alt="Download on the App Store" loading="lazy"><img class="ko" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/ko-kr" alt="App Store에서 다운로드" loading="lazy"></a></div>
-    </div>
-  </div>
-
-  <div class="stats">
-    <div class="stat"><b>20,000</b><span class="en">characters</span><span class="ko">한자</span></div>
-    <div class="stat"><b>14,167</b><span class="en">classical idioms</span><span class="ko">고사성어·숙어</span></div>
-    <div class="stat"><b>3,158</b><span class="en">trad ↔ simplified pairs</span><span class="ko">정자↔간체 쌍</span></div>
-    <div class="stat"><b>1,909</b><span class="en">kyūjitai ↔ shinjitai pairs</span><span class="ko">구자체↔신자체 쌍</span></div>
-  </div>
-
-  <section>
-    <p class="eyebrow"><em><span class="en">Three readings, one screen</span><span class="ko">독음 세 개, 화면 하나</span></em> <s></s></p>
-    <h2><span class="en">Korean hanja, Mandarin pinyin, Japanese on'yomi and kun'yomi — together.</span><span class="ko">한국 한자음·중국어 병음·일본어 음독·훈독을 한 화면에.</span></h2>
-    <div class="body">
-      <p>
-        <span class="en">Most dictionaries pick one country's reading and stop. This one carries all three: the Korean sound, the Mandarin pinyin, and both Japanese on'yomi and kun'yomi — for <strong>20,000 characters</strong>, a scope closer to a Unihan-scale reference than a study-list app.</span>
-        <span class="ko">대부분의 사전은 한 나라의 독음만 담고 끝납니다. 이 앱은 한국 한자음·중국어 병음·일본어 음독과 훈독을 모두 담았습니다. <strong>2만 자</strong> 규모라서 학습용 단어장보다는 유니코드 한자 데이터베이스(Unihan)에 가까운 참고 사전입니다.</span>
-      </p>
-    </div>
-
-    <div class="cols">
-      <div class="col">
-        <h3><span class="en">Traditional, simplified, shinjitai</span><span class="ko">정자·간체·신자체</span></h3>
-        <p><span class="en">3,158 traditional↔simplified pairs and 1,909 kyūjitai (old-form)↔shinjitai (modern Japanese) pairs, plus 3,386 semantic-variant links, so you can trace one character across all three scripts.</span>
-           <span class="ko">정자↔간체 3,158쌍, 구자체↔일본 신자체 1,909쌍, 여기에 이체자 연결 3,386건을 더해 한 글자가 세 나라에서 어떻게 다른 모양으로 쓰이는지 따라가 볼 수 있습니다.</span></p>
+  <section class="app-hero">
+    <div class="wrap">
+      <div>
+        <div class="app-id">
+          <img src="assets/icons/cjk.webp" alt="" width="72" height="72">
+          <div>
+            <div class="name"><span class="ko">삼국한자</span><span class="en">CJK Characters</span><span class="ja">日中韓漢字</span><span class="zh">中日韓漢字</span></div>
+            <div class="chips"><span class="chip and">Android</span><span class="chip ios">iOS</span></div>
+          </div>
+        </div>
+        <h1>
+          <span class="ko">한 글자를<br><em>한·중·일 세 나라로</em></span>
+          <span class="en">One character,<br><em>three countries</em></span>
+          <span class="ja">ひとつの漢字を、<br><em>日・中・韓で</em></span>
+          <span class="zh">一個漢字，<br><em>中・日・韓一次看</em></span>
+        </h1>
+        <p class="lede">
+          <span class="ko">한자 20,000자의 한국·중국·일본 독음과 뜻, 정자·간체·신자체를 한 화면에서 비교합니다. 고사성어 14,167개, 손글씨 검색, 간격 반복 퀴즈까지. 앱은 한국어·영어·일본어·중국어로 쓸 수 있습니다.</span>
+          <span class="en">20,000 Chinese characters with their Korean, Mandarin and Japanese readings and meanings — and their traditional, simplified and shinjitai forms — on one screen. Plus 14,167 idioms, handwriting search and spaced-repetition quizzes, in Korean, English, Japanese or Chinese.</span>
+          <span class="ja">漢字20,000字の韓国・中国・日本の読みと意味、そして繁体字・簡体字・新字体を一画面で比べられます。四字熟語・成語14,167件、手書き検索、間隔反復のクイズまで。アプリは韓国語・英語・日本語・中国語に対応しています。</span>
+          <span class="zh">收錄漢字20,000字，韓國・中國・日本的讀音與字義，以及繁體・簡體・新字體，一個畫面就能對照。另有成語14,167則、手寫查字與間隔重複測驗。App 介面支援韓文、英文、日文與中文。</span>
+        </p>
+        <div class="badges">
+          <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.cjkhanja"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ja" src="https://play.google.com/intl/en_us/badges/static/images/badges/ja_badge_web_generic.png" alt="Google Play で手に入れよう" loading="lazy"><img class="zh" src="https://play.google.com/intl/en_us/badges/static/images/badges/zh-tw_badge_web_generic.png" alt="立即下載 Google Play" loading="lazy"></a>
+          <a class="badge as" href="https://apps.apple.com/app/id6822160755"><img class="ko" src="assets/badges/appstore-ko.svg" alt="App Store에서 다운로드" loading="lazy"><img class="en" src="assets/badges/appstore-en.svg" alt="Download on the App Store" loading="lazy"><img class="ja" src="assets/badges/appstore-ja.svg" alt="App Store からダウンロード" loading="lazy"><img class="zh" src="assets/badges/appstore-zh.svg" alt="從 App Store 下載" loading="lazy"></a>
+        </div>
+        <p class="fine">
+          <span class="ko">무료 · 광고 포함 · 인앱 결제 없음</span>
+          <span class="en">Free · Contains ads · No in-app purchases</span>
+          <span class="ja">無料・広告あり・アプリ内課金なし</span>
+          <span class="zh">免費・含廣告・無 App 內購買</span>
+        </p>
       </div>
-      <div class="col">
-        <h3><span class="en">Everyday-use markers per country</span><span class="ko">국가별 상용자 표시</span></h3>
-        <p><span class="en">Each character is flagged for whether it's in everyday use in Korea, mainland China, or Japan, so you can tell a common character from a rare one at a glance.</span>
-           <span class="ko">글자마다 한국·중국·일본에서 상용으로 쓰이는지 표시돼 있어, 흔한 글자인지 벽자인지 한눈에 구분됩니다.</span></p>
+      <div class="phones" aria-hidden="true">
+        <img class="p2 ko" src="assets/shots/cjk/ko_03.webp" alt="" width="600" height="1067" loading="lazy"><img class="p2 en" src="assets/shots/cjk/en_03.webp" alt="" width="600" height="1067" loading="lazy"><img class="p2 ja" src="assets/shots/cjk/ja_03.webp" alt="" width="600" height="1067" loading="lazy"><img class="p2 zh" src="assets/shots/cjk/zh_03.webp" alt="" width="600" height="1067" loading="lazy">
+        <img class="p1 ko" src="assets/shots/cjk/ko_01.webp" alt="" width="600" height="1067" loading="lazy"><img class="p1 en" src="assets/shots/cjk/en_01.webp" alt="" width="600" height="1067" loading="lazy"><img class="p1 ja" src="assets/shots/cjk/ja_01.webp" alt="" width="600" height="1067" loading="lazy"><img class="p1 zh" src="assets/shots/cjk/zh_01.webp" alt="" width="600" height="1067" loading="lazy">
       </div>
     </div>
   </section>
 
-  <section>
-    <p class="eyebrow"><em><span class="en">Idioms</span><span class="ko">고사성어</span></em> <s></s></p>
-    <h2><span class="en">14,167 classical Chinese idioms, most with a Korean reading.</span><span class="ko">고사성어·숙어 14,167개, 대부분 한국어 독음 포함.</span></h2>
-    <div class="body">
-      <p>
-        <span class="en">Each idiom carries its Chinese characters, pinyin, origin citation and a usage example. <strong>13,298 of the 14,167</strong> also carry a Korean reading, and 483 carry a Japanese one, so the same four-character phrase you'd meet studying Korean or Japanese can be traced back to its classical Chinese source.</span>
-        <span class="ko">고사성어마다 한자, 병음, 출전, 용례가 함께 실려 있습니다. 14,167개 중 <strong>13,298개</strong>에 한국어 독음이, 483개에 일본어 독음이 붙어 있어, 한국어나 일본어를 공부하다 만나는 사자성어를 한문 출전까지 거슬러 찾아볼 수 있습니다.</span>
-      </p>
-      <p>
-        <span class="en">36,580 example words round out the character dictionary, so a character's meaning is anchored in real compounds, not just an isolated definition.</span>
-        <span class="ko">한자 사전에는 예시 단어 36,580개가 더 붙어 있어, 글자의 뜻을 실제 단어 속에서 확인할 수 있습니다.</span>
-      </p>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>20,000</b><span class="ko">한자</span><span class="en">characters</span><span class="ja">漢字</span><span class="zh">漢字</span></div>
+      <div class="stat"><b>14,167</b><span class="ko">고사성어·숙어</span><span class="en">idioms</span><span class="ja">四字熟語・成語</span><span class="zh">成語・熟語</span></div>
+      <div class="stat"><b>3,158</b><span class="ko">정자 ↔ 간체 쌍</span><span class="en">traditional ↔ simplified pairs</span><span class="ja">繁体字 ↔ 簡体字</span><span class="zh">繁體 ↔ 簡體</span></div>
+      <div class="stat"><b>1,909</b><span class="ko">구자체 ↔ 신자체 쌍</span><span class="en">kyūjitai ↔ shinjitai pairs</span><span class="ja">旧字体 ↔ 新字体</span><span class="zh">舊字體 ↔ 新字體</span></div>
     </div>
-  </section>
-
-  <section>
-    <p class="eyebrow"><em>FAQ</em> <s></s></p>
-    <div class="faq">
-      <details>
-        <summary><span class="en">Is it free?</span><span class="ko">무료인가요?</span></summary>
-        <p><span class="en">Yes. The app is free to install and supported by ads. There is no in-app purchase — the full 20,000-character dictionary and idiom database are free.</span>
-           <span class="ko">네. 무료로 설치해 쓸 수 있고, 광고가 포함되어 있습니다. 인앱 결제가 없고, 2만 자 사전과 고사성어 데이터베이스 전체가 무료입니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">Do I need to know Chinese, Japanese or Korean already?</span><span class="ko">중국어·일본어·한국어를 미리 알아야 하나요?</span></summary>
-        <p><span class="en">No — it's a reference dictionary, not a course. It's most useful if you already study one of Korean, Chinese or Japanese and want to see how a character behaves in the other two.</span>
-           <span class="ko">아니요. 강의가 아니라 참고용 사전입니다. 한국어·중국어·일본어 중 하나를 이미 공부하고 있고, 그 한자가 나머지 두 나라에서 어떻게 쓰이는지 보고 싶을 때 가장 유용합니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">Do I need an account?</span><span class="ko">계정이 필요한가요?</span></summary>
-        <p><span class="en">No. There is no sign-up and no login.</span>
-           <span class="ko">아니요. 회원가입이나 로그인이 필요 없습니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">Is it available on iPhone?</span><span class="ko">아이폰에서도 쓸 수 있나요?</span></summary>
-        <p><span class="en">Yes. CJK Characters is available on both Google Play and the App Store (iPhone).</span>
-           <span class="ko">네. 구글플레이와 앱스토어(아이폰) 모두에서 받을 수 있습니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">I found an error in a reading or variant mapping.</span><span class="ko">독음이나 이체자 매핑 오류를 발견했습니다.</span></summary>
-        <p><span class="en">Email the character and what's wrong to teamstar13000@gmail.com. I read every report, and corrections go into the next update.</span>
-           <span class="ko">해당 한자와 문제점을 teamstar13000@gmail.com으로 보내 주세요. 모두 읽고, 확인되면 다음 업데이트에 반영합니다.</span></p>
-      </details>
-    </div>
-  </section>
-
-  <div class="tail">
-    <h2><span class="en">Look up a character. See it in three scripts.</span><span class="ko">한 글자를 세 나라 자형으로 비교해 보세요.</span></h2>
-    <div class="badges"><a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.cjkhanja"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"></a><a class="badge as" href="https://apps.apple.com/app/id6822160755"><img class="en" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us" alt="Download on the App Store" loading="lazy"><img class="ko" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/ko-kr" alt="App Store에서 다운로드" loading="lazy"></a></div>
-    <p class="note" style="margin-top:18px;font-family:var(--mono);font-size:11.5px;color:var(--dim)">com.redmoon.cjkhanja</p>
   </div>
 
-  <footer>
-    <span>© <span id="yr">2026</span> RedMoon Lab</span>
-    <a href="privacy.html"><span class="en">Privacy policy</span><span class="ko">개인정보처리방침</span></a>
-    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
-  </footer>
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">자형 비교</span><span class="en">Forms side by side</span><span class="ja">字形の比較</span><span class="zh">字形對照</span></span>
+        <h2><span class="ko">같은 한자, 네 가지 모양</span><span class="en">The same character, four shapes</span><span class="ja">同じ漢字、4つの形</span><span class="zh">同一個漢字，四種寫法</span></h2>
+        <p><span class="ko">한국과 대만은 정자를, 중국은 간체를, 일본은 신자체를 씁니다. 삼국한자는 한 글자를 검색하면 네 가지 자형과 나라별 독음을 나란히 보여 줍니다.</span><span class="en">Korea and Taiwan write the traditional form, mainland China the simplified one, Japan the shinjitai. Look up one character and the app lines up all four, with each country's reading.</span><span class="ja">韓国と台湾は正字(繁体字)、中国は簡体字、日本は新字体を使います。1字を調べると、4つの字形と各国の読みが並んで表示されます。</span><span class="zh">韓國與台灣使用正體(繁體)字，中國大陸使用簡體字，日本使用新字體。查一個字，就能並排看到四種字形與各國讀音。</span></p>
+      </div>
+      <div class="forms">
+        <div class="form"><span class="g" lang="ko">龍</span><b><span class="ko">한국</span><span class="en">Korea</span><span class="ja">韓国</span><span class="zh">韓國</span></b><span>용 (룡)</span></div>
+        <div class="form"><span class="g" lang="zh-Hant">龍</span><b><span class="ko">번체 (대만·홍콩)</span><span class="en">Traditional</span><span class="ja">繁体字</span><span class="zh">繁體(台灣・香港)</span></b><span>lóng</span></div>
+        <div class="form diff"><span class="g" lang="zh-Hans">龙</span><b><span class="ko">간체 (중국)</span><span class="en">Simplified</span><span class="ja">簡体字(中国)</span><span class="zh">簡體(中國大陸)</span></b><span>lóng</span></div>
+        <div class="form diff"><span class="g" lang="ja">竜</span><b><span class="ko">신자체 (일본)</span><span class="en">Shinjitai (Japan)</span><span class="ja">新字体(日本)</span><span class="zh">新字體(日本)</span></b><span>リュウ · たつ</span></div>
+      </div>
+      <div class="facts-row">
+        <div><b>9</b><span class="ko">뜻풀이 출처 사전·자료</span><span class="en">dictionary sources for meanings</span><span class="ja">意味の出典(辞書・資料)</span><span class="zh">字義來源(辭典・資料)</span></div>
+        <div><b>214</b><span class="ko">부수 (부수·획수로 찾기)</span><span class="en">radicals to search by</span><span class="ja">部首(部首・画数で検索)</span><span class="zh">部首(依部首・筆畫查字)</span></div>
+        <div><b>36,580</b><span class="ko">예시 단어</span><span class="en">example words</span><span class="ja">例語</span><span class="zh">例詞</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0;padding-bottom:56px">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">앱 화면</span><span class="en">Inside the app</span><span class="ja">アプリ画面</span><span class="zh">App 畫面</span></span>
+        <h2><span class="ko">검색부터 학습까지</span><span class="en">From lookup to study</span><span class="ja">検索から学習まで</span><span class="zh">從查字到學習</span></h2>
+        <p><span class="ko">옆으로 넘겨 실제 화면을 보세요.</span><span class="en">Swipe through the actual screens.</span><span class="ja">横にスクロールして実際の画面をご覧ください。</span><span class="zh">左右滑動查看實際畫面。</span></p>
+      </div>
+    </div>
+    <div class="gallery-wrap">
+      <div class="gallery" tabindex="0" aria-label="Screenshots">
+        <img class="ko" src="assets/shots/cjk/ko_01.webp" alt="한·중·일 통합 검색" width="600" height="1067" loading="lazy"><img class="ko" src="assets/shots/cjk/ko_02.webp" alt="한자 상세" width="600" height="1067" loading="lazy"><img class="ko" src="assets/shots/cjk/ko_03.webp" alt="자형 비교" width="600" height="1067" loading="lazy"><img class="ko" src="assets/shots/cjk/ko_04.webp" alt="뜻과 발음" width="600" height="1067" loading="lazy"><img class="ko" src="assets/shots/cjk/ko_05.webp" alt="부수 검색" width="600" height="1067" loading="lazy"><img class="ko" src="assets/shots/cjk/ko_06.webp" alt="손글씨 검색" width="600" height="1067" loading="lazy"><img class="ko" src="assets/shots/cjk/ko_07.webp" alt="퀴즈" width="600" height="1067" loading="lazy"><img class="ko" src="assets/shots/cjk/ko_08.webp" alt="학습 통계" width="600" height="1067" loading="lazy">
+        <img class="en" src="assets/shots/cjk/en_01.webp" alt="Unified search" width="600" height="1067" loading="lazy"><img class="en" src="assets/shots/cjk/en_02.webp" alt="Character details" width="600" height="1067" loading="lazy"><img class="en" src="assets/shots/cjk/en_03.webp" alt="Form comparison" width="600" height="1067" loading="lazy"><img class="en" src="assets/shots/cjk/en_04.webp" alt="Meanings and readings" width="600" height="1067" loading="lazy"><img class="en" src="assets/shots/cjk/en_05.webp" alt="Radical search" width="600" height="1067" loading="lazy"><img class="en" src="assets/shots/cjk/en_06.webp" alt="Handwriting search" width="600" height="1067" loading="lazy"><img class="en" src="assets/shots/cjk/en_07.webp" alt="Quiz" width="600" height="1067" loading="lazy"><img class="en" src="assets/shots/cjk/en_08.webp" alt="Study stats" width="600" height="1067" loading="lazy">
+        <img class="ja" src="assets/shots/cjk/ja_01.webp" alt="日中韓の統合検索" width="600" height="1067" loading="lazy"><img class="ja" src="assets/shots/cjk/ja_02.webp" alt="漢字の詳細" width="600" height="1067" loading="lazy"><img class="ja" src="assets/shots/cjk/ja_03.webp" alt="字形の比較" width="600" height="1067" loading="lazy"><img class="ja" src="assets/shots/cjk/ja_04.webp" alt="意味と読み" width="600" height="1067" loading="lazy"><img class="ja" src="assets/shots/cjk/ja_05.webp" alt="部首検索" width="600" height="1067" loading="lazy"><img class="ja" src="assets/shots/cjk/ja_06.webp" alt="手書き検索" width="600" height="1067" loading="lazy"><img class="ja" src="assets/shots/cjk/ja_07.webp" alt="クイズ" width="600" height="1067" loading="lazy"><img class="ja" src="assets/shots/cjk/ja_08.webp" alt="学習統計" width="600" height="1067" loading="lazy">
+        <img class="zh" src="assets/shots/cjk/zh_01.webp" alt="中日韓漢字統合搜尋" width="600" height="1067" loading="lazy"><img class="zh" src="assets/shots/cjk/zh_02.webp" alt="漢字詳細" width="600" height="1067" loading="lazy"><img class="zh" src="assets/shots/cjk/zh_03.webp" alt="字形比較" width="600" height="1067" loading="lazy"><img class="zh" src="assets/shots/cjk/zh_04.webp" alt="字義與讀音" width="600" height="1067" loading="lazy"><img class="zh" src="assets/shots/cjk/zh_05.webp" alt="部首檢索" width="600" height="1067" loading="lazy"><img class="zh" src="assets/shots/cjk/zh_06.webp" alt="手寫搜尋" width="600" height="1067" loading="lazy"><img class="zh" src="assets/shots/cjk/zh_07.webp" alt="測驗" width="600" height="1067" loading="lazy"><img class="zh" src="assets/shots/cjk/zh_08.webp" alt="學習統計" width="600" height="1067" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:32px">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">기능</span><span class="en">What's inside</span><span class="ja">機能</span><span class="zh">功能</span></span>
+        <h2><span class="ko">찾고, 비교하고, 외우기까지</span><span class="en">Look it up, compare it, remember it</span><span class="ja">調べて、比べて、覚える</span><span class="zh">查字、對照、記住</span></h2>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+          <h3><span class="ko">한·중·일 통합 검색</span><span class="en">One search box, three languages</span><span class="ja">日中韓の統合検索</span><span class="zh">中日韓統合搜尋</span></h3>
+          <p><span class="ko">한자, 한글 음, 뜻, 병음, 일본어 읽기 무엇을 넣어도 한 번에 찾습니다.</span><span class="en">Type a character, its Korean reading, a meaning, pinyin or a Japanese reading — one box finds it.</span><span class="ja">漢字、韓国語の読み、意味、ピンイン、日本語の読み、どれを入力しても一度に探せます。</span><span class="zh">輸入漢字、韓文讀音、字義、拼音或日文讀音，都能在同一個搜尋框找到。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+          <h3><span class="ko">자형 4종 비교</span><span class="en">Four forms compared</span><span class="ja">4つの字形を比較</span><span class="zh">四種字形對照</span></h3>
+          <p><span class="ko">한국·번체·간체·신자체를 나란히 놓고, 정자↔간체 3,158쌍과 구자체↔신자체 1,909쌍의 대응을 보여 줍니다.</span><span class="en">Korean, traditional, simplified and shinjitai side by side, with 3,158 traditional↔simplified and 1,909 kyūjitai↔shinjitai mappings.</span><span class="ja">韓国・繁体字・簡体字・新字体を並べ、繁体↔簡体3,158組、旧字体↔新字体1,909組の対応を示します。</span><span class="zh">韓國字、繁體、簡體、新字體並排呈現，並收錄繁簡對應3,158組、舊字體↔新字體1,909組。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h10a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"/><path d="M8 9h6M8 13h6"/></svg></div>
+          <h3><span class="ko">9종 사전, 4개 언어 뜻</span><span class="en">Nine sources, four languages</span><span class="ja">9種の辞書、4言語の意味</span><span class="zh">九種來源、四種語言字義</span></h3>
+          <p><span class="ko">표준국어대사전·KANJIDIC·Unihan·CC-CEDICT·위키낱말사전 등에서 모은 뜻을 한국어·중국어·일본어·영어로 함께 봅니다.</span><span class="en">Meanings from the Standard Korean Dictionary, KANJIDIC, Unihan, CC-CEDICT, Wiktionary and more, in Korean, Chinese, Japanese and English.</span><span class="ja">標準国語大辞典・KANJIDIC・Unihan・CC-CEDICT・ウィクショナリーなどの意味を、韓国語・中国語・日本語・英語でまとめて見られます。</span><span class="zh">彙整標準國語大辭典、KANJIDIC、Unihan、CC-CEDICT、維基詞典等來源的字義，以韓、中、日、英四種語言呈現。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg></div>
+          <h3><span class="ko">발음과 획순</span><span class="en">Pronunciation and stroke order</span><span class="ja">発音と筆順</span><span class="zh">發音與筆順</span></h3>
+          <p><span class="ko">한국어·중국어·일본어 발음을 들어 보고, 획순 애니메이션과 부수·획수·급수 정보를 한 화면에서 봅니다.</span><span class="en">Hear the Korean, Mandarin and Japanese pronunciation, and see the stroke-order animation with radical, stroke count and grade on one screen.</span><span class="ja">韓国語・中国語・日本語の発音を聞き、筆順アニメーションと部首・画数・級の情報を一画面で確認できます。</span><span class="zh">可聆聽韓、中、日三種發音，並在同一畫面查看筆順動畫與部首、筆畫、級別資訊。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M3 9h18M9 3v18"/></svg></div>
+          <h3><span class="ko">214 부수 + 획수로 찾기</span><span class="en">Search by 214 radicals</span><span class="ja">214部首+画数で検索</span><span class="zh">214 部首+筆畫查字</span></h3>
+          <p><span class="ko">읽는 법을 모르는 한자도 부수를 고르고 남은 획수로 좁혀 찾을 수 있습니다.</span><span class="en">Don't know how to read it? Pick the radical and narrow down by the remaining strokes.</span><span class="ja">読み方がわからない漢字も、部首を選んで残りの画数で絞り込めます。</span><span class="zh">不知道怎麼念也沒關係，選擇部首再依剩餘筆畫縮小範圍即可。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4-1 11-11a2.1 2.1 0 0 0-3-3L5 16z"/><path d="M14 6l3 3"/></svg></div>
+          <h3><span class="ko">손글씨 검색</span><span class="en">Handwriting search</span><span class="ja">手書き検索</span><span class="zh">手寫查字</span></h3>
+          <p><span class="ko">화면에 손가락으로 한자를 그리면 바로 후보를 찾아 줍니다.</span><span class="en">Draw a character with your finger and the app suggests matches instantly.</span><span class="ja">画面に指で漢字を書くと、すぐに候補を表示します。</span><span class="zh">用手指在畫面上寫出漢字，立即列出候選字。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14"/><path d="M12 17.5v.01"/></svg></div>
+          <h3><span class="ko">퀴즈와 간격 반복</span><span class="en">Quizzes with spaced repetition</span><span class="ja">クイズと間隔反復</span><span class="zh">測驗與間隔重複</span></h3>
+          <p><span class="ko">뜻↔한자, 발음↔한자, 자형 맞히기 등 5가지 퀴즈와 성어 퀴즈. 복습 일정은 SM-2와 FSRS 중에서 고를 수 있습니다.</span><span class="en">Five quiz types — meaning, reading and form matching — plus idiom quizzes. Choose SM-2 or FSRS to schedule your reviews.</span><span class="ja">意味↔漢字、発音↔漢字、字形あてなど5種類のクイズと成語クイズ。復習スケジュールはSM-2とFSRSから選べます。</span><span class="zh">字義↔漢字、讀音↔漢字、字形配對等五種題型，另有成語測驗。複習排程可選擇 SM-2 或 FSRS。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div>
+          <h3><span class="ko">시험 급수별 목록</span><span class="en">Lists by exam level</span><span class="ja">検定の級別リスト</span><span class="zh">依考試級別瀏覽</span></h3>
+          <p><span class="ko">한국 한자능력검정시험 5,912자, 일본 학년별 한자 2,997자, 중국 HSK 3,000자를 급수별로 골라 공부합니다.</span><span class="en">Browse by level: 5,912 characters graded for Korea's Hanja exam, 2,997 by Japanese school grade, and 3,000 for China's HSK.</span><span class="ja">韓国の漢字検定5,912字、日本の学年別漢字2,997字、中国のHSK 3,000字を級ごとに選んで学べます。</span><span class="zh">可依級別學習：韓國漢字能力檢定5,912字、日本學年別漢字2,997字、中國HSK 3,000字。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M6 20v-7M11 20V5M16 20v-10"/></svg></div>
+          <h3><span class="ko">덱·즐겨찾기·통계</span><span class="en">Decks, favorites, stats</span><span class="ja">デッキ・お気に入り・統計</span><span class="zh">字卡組・收藏・統計</span></h3>
+          <p><span class="ko">나만의 덱과 즐겨찾기로 모아 두고, 30일 학습량과 정답률을 차트로 확인합니다.</span><span class="en">Collect characters into your own decks and favorites, and track 30 days of study and accuracy on a chart.</span><span class="ja">自分だけのデッキやお気に入りにまとめ、30日間の学習量と正答率をグラフで確認できます。</span><span class="zh">建立自己的字卡組與收藏，並以圖表查看30天的學習量與正確率。</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="background:var(--surface);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)">
+    <div class="wrap split">
+      <div>
+        <span class="kicker"><span class="ko">고사성어</span><span class="en">Idioms</span><span class="ja">四字熟語・成語</span><span class="zh">成語</span></span>
+        <div class="sec-head" style="margin:12px 0 0">
+          <h2><span class="ko">고사성어·숙어 14,167개</span><span class="en">14,167 idioms</span><span class="ja">四字熟語・成語14,167件</span><span class="zh">成語・熟語14,167則</span></h2>
+          <p><span class="ko">중국 성어 12,975개, 일본 사자숙어 869개, 한국 고사성어 323개를 담았고, 그중 13,298개에 한국어 독음이 있습니다. 성어마다 구성 한자로 바로 이동할 수 있습니다.</span><span class="en">12,975 Chinese chengyu, 869 Japanese yojijukugo and 323 Korean sayings — 13,298 of them with Korean readings. Tap through to each character in an idiom.</span><span class="ja">中国の成語12,975件、日本の四字熟語869件、韓国の故事成語323件を収録し、うち13,298件に韓国語の読みがあります。成語から構成する漢字へすぐ移動できます。</span><span class="zh">收錄中國成語12,975則、日本四字熟語869則、韓國故事成語323則，其中13,298則附韓文讀音。每則成語都能直接點進組成的漢字。</span></p>
+        </div>
+      </div>
+      <div>
+        <div class="panel">
+          <h3><span class="ko">인터넷 없이도</span><span class="en">Works offline</span><span class="ja">オフラインでも</span><span class="zh">離線也能用</span></h3>
+          <p><span class="ko">사전 데이터가 앱 안에 들어 있어 비행기 안에서도 찾고 공부할 수 있습니다. 손글씨 인식 모델만 처음 한 번 내려받습니다. 계정도 필요 없습니다.</span><span class="en">The whole dictionary ships inside the app, so lookup and study work without a connection. Only the handwriting model downloads once. No account needed.</span><span class="ja">辞書データはアプリに内蔵されているので、機内でも検索・学習できます。手書き認識モデルだけ初回に一度ダウンロードします。アカウントも不要です。</span><span class="zh">辭典資料全部內建在 App 中，搭飛機也能查字、學習。只有手寫辨識模型需在第一次使用時下載。不需要帳號。</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">FAQ</span>
+        <h2><span class="ko">자주 묻는 질문</span><span class="en">Questions</span><span class="ja">よくある質問</span><span class="zh">常見問題</span></h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary><span class="ko">무료인가요?</span><span class="en">Is it free?</span><span class="ja">無料ですか?</span><span class="zh">是免費的嗎?</span></summary>
+          <p><span class="ko">네. 모든 기능을 무료로 쓸 수 있고 광고가 포함되어 있습니다. 인앱 결제는 없습니다.</span><span class="en">Yes. Every feature is free, with ads. There are no in-app purchases.</span><span class="ja">はい。すべての機能を無料で使え、広告が表示されます。アプリ内課金はありません。</span><span class="zh">是的。所有功能皆可免費使用，含廣告，沒有 App 內購買。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">어떤 언어로 쓸 수 있나요?</span><span class="en">Which languages does the app support?</span><span class="ja">どの言語で使えますか?</span><span class="zh">支援哪些語言?</span></summary>
+          <p><span class="ko">앱 화면은 한국어·영어·일본어·중국어(번체)를 지원합니다. 뜻풀이는 한국어·중국어·일본어·영어로 함께 볼 수 있습니다.</span><span class="en">The app runs in Korean, English, Japanese and Traditional Chinese, and shows meanings in Korean, Chinese, Japanese and English.</span><span class="ja">アプリ画面は韓国語・英語・日本語・中国語(繁体字)に対応し、意味は韓国語・中国語・日本語・英語で表示できます。</span><span class="zh">App 介面支援韓文、英文、日文與繁體中文；字義可同時以韓、中、日、英四種語言查看。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">중국어 간체도 찾을 수 있나요?</span><span class="en">Can I look up simplified characters?</span><span class="ja">簡体字でも検索できますか?</span><span class="zh">可以查簡體字嗎?</span></summary>
+          <p><span class="ko">네. 간체·신자체도 각각 한 글자로 들어 있어 바로 찾을 수 있고, 비교 화면에서 대응하는 정자와 나란히 볼 수 있습니다.</span><span class="en">Yes. Simplified and shinjitai characters are entries of their own, and the comparison screen shows each next to its traditional counterpart.</span><span class="ja">はい。簡体字や新字体もそれぞれ1字として収録しているので直接調べられ、比較画面で対応する繁体字と並べて見られます。</span><span class="zh">可以。簡體字與新字體也各自收錄為獨立字條，可直接查詢，並能在對照畫面與對應的繁體字並排比較。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">아이폰에서도 쓸 수 있나요?</span><span class="en">Is it on iPhone?</span><span class="ja">iPhoneでも使えますか?</span><span class="zh">iPhone 可以用嗎?</span></summary>
+          <p><span class="ko">네. 구글플레이와 앱스토어 모두에서 받을 수 있습니다.</span><span class="en">Yes, on both Google Play and the App Store.</span><span class="ja">はい。Google Play と App Store の両方で入手できます。</span><span class="zh">可以。Google Play 與 App Store 皆可下載。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">독음이나 뜻 오류를 발견했어요.</span><span class="en">I found a wrong reading or meaning.</span><span class="ja">読みや意味の誤りを見つけました。</span><span class="zh">發現讀音或字義有誤。</span></summary>
+          <p><span class="ko">해당 한자와 문제점을 teamstar13000@gmail.com으로 보내 주세요. 확인되면 다음 업데이트에 반영합니다.</span><span class="en">Email the character and what's wrong to teamstar13000@gmail.com. Confirmed fixes go into the next update.</span><span class="ja">該当する漢字と問題点を teamstar13000@gmail.com までお送りください。確認できたものは次のアップデートで修正します。</span><span class="zh">請將該漢字與問題寄至 teamstar13000@gmail.com，確認後會在下次更新中修正。</span></p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="cta-band">
+      <img class="icon" src="assets/icons/cjk.webp" alt="" width="112" height="112">
+      <div>
+        <h2><span class="ko">한 글자를 세 나라 자형으로 비교해 보세요</span><span class="en">Look up a character. See it in three countries.</span><span class="ja">ひとつの漢字を、3か国の字形で</span><span class="zh">一個漢字，三國字形一次看懂</span></h2>
+        <p><span class="ko">무료로 설치하고 지금 궁금한 한자부터 찾아보세요.</span><span class="en">Free to install — start with the character you're curious about.</span><span class="ja">無料でインストールして、気になる漢字から調べてみましょう。</span><span class="zh">免費下載，從你好奇的那個字開始查吧。</span></p>
+        <div class="badges">
+          <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.cjkhanja"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ja" src="https://play.google.com/intl/en_us/badges/static/images/badges/ja_badge_web_generic.png" alt="Google Play で手に入れよう" loading="lazy"><img class="zh" src="https://play.google.com/intl/en_us/badges/static/images/badges/zh-tw_badge_web_generic.png" alt="立即下載 Google Play" loading="lazy"></a>
+          <a class="badge as" href="https://apps.apple.com/app/id6822160755"><img class="ko" src="assets/badges/appstore-ko.svg" alt="App Store에서 다운로드" loading="lazy"><img class="en" src="assets/badges/appstore-en.svg" alt="Download on the App Store" loading="lazy"><img class="ja" src="assets/badges/appstore-ja.svg" alt="App Store からダウンロード" loading="lazy"><img class="zh" src="assets/badges/appstore-zh.svg" alt="從 App Store 下載" loading="lazy"></a>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </main>
 
-<script>
-(function(){
-  var root=document.documentElement, btns=document.querySelectorAll('.lang');
-  function setLang(l){
-    root.setAttribute('data-lang',l);
-    root.setAttribute('lang',l==='ko'?'ko':'en');
-    btns.forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.set===l)); });
-    try{ localStorage.setItem('rml-lang',l); }catch(e){}
-  }
-  btns.forEach(function(b){ b.addEventListener('click',function(){ setLang(b.dataset.set); }); });
-  var saved=null;
-  try{ saved=localStorage.getItem('rml-lang'); }catch(e){}
-  if(saved!=='ko'&&saved!=='en'){ saved=(navigator.language||'').toLowerCase().indexOf('ko')===0?'ko':'en'; }
-  setLang(saved);
-  document.getElementById('yr').textContent=new Date().getFullYear();
-})();
-</script>
-<script src="assets/store-links.js" defer></script>
+<footer class="site-foot">
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> RedMoon Lab</span>
+    <a href="index.html"><span class="ko">전체 앱</span><span class="en">All apps</span><span class="ja">アプリ一覧</span><span class="zh">全部 App</span></a>
+    <a href="privacy.html"><span class="ko">개인정보처리방침</span><span class="en">Privacy policy</span><span class="ja">プライバシーポリシー</span><span class="zh">隱私權政策</span></a>
+    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
+    <span class="legal">
+      <span class="ko">사전 자료: Unicode Unihan, KANJIDIC(EDRDG), CC-CEDICT, 표준국어대사전(국립국어원), 위키낱말사전 — 각 자료의 라이선스를 따릅니다. Google Play 및 Google Play 로고는 Google LLC의 상표이고, App Store는 Apple Inc.의 서비스 마크입니다.</span>
+      <span class="en">Dictionary data: Unicode Unihan, KANJIDIC (EDRDG), CC-CEDICT, the Standard Korean Dictionary (National Institute of Korean Language) and Wiktionary, each under its own license. Google Play and the Google Play logo are trademarks of Google LLC. App Store is a service mark of Apple Inc.</span>
+      <span class="ja">辞書データ:Unicode Unihan、KANJIDIC(EDRDG)、CC-CEDICT、標準国語大辞典(国立国語院)、ウィクショナリー — 各データのライセンスに従います。Google Play および Google Play ロゴは Google LLC の商標です。App Store は Apple Inc. のサービスマークです。</span>
+      <span class="zh">辭典資料:Unicode Unihan、KANJIDIC(EDRDG)、CC-CEDICT、標準國語大辭典(韓國國立國語院)、維基詞典,依各資料之授權條款使用。Google Play 與 Google Play 標誌是 Google LLC 的商標。App Store 是 Apple Inc. 的服務標章。</span>
+    </span>
+  </div>
+</footer>
+
+<script src="assets/site.js?v=3" defer></script>
 <script src="assets/analytics.js?v=1" defer></script>
 </body>
 </html>

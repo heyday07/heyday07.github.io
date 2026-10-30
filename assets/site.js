@@ -12,7 +12,7 @@
   var buttons = document.querySelectorAll(".lang-switch button[data-set]");
   function show(l) {
     root.setAttribute("data-lang", l);
-    root.setAttribute("lang", l);
+    root.setAttribute("lang", l === "zh" ? "zh-Hant" : l);
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].setAttribute("aria-pressed", String(buttons[i].getAttribute("data-set") === l));
     }
