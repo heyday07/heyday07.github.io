@@ -3,226 +3,303 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Daily Sudoku — four difficulty tiers, one puzzle a day | RedMoon Lab</title>
-<meta name="description" content="Daily Sudoku is an Android sudoku app with four generated difficulty tiers, a daily challenge, solve replay, and detailed statistics.">
+<script src="assets/lang.js?v=3"></script>
+<title>매일매일 스도쿠 — 클래식·킬러·대각선·온도계·화살표 스도쿠 | RedMoon Lab</title>
+<meta name="description" content="매일매일 스도쿠는 클래식·대각선·킬러·온도계·화살표 5가지 스도쿠를 5단계 난이도로 즐기는 퍼즐 앱입니다. 퍼즐 25,000개, 풀이 기법을 알려 주는 힌트와 레슨 11가지, 풀이 다시 보기, 데일리 챌린지.">
 <link rel="canonical" href="https://heyday07.github.io/sudoku.html">
-<meta property="og:title" content="Daily Sudoku — four difficulty tiers, one puzzle a day">
-<meta property="og:description" content="Adaptive sudoku puzzles with a daily challenge, replay and statistics.">
+<meta property="og:title" content="매일매일 스도쿠 — 5가지 규칙, 25,000개 퍼즐">
+<meta property="og:description" content="클래식부터 킬러·온도계·화살표까지. 막히면 다음 수에 쓸 풀이 기법을 알려 줍니다.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://heyday07.github.io/sudoku.html">
 <meta property="og:image" content="https://heyday07.github.io/assets/og-logo.png">
+<meta name="theme-color" content="#2463E0">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=10">
 <style>
-:root{
-  --paper:#E6E8EA;--panel:#EFF1F2;--ink:#14171B;--dim:#5C636B;--rule:#C6CBD0;--seal:#A8231E;
-  --sans:"IBM Plex Sans KR",system-ui,sans-serif;--serif:"Noto Serif KR",serif;--mono:"IBM Plex Mono",monospace;
+/* page-only: the five rule sets, each drawn on a small grid */
+.variants{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.variant{background:var(--surface);border:1px solid var(--rule);border-radius:20px;padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px}
+.variant svg{width:96px;height:96px;margin-bottom:6px;color:var(--accent-text)}
+.variant svg .g{stroke:var(--rule);stroke-width:1.2;fill:none}
+.variant svg .gb{stroke:color-mix(in srgb,var(--ink) 55%,transparent);stroke-width:1.8;fill:none}
+.variant svg text{font:600 13px var(--font);fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+.variant svg text.s{font-size:10px;font-weight:800;fill:var(--accent-text);text-anchor:start;dominant-baseline:hanging}
+.variant b{font-size:17px;font-weight:750}
+.variant p{font-size:14.5px;color:var(--dim);line-height:1.6}
+.levels{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;align-items:center}
+.levels .lab{font-size:14px;font-weight:700;color:var(--dim);margin-right:4px}
+.levels span.lv{font-size:14px;font-weight:650;border:1px solid var(--accent-line);background:var(--accent-soft);color:var(--accent-text);border-radius:999px;padding:5px 13px}
+html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
+@media (max-width:1000px){.variants{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:760px){
+  .variants{grid-template-columns:1fr}
+  .variant{display:grid;grid-template-columns:72px 1fr;column-gap:16px;row-gap:4px;padding:16px}
+  .variant svg{grid-row:span 2;width:72px;height:72px;margin:0}
 }
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}
-a{color:inherit}
-.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
-[data-lang="en"] .ko,[data-lang="ko"] .en{display:none}
-
-.cell{position:relative;display:grid;place-items:center;border:1px solid var(--rule);background:var(--panel);
-  font-family:var(--serif);font-weight:600;line-height:1;color:var(--ink)}
-.cell::before,.cell::after{content:"";position:absolute;border-color:var(--rule);border-style:dashed;border-width:0}
-.cell::before{left:0;right:0;top:50%;border-top-width:1px}
-.cell::after{top:0;bottom:0;left:50%;border-left-width:1px}
-.cell > span{position:relative;z-index:1;background:var(--panel);padding:0 .04em}
-
-header{border-bottom:1px solid var(--rule)}
-.bar{display:flex;align-items:center;gap:14px;height:64px}
-.mark{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
-.moon{width:22px;height:22px;border-radius:50%;flex:none;display:block}
-.bar nav{margin-left:auto;display:flex;gap:6px;align-items:center}
-.back{font-size:13.5px;color:var(--dim);text-decoration:none;margin-right:10px}
-.back:hover{color:var(--ink)}
-.lang{font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:none;border:1px solid var(--rule);color:var(--dim);padding:5px 10px;cursor:pointer}
-.lang[aria-pressed="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink)}
-.lang:focus-visible,a:focus-visible,.badge:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
-
-.hero{display:grid;grid-template-columns:200px 1fr;gap:44px;align-items:center;padding:72px 0 60px}
-.glyphbox{width:200px;height:200px;font-size:104px}
-.eyebrow-app{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
-h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4.8vw,46px);line-height:1.25;margin:0 0 18px;letter-spacing:-.015em}
-.lede{max-width:50ch;color:var(--dim);margin:0 0 28px}
-/* official store badges — Google PNG has transparent padding, cropped so both read at the same height */
-.badges{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.tail .badges{justify-content:center}
-.badge{--bh:44px;display:inline-block;height:var(--bh);overflow:hidden;line-height:0;border-radius:7px;transition:opacity .16s}
-.badge:hover{opacity:.8}
-.badge img{display:block;height:var(--bh);width:auto}
-.badge.gp img.en{height:calc(var(--bh)*250/168);width:calc(var(--bh)*646/168);margin:calc(var(--bh)*-41/168)}
-.badge.gp img.ko{height:calc(var(--bh)*250/192);width:calc(var(--bh)*646/192);margin:calc(var(--bh)*-29/192) 0}
-/* fixed widths so the row does not shift while badges load */
-.badge.as img.en{width:calc(var(--bh)*119.66/40)}
-.badge.as img.ko{width:calc(var(--bh)*129.7/40)}
-
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
-.stat{background:var(--paper);padding:24px 20px}
-.stat b{display:block;font-family:var(--serif);font-weight:800;font-size:clamp(24px,3.2vw,32px);line-height:1.1;letter-spacing:-.02em}
-.stat span{display:block;margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
-
-section{padding:62px 0;border-top:1px solid var(--rule)}
-.eyebrow{display:flex;align-items:baseline;gap:12px;margin:0 0 26px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-.eyebrow s{flex:1;height:1px;background:var(--rule);text-decoration:none}
-.eyebrow em{font-style:normal;color:var(--ink)}
-h2{font-family:var(--serif);font-weight:600;font-size:clamp(22px,3vw,28px);line-height:1.35;margin:0 0 14px;letter-spacing:-.01em}
-.body{max-width:60ch;color:var(--dim)}
-.body p{margin:0 0 14px}
-.body strong{color:var(--ink);font-weight:600}
-
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:30px}
-.col{background:var(--paper);padding:28px 26px}
-.col h3{font-family:var(--serif);font-size:17px;font-weight:600;margin:0 0 9px}
-.col p{margin:0;font-size:14.5px;color:var(--dim);line-height:1.6}
-
-.faq{border-top:1px solid var(--rule);margin-top:8px}
-details{border-bottom:1px solid var(--rule)}
-summary{cursor:pointer;padding:17px 2px;font-weight:500;font-size:15.5px;list-style:none;display:flex;gap:14px;align-items:baseline}
-summary::-webkit-details-marker{display:none}
-summary::before{content:"+";font-family:var(--mono);color:var(--seal);flex:none}
-details[open] summary::before{content:"−"}
-details p{margin:0 0 18px 26px;color:var(--dim);font-size:15px;max-width:62ch}
-
-.tail{text-align:center;padding:70px 0 80px;border-top:1px solid var(--rule)}
-.tail h2{margin-bottom:22px}
-footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color:var(--dim);display:flex;flex-wrap:wrap;gap:6px 20px}
-
-@media (max-width:860px){
-  .hero{grid-template-columns:1fr;gap:28px;padding:48px 0}
-  .glyphbox{width:128px;height:128px;font-size:70px}
-  .stats{grid-template-columns:repeat(3,1fr)}
-  .cols{grid-template-columns:1fr}
-}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
-<body>
+<body style="--accent:#2463E0">
 
-<header>
-  <div class="wrap bar">
-    <a class="mark" href="index.html"><img class="moon" src="assets/logo-moon.png" alt="" width="22" height="22">RedMoon Lab</a>
-    <nav aria-label="Language">
-      <a class="back" href="index.html"><span class="en">All apps</span><span class="ko">전체 앱</span></a>
-      <button class="lang" data-set="en" aria-pressed="true">EN</button>
-      <button class="lang" data-set="ko" aria-pressed="false">KO</button>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="assets/logo-moon.png" alt="" width="26" height="26">RedMoon Lab</a>
+    <nav class="head-nav" aria-label="Site">
+      <a class="hide-sm" href="index.html"><span class="ko">전체 앱</span><span class="en">All apps</span><span class="ja">アプリ一覧</span></a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button data-set="ko" aria-pressed="false">KO</button>
+        <button data-set="en" aria-pressed="false">EN</button>
+        <button data-set="ja" aria-pressed="false">JP</button>
+      </div>
     </nav>
   </div>
 </header>
 
-<main class="wrap">
+<main>
 
-  <div class="hero">
-    <div class="cell glyphbox" aria-hidden="true"><img src="assets/icon-sudoku.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-    <div>
-      <p class="eyebrow-app"><span class="en">Daily Sudoku · Android · iOS</span><span class="ko">Daily Sudoku · Android · iOS</span></p>
-      <h1>
-        <span class="en">A sudoku a day,<br>tuned to your level.</span>
-        <span class="ko">매일 한 판,<br>내 수준에 맞게.</span>
-      </h1>
-      <p class="lede">
-        <span class="en">Four difficulty tiers — Easy, Medium, Hard, Expert — each generated to a target number of given cells, plus a daily challenge everyone gets the same puzzle for.</span>
-        <span class="ko">쉬움·보통·어려움·전문가 4단계 난이도마다 힌트 칸 수를 맞춰 퍼즐을 만들고, 모두가 같은 날 같은 문제를 푸는 데일리 챌린지도 있습니다.</span>
-      </p>
-      <div class="badges">
-        <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.sudoku"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"></a>
-        <a class="badge as" href="https://apps.apple.com/app/id6819275133"><img class="en" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us" alt="Download on the App Store" loading="lazy"><img class="ko" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/ko-kr" alt="App Store에서 다운로드" loading="lazy"></a>
+  <section class="app-hero">
+    <div class="wrap">
+      <div>
+        <div class="app-id">
+          <img src="assets/icons/sudoku.webp" alt="" width="72" height="72">
+          <div>
+            <div class="name"><span class="ko">매일매일 스도쿠</span><span class="en">Daily Sudoku</span><span class="ja">毎日ナンプレ</span></div>
+            <div class="chips"><span class="chip and">Android</span><span class="chip ios">iOS</span></div>
+          </div>
+        </div>
+        <h1>
+          <span class="ko">막혀도 괜찮아요,<br><em>다음 수를 알려 드릴게요</em></span>
+          <span class="en">Stuck? We'll show you<br><em>the technique for the next move</em></span>
+          <span class="ja">行き詰まっても大丈夫。<br><em>次の一手の解き方を教えます</em></span>
+        </h1>
+        <p class="lede">
+          <span class="ko">클래식부터 대각선·킬러·온도계·화살표까지 5가지 스도쿠를 5단계 난이도로 즐깁니다. 힌트는 답만 채우지 않고 그 칸에 쓸 풀이 기법을 알려 주고, 다 풀면 내 풀이를 한 수씩 다시 볼 수 있습니다.</span>
+          <span class="en">Five kinds of sudoku — Classic, X-Sudoku, Killer, Thermo and Arrow — at five difficulty levels. Hints don't just fill in a number; they name the technique that solves the cell. When you finish, replay your solve move by move.</span>
+          <span class="ja">クラシックから対角線・キラー・温度計・矢印まで、5種類のナンプレを5段階の難易度で遊べます。ヒントは答えを埋めるだけでなく、そのマスに使う解き方を教えてくれます。解き終えたら自分の手順を1手ずつ振り返れます。</span>
+        </p>
+        <div class="badges">
+          <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.sudoku"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ja" src="https://play.google.com/intl/en_us/badges/static/images/badges/ja_badge_web_generic.png" alt="Google Play で手に入れよう" loading="lazy"></a>
+          <a class="badge as" href="https://apps.apple.com/app/id6819275133"><img class="ko" src="assets/badges/appstore-ko.svg" alt="App Store에서 다운로드" loading="lazy"><img class="en" src="assets/badges/appstore-en.svg" alt="Download on the App Store" loading="lazy"><img class="ja" src="assets/badges/appstore-ja.svg" alt="App Store からダウンロード" loading="lazy"></a>
+        </div>
+        <p class="fine">
+          <span class="ko">무료 · 광고 포함 · 6개 언어</span>
+          <span class="en">Free · Contains ads · 6 languages</span>
+          <span class="ja">無料・広告あり・6言語</span>
+        </p>
       </div>
-    </div>
-  </div>
-
-  <div class="stats">
-    <div class="stat"><b>4</b><span class="en">difficulty tiers</span><span class="ko">난이도 단계</span></div>
-    <div class="stat"><b>1</b><span class="en">daily challenge</span><span class="ko">데일리 챌린지</span></div>
-    <div class="stat"><b>∞</b><span class="en">generated puzzles</span><span class="ko">무한 생성 퍼즐</span></div>
-  </div>
-
-  <section>
-    <p class="eyebrow"><em><span class="en">Difficulty</span><span class="ko">난이도</span></em> <s></s></p>
-    <h2><span class="en">Easy, Medium, Hard, Expert — generated, not picked from a fixed set.</span><span class="ko">쉬움·보통·어려움·전문가. 정해진 문제집이 아니라 매번 새로 만듭니다.</span></h2>
-    <div class="body">
-      <p>
-        <span class="en">Every puzzle is generated fresh and checked for a unique solution, with the given-cell count tuned to the tier you picked. There's always a new board waiting, so you never run out and never replay the same puzzle twice.</span>
-        <span class="ko">모든 퍼즐은 매번 새로 만들고, 답이 하나뿐인지 검증합니다. 선택한 난이도에 맞춰 힌트 칸 수가 정해집니다. 늘 새 퍼즐이 준비되어 있어, 문제가 떨어지거나 같은 퍼즐을 두 번 만나는 일이 없습니다.</span>
-      </p>
-    </div>
-
-    <div class="cols">
-      <div class="col">
-        <h3><span class="en">Solve replay</span><span class="ko">풀이 리플레이</span></h3>
-        <p><span class="en">Watch your own solve play back move by move after you finish, useful for spotting where you slowed down or guessed.</span>
-           <span class="ko">완료 후 자신이 푼 과정을 한 수씩 다시 재생해 볼 수 있습니다. 어디서 막혔는지, 어디서 찍었는지 되짚어보기 좋습니다.</span></p>
-      </div>
-      <div class="col">
-        <h3><span class="en">Detailed statistics</span><span class="ko">상세 통계</span></h3>
-        <p><span class="en">Track solve times, streaks and completion counts per difficulty, so progress is visible beyond just "I finished a puzzle."</span>
-           <span class="ko">난이도별 풀이 시간·연속 기록·완료 횟수를 기록해, 실력이 얼마나 늘었는지 한눈에 보여 줍니다.</span></p>
+      <div class="phones" aria-hidden="true">
+        <img class="p2 ko" src="assets/shots/sudoku/ko_03.webp" alt="" width="600" height="1221" loading="lazy">
+        <img class="p1 ko" src="assets/shots/sudoku/ko_02.webp" alt="" width="600" height="1221" loading="lazy">
+        <img class="p2 en" src="assets/shots/sudoku/en_03.webp" alt="" width="600" height="1221" loading="lazy">
+        <img class="p1 en" src="assets/shots/sudoku/en_02.webp" alt="" width="600" height="1221" loading="lazy">
+        <img class="p2 ja" src="assets/shots/sudoku/ja_03.webp" alt="" width="600" height="1221" loading="lazy">
+        <img class="p1 ja" src="assets/shots/sudoku/ja_02.webp" alt="" width="600" height="1221" loading="lazy">
       </div>
     </div>
   </section>
 
-  <section>
-    <p class="eyebrow"><em>FAQ</em> <s></s></p>
-    <div class="faq">
-      <details>
-        <summary><span class="en">Is it free?</span><span class="ko">무료인가요?</span></summary>
-        <p><span class="en">Yes. The app is free to install and supported by ads. There is no in-app purchase — every difficulty and the daily challenge are free.</span>
-           <span class="ko">네. 무료로 설치해 쓸 수 있고, 광고가 포함되어 있습니다. 인앱 결제가 없고, 모든 난이도와 데일리 챌린지가 무료입니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">Do I need an account?</span><span class="ko">계정이 필요한가요?</span></summary>
-        <p><span class="en">No. There is no sign-up and no login. Progress and statistics are stored locally on your device.</span>
-           <span class="ko">아니요. 회원가입이나 로그인이 필요 없습니다. 진행 상황과 통계는 기기에 저장됩니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">Is it available on iPhone?</span><span class="ko">아이폰에서도 쓸 수 있나요?</span></summary>
-        <p><span class="en">Yes. Daily Sudoku is available on both Google Play and the App Store.</span>
-           <span class="ko">네. 구글플레이와 앱스토어 모두에서 받을 수 있습니다.</span></p>
-      </details>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>25,000</b><span class="ko">퍼즐</span><span class="en">puzzles</span><span class="ja">問題</span></div>
+      <div class="stat"><b>5</b><span class="ko">가지 규칙</span><span class="en">rule sets</span><span class="ja">種類のルール</span></div>
+      <div class="stat"><b>5</b><span class="ko">단계 난이도</span><span class="en">difficulty levels</span><span class="ja">段階の難易度</span></div>
+      <div class="stat"><b>11</b><span class="ko">가지 풀이 기법 레슨</span><span class="en">technique lessons</span><span class="ja">種類の解き方レッスン</span></div>
+    </div>
+  </div>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">5가지 규칙</span><span class="en">Five rule sets</span><span class="ja">5種類のルール</span></span>
+        <h2><span class="ko">익숙한 스도쿠에 규칙 하나를 더합니다</span><span class="en">Classic sudoku, plus one extra rule</span><span class="ja">おなじみのナンプレに、ルールを1つ足すだけ</span></h2>
+        <p><span class="ko">모든 칸에 1~9를 겹치지 않게 넣는 기본 규칙은 같습니다. 규칙마다 난이도별로 1,000개씩, 모두 답이 하나뿐인 퍼즐이 들어 있습니다.</span><span class="en">The basic rule never changes: 1–9 once in every row, column and box. Each rule set has 1,000 puzzles per difficulty, every one with a single solution.</span><span class="ja">各行・列・ブロックに1〜9を重ならないように入れる基本ルールは同じです。ルールごと・難易度ごとに1,000問ずつ、すべて答えが1つだけの問題を収録しています。</span></p>
+      </div>
+      <div class="variants">
+        <div class="variant">
+          <svg viewBox="0 0 96 96" aria-hidden="true"><path class="g" d="M6 34h84M6 62h84M34 6v84M62 6v84"/><rect class="gb" x="6" y="6" width="84" height="84" rx="3"/><text x="20" y="20">5</text><text x="76" y="20">3</text><text x="48" y="48">7</text><text x="20" y="76">9</text><text x="76" y="76">1</text></svg>
+          <b><span class="ko">클래식</span><span class="en">Classic</span><span class="ja">クラシック</span></b>
+          <p><span class="ko">가로줄·세로줄·3×3 칸에 1~9가 한 번씩.</span><span class="en">1–9 once in each row, column and 3×3 box.</span><span class="ja">各行・列・3×3ブロックに1〜9を1回ずつ。</span></p>
+        </div>
+        <div class="variant">
+          <svg viewBox="0 0 96 96" aria-hidden="true"><path class="g" d="M6 34h84M6 62h84M34 6v84M62 6v84"/><rect class="gb" x="6" y="6" width="84" height="84" rx="3"/><path d="M10 10 86 86M86 10 10 86" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity=".55"/><text x="20" y="20">4</text><text x="48" y="48">6</text><text x="76" y="20">8</text></svg>
+          <b><span class="ko">대각선</span><span class="en">X-Sudoku</span><span class="ja">対角線</span></b>
+          <p><span class="ko">두 대각선에도 1~9가 한 번씩 들어갑니다.</span><span class="en">Both long diagonals must also hold 1–9 once.</span><span class="ja">2本の対角線にも1〜9が1回ずつ入ります。</span></p>
+        </div>
+        <div class="variant">
+          <svg viewBox="0 0 96 96" aria-hidden="true"><path class="g" d="M6 34h84M6 62h84M34 6v84M62 6v84"/><rect class="gb" x="6" y="6" width="84" height="84" rx="3"/><path d="M9.5 9.5H58.5V30.5H30.5V58.5H9.5z" fill="color-mix(in srgb,currentColor 8%,transparent)" stroke="currentColor" stroke-width="1.8" stroke-dasharray="4 3" stroke-linejoin="round"/><text class="s" x="12" y="11.5">15</text><text x="22" y="24">4</text><text x="48" y="22">2</text><text x="20" y="48">9</text></svg>
+          <b><span class="ko">킬러</span><span class="en">Killer</span><span class="ja">キラー</span></b>
+          <p><span class="ko">점선 케이지 안 숫자의 합이 모서리의 작은 숫자와 같고, 케이지 안에서는 숫자가 겹치지 않습니다.</span><span class="en">Numbers in each dotted cage add up to its small clue, with no repeats inside the cage.</span><span class="ja">点線のケージ内の数字の合計が隅の小さな数字と等しく、ケージ内で数字は重なりません。</span></p>
+        </div>
+        <div class="variant">
+          <svg viewBox="0 0 96 96" aria-hidden="true"><path class="g" d="M6 34h84M6 62h84M34 6v84M62 6v84"/><rect class="gb" x="6" y="6" width="84" height="84" rx="3"/><path d="M20 76V48h56V20" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".28"/><circle cx="20" cy="76" r="11" fill="currentColor" opacity=".28"/><text x="20" y="76">2</text><text x="20" y="48">4</text><text x="48" y="48">6</text><text x="76" y="48">7</text><text x="76" y="20">9</text></svg>
+          <b><span class="ko">온도계</span><span class="en">Thermo</span><span class="ja">温度計</span></b>
+          <p><span class="ko">온도계를 따라 숫자가 커집니다. 둥근 끝(전구)이 가장 작습니다.</span><span class="en">Numbers increase along each thermometer, starting smallest at the bulb.</span><span class="ja">温度計に沿って数字が大きくなります。丸い端（球部）が最小です。</span></p>
+        </div>
+        <div class="variant">
+          <svg viewBox="0 0 96 96" aria-hidden="true"><path class="g" d="M6 34h84M6 62h84M34 6v84M62 6v84"/><rect class="gb" x="6" y="6" width="84" height="84" rx="3"/><circle cx="20" cy="20" r="11" fill="none" stroke="currentColor" stroke-width="2"/><path d="M28 28 70 70M70 70h-9M70 70v-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><text x="20" y="20">9</text><text x="48" y="48">4</text><text x="76" y="76">5</text></svg>
+          <b><span class="ko">화살표</span><span class="en">Arrow</span><span class="ja">矢印</span></b>
+          <p><span class="ko">화살표가 지나는 칸의 합이 원 안의 숫자와 같습니다.</span><span class="en">The cells along an arrow add up to the number in its circle.</span><span class="ja">矢印が通るマスの合計が、丸の中の数字と同じになります。</span></p>
+        </div>
+      </div>
+      <div class="levels">
+        <span class="lab"><span class="ko">난이도</span><span class="en">Difficulty</span><span class="ja">難易度</span></span>
+        <span class="lv"><span class="ko">쉬움</span><span class="en">Easy</span><span class="ja">簡単</span></span>
+        <span class="lv"><span class="ko">보통</span><span class="en">Medium</span><span class="ja">普通</span></span>
+        <span class="lv"><span class="ko">어려움</span><span class="en">Hard</span><span class="ja">難しい</span></span>
+        <span class="lv"><span class="ko">전문가</span><span class="en">Expert</span><span class="ja">エキスパート</span></span>
+        <span class="lv"><span class="ko">마스터</span><span class="en">Master</span><span class="ja">マスター</span></span>
+      </div>
     </div>
   </section>
 
-  <div class="tail">
-    <h2><span class="en">Today's puzzle is waiting.</span><span class="ko">오늘의 퍼즐이 기다립니다.</span></h2>
-    <div class="badges">
-      <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.sudoku"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"></a>
-      <a class="badge as" href="https://apps.apple.com/app/id6819275133"><img class="en" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us" alt="Download on the App Store" loading="lazy"><img class="ko" src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/ko-kr" alt="App Store에서 다운로드" loading="lazy"></a>
+  <section class="sec" style="padding-top:0;padding-bottom:56px">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">앱 화면</span><span class="en">Inside the app</span><span class="ja">アプリ画面</span></span>
+        <h2><span class="ko">보드, 레슨, 통계, 테마까지</span><span class="en">Boards, lessons, stats and themes</span><span class="ja">盤面、レッスン、統計、テーマまで</span></h2>
+        <p><span class="ko">옆으로 넘겨 실제 화면을 보세요.</span><span class="en">Swipe through the actual screens.</span><span class="ja">横にスクロールして実際の画面をご覧ください。</span></p>
+      </div>
     </div>
-    <p class="note" style="margin-top:18px;font-family:var(--mono);font-size:11.5px;color:var(--dim)">com.redmoon.sudoku</p>
-  </div>
+    <div class="gallery-wrap">
+      <div class="gallery ko" tabindex="0" aria-label="스크린샷">
+        <img src="assets/shots/sudoku/ko_01.webp" alt="홈" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/ko_02.webp" alt="클래식" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/ko_03.webp" alt="킬러" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/ko_04.webp" alt="온도계" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/ko_05.webp" alt="풀이 기법 레슨" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/ko_06.webp" alt="통계와 업적" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/ko_07.webp" alt="컬러 테마" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/ko_08.webp" alt="다크 모드" width="600" height="1221" loading="lazy">
+      </div>
+      <div class="gallery en" tabindex="0" aria-label="Screenshots">
+        <img src="assets/shots/sudoku/en_01.webp" alt="Home" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/en_02.webp" alt="Classic" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/en_03.webp" alt="Killer" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/en_04.webp" alt="Thermo" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/en_05.webp" alt="Technique lesson" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/en_06.webp" alt="Stats and achievements" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/en_07.webp" alt="Color themes" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/en_08.webp" alt="Dark mode" width="600" height="1221" loading="lazy">
+      </div>
+      <div class="gallery ja" tabindex="0" aria-label="スクリーンショット">
+        <img src="assets/shots/sudoku/ja_01.webp" alt="ホーム" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/ja_02.webp" alt="クラシック" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/ja_03.webp" alt="キラー" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/ja_04.webp" alt="温度計" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/ja_05.webp" alt="解き方レッスン" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/ja_06.webp" alt="統計と実績" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/ja_07.webp" alt="カラーテーマ" width="600" height="1221" loading="lazy"><img src="assets/shots/sudoku/ja_08.webp" alt="ダークモード" width="600" height="1221" loading="lazy">
+      </div>
+    </div>
+  </section>
 
-  <footer>
-    <span>© <span id="yr">2026</span> RedMoon Lab</span>
-    <a href="privacy.html"><span class="en">Privacy policy</span><span class="ko">개인정보처리방침</span></a>
-    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
-  </footer>
+  <section class="sec" style="padding-top:32px">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">기능</span><span class="en">Features</span><span class="ja">機能</span></span>
+        <h2><span class="ko">풀면서 실력이 느는 스도쿠</span><span class="en">Sudoku that makes you better as you play</span><span class="ja">解くほど上達するナンプレ</span></h2>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/></svg></div>
+          <h3><span class="ko">기법을 알려 주는 힌트</span><span class="en">Hints that name the technique</span><span class="ja">解き方を教えるヒント</span></h3>
+          <p><span class="ko">힌트를 쓰면 숫자와 함께 그 칸을 푸는 데 쓴 기법을 보여 줍니다. 힌트는 데일리 챌린지와 업적으로 모읍니다.</span><span class="en">A hint fills a cell and tells you which technique solves it. You earn hints from the Daily Challenge and achievements.</span><span class="ja">ヒントを使うと、数字と一緒にそのマスを解く解き方を表示します。ヒントはデイリーチャレンジと実績でもらえます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7l10-4 10 4-10 4z"/><path d="M6 9v5c0 1.7 2.7 3 6 3s6-1.3 6-3V9"/></svg></div>
+          <h3><span class="ko">풀이 기법 레슨 11가지</span><span class="en">11 technique lessons</span><span class="ja">解き方レッスン11種類</span></h3>
+          <p><span class="ko">네이키드 싱글부터 X-윙·스워드피시·젤리피시까지, 기법마다 설명과 예시 보드가 있습니다.</span><span class="en">From Naked Single to X-Wing, Swordfish and Jellyfish — each with an explanation and an example board.</span><span class="ja">ネイキッドシングルからXウイング・ソードフィッシュ・ジェリーフィッシュまで、解き方ごとに説明と例題があります。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 8v4l3 2"/></svg></div>
+          <h3><span class="ko">풀이 다시 보기</span><span class="en">Replay your solve</span><span class="ja">手順の振り返り</span></h3>
+          <p><span class="ko">다 푼 퍼즐을 한 수씩 다시 재생합니다. 오래 걸린 구간과 그때 쓸 수 있었던 기법을 짚어 줍니다.</span><span class="en">Play back a finished puzzle move by move, with the slow spots marked and the technique you could have used there.</span><span class="ja">解き終えた問題を1手ずつ再生します。時間がかかった場面と、そこで使えた解き方を示します。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
+          <h3><span class="ko">약한 기법 찾기</span><span class="en">Find your weak spots</span><span class="ja">苦手な解き方を発見</span></h3>
+          <p><span class="ko">힌트를 자주 쓰는 기법을 찾아 홈 화면에서 알려 주고, 통계에서 연습이 필요한 기법을 보여 줍니다.</span><span class="en">The app spots techniques you often need hints for, flags them on the home screen and lists them in your stats.</span><span class="ja">ヒントをよく使う解き方を見つけてホーム画面で知らせ、統計で練習が必要な解き方を表示します。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+          <h3><span class="ko">데일리 챌린지</span><span class="en">Daily Challenge</span><span class="ja">デイリーチャレンジ</span></h3>
+          <p><span class="ko">매일 모든 사람이 같은 퍼즐을 풉니다. 캘린더에 완료한 날이 쌓이고, 완료하면 힌트 3개를 받습니다.</span><span class="en">Everyone gets the same puzzle each day. Finished days fill your calendar, and each one earns you three hints.</span><span class="ja">毎日、全員が同じ問題を解きます。クリアした日はカレンダーに記録され、クリアするとヒントが3つもらえます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg></div>
+          <h3><span class="ko">타임 어택</span><span class="en">Time Attack</span><span class="ja">タイムアタック</span></h3>
+          <p><span class="ko">보통 난이도 퍼즐을 5분 안에 풀어 보세요.</span><span class="en">Solve a Medium puzzle in under five minutes.</span><span class="ja">普通の難易度の問題を5分以内に解きましょう。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
+          <h3><span class="ko">메모와 자동 메모</span><span class="en">Notes and auto-notes</span><span class="ja">メモと自動メモ</span></h3>
+          <p><span class="ko">칸마다 후보 숫자를 적어 두고, 짧은 광고를 보면 자동 메모로 모든 빈칸의 후보를 한 번에 채울 수 있습니다.</span><span class="en">Pencil in candidates cell by cell, or watch a short ad to auto-fill every empty cell's candidates at once.</span><span class="ja">マスごとに候補の数字をメモでき、短い広告を見ると自動メモですべての空きマスの候補を一度に埋められます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M6 20v-7M11 20V5M16 20v-10"/></svg></div>
+          <h3><span class="ko">통계와 업적</span><span class="en">Stats and achievements</span><span class="ja">統計と実績</span></h3>
+          <p><span class="ko">최근 7일 기록, 연속 기록, 완료 수와 총 플레이 시간, 업적 10개를 확인합니다.</span><span class="en">See the last seven days, your streak, puzzles solved, total play time and 10 achievements.</span><span class="ja">直近7日の記録、連続記録、クリア数と総プレイ時間、10個の実績を確認できます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2.3A4.7 4.7 0 0 0 22 10.7C22 5.9 17.5 2 12 2z"/></svg></div>
+          <h3><span class="ko">컬러 테마 10가지</span><span class="en">10 color themes</span><span class="ja">カラーテーマ10種類</span></h3>
+          <p><span class="ko">보드 색을 10가지 중에서 고르고, 라이트·다크 모드를 지원합니다.</span><span class="en">Pick from 10 board colors, in light or dark mode.</span><span class="ja">盤面の色を10種類から選べ、ライト・ダークモードに対応しています。</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">FAQ</span>
+        <h2><span class="ko">자주 묻는 질문</span><span class="en">Questions</span><span class="ja">よくある質問</span></h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary><span class="ko">무료인가요?</span><span class="en">Is it free?</span><span class="ja">無料ですか？</span></summary>
+          <p><span class="ko">네. 모든 규칙과 난이도, 데일리 챌린지를 무료로 즐길 수 있고 광고로 운영됩니다. 앱 안에서 결제하는 상품은 없습니다. 처음 두 판을 마칠 때까지는 전면 광고가 나오지 않습니다.</span><span class="en">Yes. Every rule set, difficulty and the Daily Challenge are free and supported by ads; there are no in-app purchases. No full-screen ads appear until you've finished your first two puzzles.</span><span class="ja">はい。すべてのルール・難易度・デイリーチャレンジを無料で遊べ、広告で運営しています。アプリ内課金はありません。最初の2問を解き終えるまで全画面広告は表示されません。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">실수하면 어떻게 되나요?</span><span class="en">What happens when I make a mistake?</span><span class="ja">ミスするとどうなりますか？</span></summary>
+          <p><span class="ko">하트가 하나 줄어듭니다. 하트 3개를 모두 쓰면 짧은 광고를 보고 이어서 풀 수 있습니다.</span><span class="en">You lose a heart. If all three are gone, you can watch a short ad to keep going.</span><span class="ja">ハートが1つ減ります。3つすべてなくなったら、短い広告を見て続けられます。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">킬러나 온도계 스도쿠는 처음인데요.</span><span class="en">I've never played Killer or Thermo.</span><span class="ja">キラーや温度計は初めてです。</span></summary>
+          <p><span class="ko">도움말에 규칙마다 설명이 있습니다. 쉬움 단계부터 시작해 보세요.</span><span class="en">The help screen explains each rule set. Start with Easy.</span><span class="ja">ヘルプにルールごとの説明があります。「簡単」から始めてみてください。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">계정이 필요한가요?</span><span class="en">Do I need an account?</span><span class="ja">アカウントは必要ですか？</span></summary>
+          <p><span class="ko">아니요. 회원가입이나 로그인 없이 쓸 수 있습니다. 진행 상황과 통계는 기기에 저장됩니다.</span><span class="en">No. There's no sign-up or login; your progress and stats are stored on your device.</span><span class="ja">いいえ。会員登録やログインなしで使えます。進み具合と統計は端末に保存されます。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">어떤 언어를 지원하나요?</span><span class="en">Which languages does it support?</span><span class="ja">対応言語は？</span></summary>
+          <p><span class="ko">한국어, 영어, 일본어, 스페인어, 중국어(간체·번체) 6개 언어를 지원합니다.</span><span class="en">Six: Korean, English, Japanese, Spanish, and Chinese (Simplified and Traditional).</span><span class="ja">日本語、英語、韓国語、スペイン語、中国語（簡体字・繁体字）の6言語に対応しています。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">아이폰에서도 쓸 수 있나요?</span><span class="en">Is it on iPhone?</span><span class="ja">iPhoneでも使えますか？</span></summary>
+          <p><span class="ko">네. 구글플레이와 앱스토어 모두에서 받을 수 있고, 아이패드도 지원합니다.</span><span class="en">Yes. It's on both Google Play and the App Store, and it supports iPad too.</span><span class="ja">はい。Google Play と App Store の両方からダウンロードでき、iPadにも対応しています。</span></p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="cta-band">
+      <img class="icon" src="assets/icons/sudoku.webp" alt="" width="112" height="112">
+      <div>
+        <h2><span class="ko">오늘의 퍼즐부터 풀어 보세요</span><span class="en">Start with today's puzzle</span><span class="ja">今日の1問から始めましょう</span></h2>
+        <p><span class="ko">무료로 설치하고 데일리 챌린지로 하루를 시작하세요.</span><span class="en">Free to install. Begin with the Daily Challenge.</span><span class="ja">無料でインストールして、デイリーチャレンジから始めましょう。</span></p>
+        <div class="badges">
+          <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.sudoku"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ja" src="https://play.google.com/intl/en_us/badges/static/images/badges/ja_badge_web_generic.png" alt="Google Play で手に入れよう" loading="lazy"></a>
+          <a class="badge as" href="https://apps.apple.com/app/id6819275133"><img class="ko" src="assets/badges/appstore-ko.svg" alt="App Store에서 다운로드" loading="lazy"><img class="en" src="assets/badges/appstore-en.svg" alt="Download on the App Store" loading="lazy"><img class="ja" src="assets/badges/appstore-ja.svg" alt="App Store からダウンロード" loading="lazy"></a>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </main>
 
-<script>
-(function(){
-  var root=document.documentElement, btns=document.querySelectorAll('.lang');
-  function setLang(l){
-    root.setAttribute('data-lang',l);
-    root.setAttribute('lang',l==='ko'?'ko':'en');
-    btns.forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.set===l)); });
-    try{ localStorage.setItem('rml-lang',l); }catch(e){}
-  }
-  btns.forEach(function(b){ b.addEventListener('click',function(){ setLang(b.dataset.set); }); });
-  var saved=null;
-  try{ saved=localStorage.getItem('rml-lang'); }catch(e){}
-  if(saved!=='ko'&&saved!=='en'){ saved=(navigator.language||'').toLowerCase().indexOf('ko')===0?'ko':'en'; }
-  setLang(saved);
-  document.getElementById('yr').textContent=new Date().getFullYear();
-})();
-</script>
-<script src="assets/store-links.js" defer></script>
+<footer class="site-foot">
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> RedMoon Lab</span>
+    <a href="index.html"><span class="ko">전체 앱</span><span class="en">All apps</span><span class="ja">アプリ一覧</span></a>
+    <a href="privacy.html"><span class="ko">개인정보처리방침</span><span class="en">Privacy policy</span><span class="ja">プライバシーポリシー</span></a>
+    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
+    <span class="legal">
+      <span class="ko">Google Play 및 Google Play 로고는 Google LLC의 상표이고, App Store는 Apple Inc.의 서비스 마크입니다.</span>
+      <span class="en">Google Play and the Google Play logo are trademarks of Google LLC. App Store is a service mark of Apple Inc.</span>
+      <span class="ja">Google Play および Google Play ロゴは Google LLC の商標です。App Store は Apple Inc. のサービスマークです。</span>
+    </span>
+  </div>
+</footer>
+
+<script src="assets/site.js?v=3" defer></script>
 <script src="assets/analytics.js?v=1" defer></script>
 </body>
 </html>
