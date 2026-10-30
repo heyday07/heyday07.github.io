@@ -86,7 +86,7 @@ html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
         <div class="app-id">
           <img src="assets/icons/twinflip.webp" alt="" width="72" height="72">
           <div>
-            <div class="name"><span class="ko">트윈플립</span><span class="en">Twinflip</span><span class="ja">ツインフリップ</span></div>
+            <div class="name"><span class="ko">트윈플립</span><span class="en">Twinflip</span><span class="ja">Twinflip</span></div>
             <div class="chips"><span class="chip and">Android</span><span class="chip ios">iOS</span></div>
           </div>
         </div>
@@ -96,9 +96,9 @@ html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
           <span class="ja">カードをめくって<br><em>同じ絵を見つけよう</em></span>
         </h1>
         <p class="lede">
-          <span class="ko">처음 3초 동안 모든 카드를 보여 준 뒤 덮습니다. 위치를 기억해 짝을 맞추세요. 6장으로 시작해 30장까지 늘어나고, 41번째 스테이지부터는 카드가 섞이고 사라지고 잠기는 특수 규칙이 붙습니다.</span>
-          <span class="en">Every card is shown for three seconds, then turned face down. Remember where they were and match the pairs. Boards grow from 6 to 30 cards, and from stage 41 on, special rules start shuffling, hiding and locking cards.</span>
-          <span class="ja">最初の3秒間すべてのカードを見せてから伏せます。位置を覚えてペアをそろえましょう。カードは6枚から30枚まで増え、ステージ41からはカードが混ざったり消えたりロックされたりする特殊ルールが加わります。</span>
+          <span class="ko">처음 3초 동안 모든 카드를 보여 준 뒤 덮습니다. 위치를 기억해 짝을 맞추세요. 카드는 6장에서 30장까지 늘어나고, 41번째 스테이지부터는 카드가 다시 섞이거나 금방 덮이거나 잠기는 특수 규칙이 붙습니다.</span>
+          <span class="en">Every card is shown for three seconds, then turned face down. Remember where they were and match the pairs. Boards grow from 6 to 30 cards, and from stage 41 on, special rules start reshuffling, hiding and locking cards.</span>
+          <span class="ja">最初の3秒間すべてのカードを見せてから伏せます。位置を覚えてペアをそろえましょう。カードは6枚から30枚まで増え、ステージ41からはカードが混ざり直したり、すぐ伏せられたり、ロックされたりする特殊ルールが加わります。</span>
         </p>
         <div class="badges">
           <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.twinflip"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ja" src="https://play.google.com/intl/en_us/badges/static/images/badges/ja_badge_web_generic.png" alt="Google Play で手に入れよう" loading="lazy"></a>
@@ -134,13 +134,13 @@ html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
     <div class="wrap try">
       <div>
         <div class="sec-head" style="margin-bottom:0">
-          <span class="kicker"><span class="ko">한 판 해 보기</span><span class="en">Try a board</span><span class="ja">1回あそんでみる</span></span>
+          <span class="kicker"><span class="ko">한 판 해 보기</span><span class="en">Try a board</span><span class="ja">ためしに遊ぶ</span></span>
           <h2><span class="ko">3초 동안 보고, 기억으로 맞추세요</span><span class="en">Look for three seconds, then match from memory</span><span class="ja">3秒見て、記憶でそろえよう</span></h2>
-          <p><span class="ko">앱의 첫 월드와 같은 방식입니다. 시작을 누르면 카드 12장을 3초 동안 보여 준 뒤 덮습니다.</span><span class="en">This works like the app's first world. Press Start to see all 12 cards for three seconds before they turn over.</span><span class="ja">アプリの最初のワールドと同じ遊び方です。スタートを押すと12枚のカードを3秒間見せてから伏せます。</span></p>
+          <p><span class="ko">앱 첫 월드의 동물 카드로 만든 미니 보드입니다. 시작을 누르면 카드 12장을 3초 동안 보여 준 뒤 덮습니다.</span><span class="en">Built with the animal cards from the app's first world. Press Start to see all 12 cards for three seconds before they turn over.</span><span class="ja">アプリの最初のワールドの動物カードで作ったミニボードです。スタートを押すと12枚のカードを3秒間見せてから伏せます。</span></p>
         </div>
         <div class="board-wrap play-bar" id="bar">
           <button class="btn-play" id="start" type="button"><span class="ko">시작</span><span class="en">Start</span><span class="ja">スタート</span></button>
-          <span class="count"><span class="ko">시도</span><span class="en">Tries</span><span class="ja">試行</span> <b id="tries">0</b> · <span class="ko">짝</span><span class="en">Pairs</span><span class="ja">ペア</span> <b id="pairs">0</b>/6</span>
+          <span class="count"><span class="ko">시도</span><span class="en">Tries</span><span class="ja">回数</span> <b id="tries">0</b> · <span class="ko">짝</span><span class="en">Pairs</span><span class="ja">ペア</span> <b id="pairs">0</b>/6</span>
           <span class="clear-msg" role="status"><span class="ko">클리어!</span><span class="en">Cleared!</span><span class="ja">クリア！</span></span>
         </div>
       </div>
@@ -152,8 +152,8 @@ html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
     <div class="wrap">
       <div class="sec-head">
         <span class="kicker"><span class="ko">특수 규칙</span><span class="en">Special rules</span><span class="ja">特殊ルール</span></span>
-        <h2><span class="ko">익숙해질 즈음, 규칙이 바뀝니다</span><span class="en">Just as it gets easy, the rules change</span><span class="ja">慣れてきたころ、ルールが変わります</span></h2>
-        <p><span class="ko">41번째 스테이지부터 10스테이지마다 새 규칙이 하나씩 나오고, 101번째부터는 두세 개가 한꺼번에 걸립니다. 어렵다면 설정에서 특수 규칙을 끌 수 있습니다.</span><span class="en">From stage 41, a new rule arrives every ten stages; from stage 101, two or three apply at once. If it gets too hard, you can turn special rules off in Settings.</span><span class="ja">ステージ41から10ステージごとに新しいルールが1つずつ登場し、ステージ101からは2〜3個が同時にかかります。難しすぎる場合は設定で特殊ルールをオフにできます。</span></p>
+        <h2><span class="ko">익숙해질 즈음, 새 규칙이 붙습니다</span><span class="en">Just as you get the hang of it, new rules arrive</span><span class="ja">慣れてきたころ、新しいルールが加わります</span></h2>
+        <p><span class="ko">41번째 스테이지부터 10개 스테이지마다 새 규칙이 하나씩 나오고, 101번째부터는 두세 개가 한꺼번에 적용됩니다. 어렵다면 설정에서 특수 규칙을 끌 수 있습니다.</span><span class="en">From stage 41, a new rule arrives every ten stages; from stage 101, two or three apply at once. If it gets too hard, you can turn special rules off in Settings.</span><span class="ja">ステージ41から10ステージごとに新しいルールが1つずつ登場し、ステージ101からは2〜3個が同時に適用されます。難しすぎる場合は設定で特殊ルールをオフにできます。</span></p>
       </div>
       <div class="rules">
         <div class="rule" style="--c:#2FA3DA">
@@ -165,7 +165,7 @@ html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
         <div class="rule" style="--c:#E0A21B">
           <span class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg></span>
           <b><span class="ko">페이드</span><span class="en">Fade</span><span class="ja">フェード</span></b>
-          <p><span class="ko">뒤집은 카드가 1초만 보이고 다시 덮입니다.</span><span class="en">A flipped card shows for just one second, then turns back.</span><span class="ja">めくったカードは1秒だけ見えて、また伏せられます。</span></p>
+          <p><span class="ko">뒤집은 카드가 1초만 보이고 다시 덮입니다.</span><span class="en">A flipped card stays visible for just one second, then flips back.</span><span class="ja">めくったカードは1秒だけ見えて、また伏せられます。</span></p>
           <span class="from"><span class="ko">51번째 스테이지부터</span><span class="en">From stage 51</span><span class="ja">ステージ51から</span></span>
         </div>
         <div class="rule" style="--c:#E5534B">
@@ -193,7 +193,7 @@ html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
           <span class="from"><span class="ko">91번째 스테이지부터</span><span class="en">From stage 91</span><span class="ja">ステージ91から</span></span>
         </div>
       </div>
-      <p class="wl"><span class="ko">월드 6개 · 월드마다 30스테이지</span><span class="en">6 worlds · 30 stages each</span><span class="ja">6ワールド・各30ステージ</span></p>
+      <p class="wl"><span class="ko">월드 6개 · 월드마다 30개 스테이지</span><span class="en">6 worlds · 30 stages each</span><span class="ja">6ワールド・各30ステージ</span></p>
       <div class="worlds num">
         <div><b><span class="ko">동물</span><span class="en">Animals</span><span class="ja">動物</span></b><span>1–30</span></div>
         <div><b><span class="ko">음식</span><span class="en">Food</span><span class="ja">食べ物</span></b><span>31–60</span></div>
@@ -237,12 +237,12 @@ html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
         <div class="feature">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg></div>
           <h3><span class="ko">클래식 모드</span><span class="en">Classic</span><span class="ja">クラシックモード</span></h3>
-          <p><span class="ko">6개 월드, 180개 스테이지. 카드는 6장에서 30장까지 늘고, 11번째 스테이지부터 시간 제한이 붙습니다. 실수와 시간에 따라 별 3개까지 받습니다.</span><span class="en">Six worlds, 180 stages. Boards grow from 6 to 30 cards, a time limit kicks in at stage 11, and you earn up to three stars based on time and mistakes.</span><span class="ja">6ワールド・180ステージ。カードは6枚から30枚まで増え、ステージ11から制限時間がつきます。ミスと時間に応じて最大3つの星がもらえます。</span></p>
+          <p><span class="ko">6개 월드, 180개 스테이지. 카드는 6장에서 30장까지 늘고, 11번째 스테이지부터 시간 제한이 붙습니다. 걸린 시간과 실수에 따라 별을 최대 3개 받습니다.</span><span class="en">Six worlds, 180 stages. Boards grow from 6 to 30 cards, a time limit kicks in at stage 11, and you earn up to three stars based on time and mistakes.</span><span class="ja">6ワールド・180ステージ。カードは6枚から30枚まで増え、ステージ11から制限時間がつきます。ミスと時間に応じて最大3つの星がもらえます。</span></p>
         </div>
         <div class="feature">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
           <h3><span class="ko">데일리 챌린지</span><span class="en">Daily Challenge</span><span class="ja">デイリーチャレンジ</span></h3>
-          <p><span class="ko">하루에 한 판, 전 세계 플레이어가 같은 보드로 겨룹니다. 오늘의 랭킹과 연속 클리어 기록이 남습니다.</span><span class="en">One board a day, the same for every player worldwide. See today's ranking and keep your clear streak going.</span><span class="ja">1日1回、世界中のプレイヤーが同じボードで競います。今日のランキングと連続クリア記録が残ります。</span></p>
+          <p><span class="ko">매일 새 보드가 하나 나오고, 전 세계 플레이어가 같은 보드로 겨룹니다. 오늘의 랭킹과 연속 클리어 기록이 남습니다.</span><span class="en">A new board every day — the same one for every player worldwide. See today's ranking and keep your clear streak going.</span><span class="ja">毎日新しいボードが1つ登場し、世界中のプレイヤーが同じボードで競います。今日のランキングと連続クリア記録が残ります。</span></p>
         </div>
         <div class="feature">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></div>
@@ -252,7 +252,7 @@ html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
         <div class="feature">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg></div>
           <h3><span class="ko">타임어택</span><span class="en">Time Attack</span><span class="ja">タイムアタック</span></h3>
-          <p><span class="ko">60초 안에 최대한 많이 맞추세요. 3연속 성공하면 콤보 점수 1.5배, 틀리면 3초가 줄어듭니다. 주간·월간·전체 랭킹이 있습니다.</span><span class="en">Match as many pairs as you can in 60 seconds. Three in a row gives a 1.5× combo; a miss costs three seconds. Weekly, monthly and all-time rankings.</span><span class="ja">60秒でできるだけ多くそろえましょう。3連続成功でコンボ1.5倍、ミスすると3秒減ります。週間・月間・総合ランキングがあります。</span></p>
+          <p><span class="ko">60초 안에 최대한 많이 맞추세요. 3번 연속 맞히면 점수가 1.5배(콤보), 틀리면 남은 시간이 3초 줄어듭니다. 주간·월간·전체 랭킹이 있습니다.</span><span class="en">Match as many pairs as you can in 60 seconds. Three matches in a row earn a 1.5× combo bonus; a miss costs three seconds. Weekly, monthly and all-time rankings.</span><span class="ja">60秒でできるだけ多くそろえましょう。3回連続でそろえるとコンボで得点1.5倍、ミスすると残り時間が3秒減ります。週間・月間・総合ランキングがあります。</span></p>
         </div>
         <div class="feature">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.2 8.2a5 5 0 1 1 0 7.6L12 12 5.8 8.2a5 5 0 1 0 0 7.6L12 12z"/></svg></div>
@@ -262,7 +262,7 @@ html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
         <div class="feature">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.8"/><path d="M2 20a6 6 0 0 1 12 0M14.5 15.5A5 5 0 0 1 22 19.5"/></svg></div>
           <h3><span class="ko">2인 대전</span><span class="en">Versus</span><span class="ja">対戦モード</span></h3>
-          <p><span class="ko">한 기기로 번갈아 뒤집습니다. 짝을 맞추면 점수를 얻고 한 번 더 할 수 있습니다. 가족이나 친구와 함께하기 좋습니다.</span><span class="en">Two players take turns on one device. Make a match and you score and go again — great with family or friends.</span><span class="ja">1台の端末で交代にめくります。ペアをそろえると得点し、もう1回めくれます。家族や友だちと遊ぶのにぴったりです。</span></p>
+          <p><span class="ko">한 기기로 두 사람이 번갈아 뒤집습니다. 짝을 맞추면 점수를 얻고 한 번 더 할 수 있습니다. 가족이나 친구와 함께하기 좋습니다.</span><span class="en">Two players take turns on one device. Make a match and you score and go again — great with family or friends.</span><span class="ja">1台の端末で交代にめくります。ペアをそろえると得点し、もう1回めくれます。家族や友だちと遊ぶのにぴったりです。</span></p>
         </div>
         <div class="feature">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></div>
@@ -272,12 +272,12 @@ html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
         <div class="feature">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="12" height="16" rx="2.5"/><path d="M8 21h10a2 2 0 0 0 2-2V7"/></svg></div>
           <h3><span class="ko">카드 스킨과 아이템</span><span class="en">Card skins and items</span><span class="ja">カードスキンとアイテム</span></h3>
-          <p><span class="ko">게임에서 모은 코인으로 카드 뒷면 스킨 7종과 힌트·미리보기·실수 초기화 아이템을 삽니다. 결제는 없습니다.</span><span class="en">Spend coins earned in play on seven card-back skins and on Hint, Preview and Mistake Reset items. No purchases with real money.</span><span class="ja">ゲームで集めたコインで、カード裏面のスキン7種とヒント・プレビュー・ミスリセットのアイテムを買えます。課金はありません。</span></p>
+          <p><span class="ko">게임에서 모은 코인으로 카드 뒷면 스킨 7종과 힌트·시간 추가·실수 초기화 아이템을 삽니다. 현금 결제는 없습니다.</span><span class="en">Spend coins earned in play on seven card-back skins and on Hint, Time Boost and Reset Mistakes items. Nothing costs real money.</span><span class="ja">ゲームで集めたコインで、カード裏面のスキン7種とヒント・タイム追加・ミスリセットのアイテムを買えます。課金はありません。</span></p>
         </div>
         <div class="feature">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg></div>
           <h3><span class="ko">업적과 통계</span><span class="en">Achievements and stats</span><span class="ja">実績と統計</span></h3>
-          <p><span class="ko">콤보, 퍼펙트 클리어, 연속 출석 등 업적 18개와 월드별 진행 상황을 확인합니다. 라이트·다크 화면을 지원합니다.</span><span class="en">Track 18 achievements — combos, perfect clears, daily streaks — and your progress in each world. Light and dark themes included.</span><span class="ja">コンボ、パーフェクトクリア、連続クリアなど18個の実績と、ワールドごとの進み具合を確認できます。ライト・ダーク表示に対応しています。</span></p>
+          <p><span class="ko">콤보, 퍼펙트 클리어, 데일리 챌린지 연속 클리어 등 업적 18개와 월드별 진행 상황을 확인합니다. 라이트·다크 화면을 지원합니다.</span><span class="en">Track 18 achievements — combos, perfect clears, Daily Challenge streaks — and your progress in each world. Light and dark themes included.</span><span class="ja">コンボ、パーフェクトクリア、デイリーチャレンジ連続クリアなど18個の実績と、ワールドごとの進み具合を確認できます。ライト・ダーク表示に対応しています。</span></p>
         </div>
       </div>
     </div>
@@ -308,7 +308,7 @@ html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
         </details>
         <details>
           <summary><span class="ko">후반 스테이지가 너무 어려워요.</span><span class="en">The later stages are too hard.</span><span class="ja">後半のステージが難しすぎます。</span></summary>
-          <p><span class="ko">설정에서 특수 규칙을 끄면 클래식 모드가 쉬워집니다. 상점의 힌트·미리보기 아이템도 도움이 됩니다.</span><span class="en">Turn off special rules in Settings to make Classic easier. Hint and Preview items from the shop also help.</span><span class="ja">設定で特殊ルールをオフにすると、クラシックモードがやさしくなります。ショップのヒント・プレビューアイテムも役立ちます。</span></p>
+          <p><span class="ko">설정에서 특수 규칙을 끄면 클래식 모드가 쉬워집니다. 상점의 힌트·시간 추가 아이템도 도움이 됩니다.</span><span class="en">Turn off special rules in Settings to make Classic easier. Hint and Time Boost items from the shop also help.</span><span class="ja">設定で特殊ルールをオフにすると、クラシックモードがやさしくなります。ショップのヒント・タイム追加アイテムも役立ちます。</span></p>
         </details>
       </div>
     </div>
