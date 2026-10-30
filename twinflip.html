@@ -3,226 +3,414 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Memory Game — Brain Training — 150 stages across 5 worlds | RedMoon Lab</title>
-<meta name="description" content="Memory Game - Brain Training is an Android card-matching puzzle with 150 stages across 5 worlds, gimmick mechanics, a weekly challenge, and a local two-player versus mode, in Korean, English and Japanese.">
+<script src="assets/lang.js?v=3"></script>
+<title>트윈플립 — 카드 짝맞추기 기억력 게임 | RedMoon Lab</title>
+<meta name="description" content="트윈플립(Twinflip)은 카드를 뒤집어 같은 그림을 찾는 기억력 게임입니다. 180개 스테이지, 6가지 특수 규칙, 데일리 챌린지, 타임어택, 무한 모드, 한 기기로 하는 2인 대전. 한국어·영어·일본어 지원.">
 <link rel="canonical" href="https://heyday07.github.io/twinflip.html">
-<meta property="og:title" content="Memory Game — 150 stages, 5 worlds">
-<meta property="og:description" content="A card-matching puzzle with 150 stages, weekly challenges and local versus mode.">
+<meta property="og:title" content="트윈플립 — 카드 짝맞추기 기억력 게임">
+<meta property="og:description" content="180개 스테이지, 6가지 특수 규칙, 데일리 챌린지와 2인 대전. 하루 5분 두뇌 운동.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://heyday07.github.io/twinflip.html">
 <meta property="og:image" content="https://heyday07.github.io/assets/og-logo.png">
+<meta name="theme-color" content="#1A7CC0">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=10">
 <style>
-:root{
-  --paper:#E6E8EA;--panel:#EFF1F2;--ink:#14171B;--dim:#5C636B;--rule:#C6CBD0;--seal:#A8231E;
-  --sans:"IBM Plex Sans KR",system-ui,sans-serif;--serif:"Noto Serif KR",serif;--mono:"IBM Plex Mono",monospace;
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}
-a{color:inherit}
-.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
-[data-lang="en"] .ko,[data-lang="ko"] .en{display:none}
-
-.cell{position:relative;display:grid;place-items:center;border:1px solid var(--rule);background:var(--panel);
-  font-family:var(--serif);font-weight:600;line-height:1;color:var(--ink)}
-.cell::before,.cell::after{content:"";position:absolute;border-color:var(--rule);border-style:dashed;border-width:0}
-.cell::before{left:0;right:0;top:50%;border-top-width:1px}
-.cell::after{top:0;bottom:0;left:50%;border-left-width:1px}
-.cell > span{position:relative;z-index:1;background:var(--panel);padding:0 .04em}
-
-header{border-bottom:1px solid var(--rule)}
-.bar{display:flex;align-items:center;gap:14px;height:64px}
-.mark{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
-.moon{width:22px;height:22px;border-radius:50%;flex:none;display:block}
-.bar nav{margin-left:auto;display:flex;gap:6px;align-items:center}
-.back{font-size:13.5px;color:var(--dim);text-decoration:none;margin-right:10px}
-.back:hover{color:var(--ink)}
-.lang{font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:none;border:1px solid var(--rule);color:var(--dim);padding:5px 10px;cursor:pointer}
-.lang[aria-pressed="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink)}
-.lang:focus-visible,a:focus-visible,.badge:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
-
-.hero{display:grid;grid-template-columns:200px 1fr;gap:44px;align-items:center;padding:72px 0 60px}
-.glyphbox{width:200px;height:200px;font-size:96px}
-.eyebrow-app{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
-h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4.8vw,46px);line-height:1.25;margin:0 0 18px;letter-spacing:-.015em}
-.lede{max-width:50ch;color:var(--dim);margin:0 0 28px}
-/* official store badges — Google PNG has transparent padding, cropped so both read at the same height */
-.badges{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.tail .badges{justify-content:center}
-.badge{--bh:44px;display:inline-block;height:var(--bh);overflow:hidden;line-height:0;border-radius:7px;transition:opacity .16s}
-.badge:hover{opacity:.8}
-.badge img{display:block;height:var(--bh);width:auto}
-.badge.gp img.en{height:calc(var(--bh)*250/168);width:calc(var(--bh)*646/168);margin:calc(var(--bh)*-41/168)}
-.badge.gp img.ko{height:calc(var(--bh)*250/192);width:calc(var(--bh)*646/192);margin:calc(var(--bh)*-29/192) 0}
-/* fixed widths so the row does not shift while badges load */
-.badge.as img.en{width:calc(var(--bh)*119.66/40)}
-.badge.as img.ko{width:calc(var(--bh)*129.7/40)}
-
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
-.stat{background:var(--paper);padding:24px 20px}
-.stat b{display:block;font-family:var(--serif);font-weight:800;font-size:clamp(24px,3.2vw,32px);line-height:1.1;letter-spacing:-.02em}
-.stat span{display:block;margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
-
-section{padding:62px 0;border-top:1px solid var(--rule)}
-.eyebrow{display:flex;align-items:baseline;gap:12px;margin:0 0 26px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-.eyebrow s{flex:1;height:1px;background:var(--rule);text-decoration:none}
-.eyebrow em{font-style:normal;color:var(--ink)}
-h2{font-family:var(--serif);font-weight:600;font-size:clamp(22px,3vw,28px);line-height:1.35;margin:0 0 14px;letter-spacing:-.01em}
-.body{max-width:60ch;color:var(--dim)}
-.body p{margin:0 0 14px}
-.body strong{color:var(--ink);font-weight:600}
-
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:30px}
-.col{background:var(--paper);padding:28px 26px}
-.col h3{font-family:var(--serif);font-size:17px;font-weight:600;margin:0 0 9px}
-.col p{margin:0;font-size:14.5px;color:var(--dim);line-height:1.6}
-
-.faq{border-top:1px solid var(--rule);margin-top:8px}
-details{border-bottom:1px solid var(--rule)}
-summary{cursor:pointer;padding:17px 2px;font-weight:500;font-size:15.5px;list-style:none;display:flex;gap:14px;align-items:baseline}
-summary::-webkit-details-marker{display:none}
-summary::before{content:"+";font-family:var(--mono);color:var(--seal);flex:none}
-details[open] summary::before{content:"−"}
-details p{margin:0 0 18px 26px;color:var(--dim);font-size:15px;max-width:62ch}
-
-.tail{text-align:center;padding:70px 0 80px;border-top:1px solid var(--rule)}
-.tail h2{margin-bottom:22px}
-footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color:var(--dim);display:flex;flex-wrap:wrap;gap:6px 20px}
-
-@media (max-width:860px){
-  .hero{grid-template-columns:1fr;gap:28px;padding:48px 0}
-  .glyphbox{width:128px;height:128px;font-size:64px}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .cols{grid-template-columns:1fr}
-}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* page-only: playable mini board + special-rule cards */
+.try{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px;align-items:center}
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:420px;width:100%;justify-self:center}
+.tile{aspect-ratio:1;border:0;padding:0;border-radius:16px;cursor:pointer;perspective:600px;background:none;font:inherit}
+.tile:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.tile .in{position:relative;display:block;width:100%;height:100%;transition:transform .35s;transform-style:preserve-3d}
+.tile.up .in,.tile.done .in{transform:rotateY(180deg)}
+.tile .bk,.tile .fc{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;display:grid;place-items:center}
+/* back = app's default card skin (#6C5CE7 → #A29BFE, question mark); faces = the app's own animal art */
+.tile .bk{background:linear-gradient(145deg,#6C5CE7,#A29BFE);box-shadow:var(--shadow);color:rgba(255,255,255,.9);font-size:clamp(26px,7vw,40px);font-weight:800}
+.tile .fc{transform:rotateY(180deg);background:#fff;border:2px solid #fff;box-shadow:var(--shadow);overflow:hidden}
+.tile .fc img{width:100%;height:100%;object-fit:cover;display:block}
+.tile.done .fc{border-color:#23C08A;box-shadow:0 0 12px color-mix(in srgb,#23C08A 45%,transparent)}
+.tile.done .fc img{opacity:.55;transition:opacity .3s}
+.tile.miss .fc{border-color:#FF6B6B}
+.play-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:22px}
+.play-bar .count{font-size:15px;color:var(--dim);font-variant-numeric:tabular-nums}
+.play-bar .count b{color:var(--ink);font-weight:750}
+.btn-play{border:0;border-radius:999px;padding:11px 22px;font:inherit;font-weight:700;font-size:15px;color:#fff;background:var(--accent);cursor:pointer}
+.btn-play:focus-visible{outline:3px solid var(--accent-line);outline-offset:2px}
+.clear-msg{display:none;font-weight:750;color:#1A9E6F}
+.board-wrap.cleared .clear-msg{display:inline}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.rule{background:var(--surface);border:1px solid var(--rule);border-radius:20px;padding:18px 20px 18px;display:grid;grid-template-columns:52px 1fr;gap:4px 16px;align-items:start}
+.rule .mini{grid-row:span 3;width:52px;height:52px;border-radius:12px;display:grid;place-items:center;color:#fff;background:var(--c)}
+.rule .mini svg{width:26px;height:26px}
+.rule b{font-size:17px;font-weight:750}
+.rule p{font-size:14.5px;color:var(--dim);line-height:1.6}
+.rule .from{font-size:13px;font-weight:650;color:var(--accent-text);font-variant-numeric:tabular-nums}
+.wl{margin-top:28px;font-size:14px;font-weight:700;color:var(--dim)}
+.worlds{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:10px}
+.worlds div{background:var(--surface);border:1px solid var(--rule);border-radius:16px;padding:12px 14px}
+.worlds b{display:block;font-size:15.5px;font-weight:750}
+.worlds span{display:block;font-size:13px;color:var(--dim);font-variant-numeric:tabular-nums}
+html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
+@media (prefers-reduced-motion:reduce){.tile .in{transition:none}}
+@media (max-width:900px){.rules{grid-template-columns:1fr 1fr}.worlds{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:760px){.try{grid-template-columns:1fr;gap:24px}.rules{grid-template-columns:1fr}.worlds{grid-template-columns:1fr 1fr}}
 </style>
 </head>
-<body>
+<body style="--accent:#1A7CC0">
 
-<header>
-  <div class="wrap bar">
-    <a class="mark" href="index.html"><img class="moon" src="assets/logo-moon.png" alt="" width="22" height="22">RedMoon Lab</a>
-    <nav aria-label="Language">
-      <a class="back" href="index.html"><span class="en">All apps</span><span class="ko">전체 앱</span></a>
-      <button class="lang" data-set="en" aria-pressed="true">EN</button>
-      <button class="lang" data-set="ko" aria-pressed="false">KO</button>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="assets/logo-moon.png" alt="" width="26" height="26">RedMoon Lab</a>
+    <nav class="head-nav" aria-label="Site">
+      <a class="hide-sm" href="index.html"><span class="ko">전체 앱</span><span class="en">All apps</span><span class="ja">アプリ一覧</span></a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button data-set="ko" aria-pressed="false">KO</button>
+        <button data-set="en" aria-pressed="false">EN</button>
+        <button data-set="ja" aria-pressed="false">JP</button>
+      </div>
     </nav>
   </div>
 </header>
 
-<main class="wrap">
+<main>
 
-  <div class="hero">
-    <div class="cell glyphbox" aria-hidden="true"><img src="assets/icon-twinflip.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-    <div>
-      <p class="eyebrow-app"><span class="en">Memory Game — Brain Training · Android</span><span class="ko">Memory Game — Brain Training · Android</span></p>
-      <h1>
-        <span class="en">150 stages.<br>5 worlds. One memory.</span>
-        <span class="ko">150개 스테이지,<br>5개 월드로 기억력 훈련.</span>
-      </h1>
-      <p class="lede">
-        <span class="en">Flip cards to find matching pairs across 150 stages in 5 themed worlds, each adding new gimmicks — reshuffling, fading cards, traps, locked tiles. Play solo, race the weekly challenge, or go head-to-head on the same phone.</span>
-        <span class="ko">150개 스테이지, 5개 테마 월드를 거치며 카드를 뒤집어 짝을 맞춥니다. 월드마다 재섞기·페이드·함정·잠금 같은 새로운 방해 요소가 추가됩니다. 혼자 하거나, 주간 챌린지에 도전하거나, 같은 폰으로 마주 앉아 2인 대전도 할 수 있습니다.</span>
-      </p>
-      <div class="badges"><a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.twinflip"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"></a></div>
-    </div>
-  </div>
-
-  <div class="stats">
-    <div class="stat"><b>150</b><span class="en">stages</span><span class="ko">스테이지</span></div>
-    <div class="stat"><b>5</b><span class="en">worlds</span><span class="ko">월드</span></div>
-    <div class="stat"><b>3</b><span class="en">languages</span><span class="ko">지원 언어</span></div>
-    <div class="stat"><b>2</b><span class="en">local versus mode</span><span class="ko">2인 대전</span></div>
-  </div>
-
-  <section>
-    <p class="eyebrow"><em><span class="en">Gimmicks</span><span class="ko">방해 요소</span></em> <s></s></p>
-    <h2><span class="en">Each world adds a new way to trip you up.</span><span class="ko">월드마다 새로운 방해 요소가 추가됩니다.</span></h2>
-    <div class="body">
-      <p>
-        <span class="en">Beyond the first world's plain matching, later stages add reshuffle (cards move after a flip), fade (a matched pair briefly disappears from memory), traps, locked cards that need a key pair first, dark tiles, and rotating boards — sometimes combined on the same stage.</span>
-        <span class="ko">첫 월드의 단순 매칭을 지나면 재섞기(뒤집은 뒤 카드 위치가 바뀜), 페이드(맞춘 짝이 잠깐 사라짐), 함정, 열쇠 짝이 먼저 필요한 잠금 카드, 어두워지는 타일, 회전하는 보드가 추가되고, 한 스테이지에 여러 개가 겹치기도 합니다.</span>
-      </p>
-    </div>
-
-    <div class="cols">
-      <div class="col">
-        <h3><span class="en">Weekly challenge</span><span class="ko">주간 챌린지</span></h3>
-        <p><span class="en">Three gimmick types are randomly picked each week for a challenge mode that rotates without repeating the same combination.</span>
-           <span class="ko">매주 6가지 방해 요소 중 3개를 무작위로 골라 챌린지를 만들기 때문에, 매주 새로운 조합으로 즐길 수 있습니다.</span></p>
+  <section class="app-hero">
+    <div class="wrap">
+      <div>
+        <div class="app-id">
+          <img src="assets/icons/twinflip.webp" alt="" width="72" height="72">
+          <div>
+            <div class="name"><span class="ko">트윈플립</span><span class="en">Twinflip</span><span class="ja">ツインフリップ</span></div>
+            <div class="chips"><span class="chip and">Android</span><span class="chip ios">iOS</span></div>
+          </div>
+        </div>
+        <h1>
+          <span class="ko">카드를 뒤집어<br><em>같은 그림을 찾으세요</em></span>
+          <span class="en">Flip two cards.<br><em>Find the pair.</em></span>
+          <span class="ja">カードをめくって<br><em>同じ絵を見つけよう</em></span>
+        </h1>
+        <p class="lede">
+          <span class="ko">처음 3초 동안 모든 카드를 보여 준 뒤 덮습니다. 위치를 기억해 짝을 맞추세요. 6장으로 시작해 30장까지 늘어나고, 41번째 스테이지부터는 카드가 섞이고 사라지고 잠기는 특수 규칙이 붙습니다.</span>
+          <span class="en">Every card is shown for three seconds, then turned face down. Remember where they were and match the pairs. Boards grow from 6 to 30 cards, and from stage 41 on, special rules start shuffling, hiding and locking cards.</span>
+          <span class="ja">最初の3秒間すべてのカードを見せてから伏せます。位置を覚えてペアをそろえましょう。カードは6枚から30枚まで増え、ステージ41からはカードが混ざったり消えたりロックされたりする特殊ルールが加わります。</span>
+        </p>
+        <div class="badges">
+          <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.twinflip"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ja" src="https://play.google.com/intl/en_us/badges/static/images/badges/ja_badge_web_generic.png" alt="Google Play で手に入れよう" loading="lazy"></a>
+          <a class="badge as" href="https://apps.apple.com/app/id6820092728"><img class="ko" src="assets/badges/appstore-ko.svg" alt="App Store에서 다운로드" loading="lazy"><img class="en" src="assets/badges/appstore-en.svg" alt="Download on the App Store" loading="lazy"><img class="ja" src="assets/badges/appstore-ja.svg" alt="App Store からダウンロード" loading="lazy"></a>
+        </div>
+        <p class="fine">
+          <span class="ko">무료 · 광고 포함 · 한국어·영어·일본어</span>
+          <span class="en">Free · Contains ads · Korean, English, Japanese</span>
+          <span class="ja">無料・広告あり・日本語／英語／韓国語</span>
+        </p>
       </div>
-      <div class="col">
-        <h3><span class="en">Local two-player versus</span><span class="ko">로컬 2인 대전</span></h3>
-        <p><span class="en">Take turns on the same device — a correct match earns you another turn, just like the tabletop version of the game.</span>
-           <span class="ko">한 기기로 번갈아 플레이합니다. 짝을 맞추면 한 번 더 할 수 있는, 원래 카드 게임 규칙 그대로입니다.</span></p>
+      <div class="phones" aria-hidden="true">
+        <img class="p2 ko" src="assets/shots/twinflip/ko_02.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p1 ko" src="assets/shots/twinflip/ko_01.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p2 en" src="assets/shots/twinflip/en_02.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p1 en" src="assets/shots/twinflip/en_01.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p2 ja" src="assets/shots/twinflip/ja_02.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p1 ja" src="assets/shots/twinflip/ja_01.webp" alt="" width="600" height="1304" loading="lazy">
       </div>
     </div>
   </section>
 
-  <section>
-    <p class="eyebrow"><em>FAQ</em> <s></s></p>
-    <div class="faq">
-      <details>
-        <summary><span class="en">Is it free?</span><span class="ko">무료인가요?</span></summary>
-        <p><span class="en">Yes. The app is free to install and supported by ads. There is no in-app purchase — every stage, world and mode is free.</span>
-           <span class="ko">네. 무료로 설치해 쓸 수 있고, 광고가 포함되어 있습니다. 인앱 결제가 없고, 모든 스테이지·월드·모드가 무료입니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">Do I need an account?</span><span class="ko">계정이 필요한가요?</span></summary>
-        <p><span class="en">No sign-up is required to play. The game signs you in anonymously in the background so daily challenge scores can appear on a ranking; no name, email or phone number is collected.</span>
-           <span class="ko">회원가입 없이 바로 플레이할 수 있습니다. 데일리 챌린지 순위를 위해 백그라운드에서 익명으로 로그인되며, 이름·이메일·전화번호는 수집하지 않습니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">Which languages does it support?</span><span class="ko">어떤 언어를 지원하나요?</span></summary>
-        <p><span class="en">Korean, English and Japanese.</span>
-           <span class="ko">한국어, 영어, 일본어를 지원합니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">Is it available on iPhone?</span><span class="ko">아이폰에서도 쓸 수 있나요?</span></summary>
-        <p><span class="en">Not at the moment. The app is Android only, on Google Play.</span>
-           <span class="ko">현재는 안드로이드 전용이며 구글플레이에서만 제공됩니다.</span></p>
-      </details>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>180</b><span class="ko">스테이지 (6개 월드)</span><span class="en">stages in 6 worlds</span><span class="ja">ステージ（6ワールド）</span></div>
+      <div class="stat"><b>6</b><span class="ko">특수 규칙</span><span class="en">special rules</span><span class="ja">特殊ルール</span></div>
+      <div class="stat"><b>7</b><span class="ko">게임 모드</span><span class="en">game modes</span><span class="ja">ゲームモード</span></div>
+      <div class="stat"><b>18</b><span class="ko">업적</span><span class="en">achievements</span><span class="ja">実績</span></div>
+    </div>
+  </div>
+
+  <section class="sec">
+    <div class="wrap try">
+      <div>
+        <div class="sec-head" style="margin-bottom:0">
+          <span class="kicker"><span class="ko">한 판 해 보기</span><span class="en">Try a board</span><span class="ja">1回あそんでみる</span></span>
+          <h2><span class="ko">3초 동안 보고, 기억으로 맞추세요</span><span class="en">Look for three seconds, then match from memory</span><span class="ja">3秒見て、記憶でそろえよう</span></h2>
+          <p><span class="ko">앱의 첫 월드와 같은 방식입니다. 시작을 누르면 카드 12장을 3초 동안 보여 준 뒤 덮습니다.</span><span class="en">This works like the app's first world. Press Start to see all 12 cards for three seconds before they turn over.</span><span class="ja">アプリの最初のワールドと同じ遊び方です。スタートを押すと12枚のカードを3秒間見せてから伏せます。</span></p>
+        </div>
+        <div class="board-wrap play-bar" id="bar">
+          <button class="btn-play" id="start" type="button"><span class="ko">시작</span><span class="en">Start</span><span class="ja">スタート</span></button>
+          <span class="count"><span class="ko">시도</span><span class="en">Tries</span><span class="ja">試行</span> <b id="tries">0</b> · <span class="ko">짝</span><span class="en">Pairs</span><span class="ja">ペア</span> <b id="pairs">0</b>/6</span>
+          <span class="clear-msg" role="status"><span class="ko">클리어!</span><span class="en">Cleared!</span><span class="ja">クリア！</span></span>
+        </div>
+      </div>
+      <div class="board" id="board" aria-label="Memory board"></div>
     </div>
   </section>
 
-  <div class="tail">
-    <h2><span class="en">Flip the first card. 150 stages to go.</span><span class="ko">첫 카드를 뒤집어 보세요. 150개 스테이지가 기다립니다.</span></h2>
-    <div class="badges"><a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.twinflip"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"></a></div>
-    <p class="note" style="margin-top:18px;font-family:var(--mono);font-size:11.5px;color:var(--dim)">com.redmoon.twinflip</p>
-  </div>
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">특수 규칙</span><span class="en">Special rules</span><span class="ja">特殊ルール</span></span>
+        <h2><span class="ko">익숙해질 즈음, 규칙이 바뀝니다</span><span class="en">Just as it gets easy, the rules change</span><span class="ja">慣れてきたころ、ルールが変わります</span></h2>
+        <p><span class="ko">41번째 스테이지부터 10스테이지마다 새 규칙이 하나씩 나오고, 101번째부터는 두세 개가 한꺼번에 걸립니다. 어렵다면 설정에서 특수 규칙을 끌 수 있습니다.</span><span class="en">From stage 41, a new rule arrives every ten stages; from stage 101, two or three apply at once. If it gets too hard, you can turn special rules off in Settings.</span><span class="ja">ステージ41から10ステージごとに新しいルールが1つずつ登場し、ステージ101からは2〜3個が同時にかかります。難しすぎる場合は設定で特殊ルールをオフにできます。</span></p>
+      </div>
+      <div class="rules">
+        <div class="rule" style="--c:#2FA3DA">
+          <span class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></span>
+          <b><span class="ko">재셔플</span><span class="en">Reshuffle</span><span class="ja">リシャッフル</span></b>
+          <p><span class="ko">짝을 틀리면 남은 카드의 자리가 다시 섞입니다.</span><span class="en">Miss a pair and the remaining cards change places.</span><span class="ja">ペアを外すと、残りのカードの位置が混ざり直します。</span></p>
+          <span class="from"><span class="ko">41번째 스테이지부터</span><span class="en">From stage 41</span><span class="ja">ステージ41から</span></span>
+        </div>
+        <div class="rule" style="--c:#E0A21B">
+          <span class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg></span>
+          <b><span class="ko">페이드</span><span class="en">Fade</span><span class="ja">フェード</span></b>
+          <p><span class="ko">뒤집은 카드가 1초만 보이고 다시 덮입니다.</span><span class="en">A flipped card shows for just one second, then turns back.</span><span class="ja">めくったカードは1秒だけ見えて、また伏せられます。</span></p>
+          <span class="from"><span class="ko">51번째 스테이지부터</span><span class="en">From stage 51</span><span class="ja">ステージ51から</span></span>
+        </div>
+        <div class="rule" style="--c:#E5534B">
+          <span class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4M12 17h.01"/></svg></span>
+          <b><span class="ko">폭탄</span><span class="en">Bomb</span><span class="ja">爆弾</span></b>
+          <p><span class="ko">폭탄 카드가 섞여 있습니다. 폭탄은 폭탄끼리만 짝이 되고, 다른 카드와 맞추면 실수입니다.</span><span class="en">Bomb cards are mixed in. Bombs only match other bombs — pairing one with anything else counts as a mistake.</span><span class="ja">爆弾カードが混ざっています。爆弾は爆弾同士でしかペアにならず、ほかのカードと合わせるとミスになります。</span></p>
+          <span class="from"><span class="ko">61번째 스테이지부터</span><span class="en">From stage 61</span><span class="ja">ステージ61から</span></span>
+        </div>
+        <div class="rule" style="--c:#C8961A">
+          <span class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+          <b><span class="ko">잠금</span><span class="en">Lock</span><span class="ja">ロック</span></b>
+          <p><span class="ko">잠긴 카드는 두 번 눌러야 뒤집힙니다.</span><span class="en">Locked cards take two taps to flip.</span><span class="ja">ロックされたカードは2回タップしないとめくれません。</span></p>
+          <span class="from"><span class="ko">71번째 스테이지부터</span><span class="en">From stage 71</span><span class="ja">ステージ71から</span></span>
+        </div>
+        <div class="rule" style="--c:#8E57B3">
+          <span class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></span>
+          <b><span class="ko">어둠</span><span class="en">Dark</span><span class="ja">ダーク</span></b>
+          <p><span class="ko">일부 카드는 어둡게 가려져, 뒤집어도 그림이 잘 보이지 않습니다.</span><span class="en">Some cards are shaded, so their pictures are hard to see even when flipped.</span><span class="ja">一部のカードは暗く覆われていて、めくっても絵がよく見えません。</span></p>
+          <span class="from"><span class="ko">81번째 스테이지부터</span><span class="en">From stage 81</span><span class="ja">ステージ81から</span></span>
+        </div>
+        <div class="rule" style="--c:#1FA97A">
+          <span class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></span>
+          <b><span class="ko">회전</span><span class="en">Rotate</span><span class="ja">回転</span></b>
+          <p><span class="ko">그림이 90°·180°·270° 돌아간 카드가 섞여, 같은 그림도 달라 보입니다.</span><span class="en">Some pictures are turned 90°, 180° or 270°, so a matching pair can look different.</span><span class="ja">絵が90°・180°・270°回転したカードが混ざり、同じ絵でも違って見えます。</span></p>
+          <span class="from"><span class="ko">91번째 스테이지부터</span><span class="en">From stage 91</span><span class="ja">ステージ91から</span></span>
+        </div>
+      </div>
+      <p class="wl"><span class="ko">월드 6개 · 월드마다 30스테이지</span><span class="en">6 worlds · 30 stages each</span><span class="ja">6ワールド・各30ステージ</span></p>
+      <div class="worlds num">
+        <div><b><span class="ko">동물</span><span class="en">Animals</span><span class="ja">動物</span></b><span>1–30</span></div>
+        <div><b><span class="ko">음식</span><span class="en">Food</span><span class="ja">食べ物</span></b><span>31–60</span></div>
+        <div><b><span class="ko">국기</span><span class="en">Flags</span><span class="ja">国旗</span></b><span>61–90</span></div>
+        <div><b><span class="ko">공룡</span><span class="en">Dinosaurs</span><span class="ja">恐竜</span></b><span>91–120</span></div>
+        <div><b><span class="ko">스포츠</span><span class="en">Sports</span><span class="ja">スポーツ</span></b><span>121–150</span></div>
+        <div><b><span class="ko">우주</span><span class="en">Space</span><span class="ja">宇宙</span></b><span>151–180</span></div>
+      </div>
+    </div>
+  </section>
 
-  <footer>
-    <span>© <span id="yr">2026</span> RedMoon Lab</span>
-    <a href="privacy.html"><span class="en">Privacy policy</span><span class="ko">개인정보처리방침</span></a>
-    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
-  </footer>
+  <section class="sec" style="padding-top:0;padding-bottom:56px">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">앱 화면</span><span class="en">Inside the app</span><span class="ja">アプリ画面</span></span>
+        <h2><span class="ko">클래식부터 2인 대전까지</span><span class="en">From Classic to two-player Versus</span><span class="ja">クラシックから対戦モードまで</span></h2>
+        <p><span class="ko">옆으로 넘겨 실제 화면을 보세요.</span><span class="en">Swipe through the actual screens.</span><span class="ja">横にスクロールして実際の画面をご覧ください。</span></p>
+      </div>
+    </div>
+    <div class="gallery-wrap">
+      <div class="gallery ko" tabindex="0" aria-label="스크린샷">
+        <img src="assets/shots/twinflip/ko_01.webp" alt="게임 화면" width="600" height="1304" loading="lazy"><img src="assets/shots/twinflip/ko_02.webp" alt="홈 — 게임 모드" width="600" height="1304" loading="lazy"><img src="assets/shots/twinflip/ko_03.webp" alt="데일리 챌린지" width="600" height="1304" loading="lazy"><img src="assets/shots/twinflip/ko_04.webp" alt="스테이지 클리어" width="600" height="1304" loading="lazy"><img src="assets/shots/twinflip/ko_05.webp" alt="스테이지 선택" width="600" height="1304" loading="lazy"><img src="assets/shots/twinflip/ko_06.webp" alt="2인 대전" width="600" height="1304" loading="lazy">
+      </div>
+      <div class="gallery en" tabindex="0" aria-label="Screenshots">
+        <img src="assets/shots/twinflip/en_01.webp" alt="Game board" width="600" height="1304" loading="lazy"><img src="assets/shots/twinflip/en_02.webp" alt="Home — game modes" width="600" height="1304" loading="lazy"><img src="assets/shots/twinflip/en_03.webp" alt="Daily Challenge" width="600" height="1304" loading="lazy"><img src="assets/shots/twinflip/en_04.webp" alt="Stage clear" width="600" height="1304" loading="lazy"><img src="assets/shots/twinflip/en_05.webp" alt="Stage select" width="600" height="1304" loading="lazy"><img src="assets/shots/twinflip/en_06.webp" alt="Versus" width="600" height="1304" loading="lazy">
+      </div>
+      <div class="gallery ja" tabindex="0" aria-label="スクリーンショット">
+        <img src="assets/shots/twinflip/ja_01.webp" alt="ゲーム画面" width="600" height="1304" loading="lazy"><img src="assets/shots/twinflip/ja_02.webp" alt="ホーム — ゲームモード" width="600" height="1304" loading="lazy"><img src="assets/shots/twinflip/ja_03.webp" alt="デイリーチャレンジ" width="600" height="1304" loading="lazy"><img src="assets/shots/twinflip/ja_04.webp" alt="ステージクリア" width="600" height="1304" loading="lazy"><img src="assets/shots/twinflip/ja_05.webp" alt="ステージ選択" width="600" height="1304" loading="lazy"><img src="assets/shots/twinflip/ja_06.webp" alt="対戦モード" width="600" height="1304" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:32px">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">게임 모드</span><span class="en">Game modes</span><span class="ja">ゲームモード</span></span>
+        <h2><span class="ko">혼자서, 매일, 둘이서</span><span class="en">Solo, daily, or with a friend</span><span class="ja">ひとりで、毎日、ふたりで</span></h2>
+        <p><span class="ko">스테이지를 깨는 클래식 모드 말고도 하루 5분씩 즐길 거리가 있습니다.</span><span class="en">Beyond the Classic stages, there's something to play in five minutes a day.</span><span class="ja">ステージを進めるクラシックモードのほかにも、1日5分で遊べるモードがあります。</span></p>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg></div>
+          <h3><span class="ko">클래식 모드</span><span class="en">Classic</span><span class="ja">クラシックモード</span></h3>
+          <p><span class="ko">6개 월드, 180개 스테이지. 카드는 6장에서 30장까지 늘고, 11번째 스테이지부터 시간 제한이 붙습니다. 실수와 시간에 따라 별 3개까지 받습니다.</span><span class="en">Six worlds, 180 stages. Boards grow from 6 to 30 cards, a time limit kicks in at stage 11, and you earn up to three stars based on time and mistakes.</span><span class="ja">6ワールド・180ステージ。カードは6枚から30枚まで増え、ステージ11から制限時間がつきます。ミスと時間に応じて最大3つの星がもらえます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+          <h3><span class="ko">데일리 챌린지</span><span class="en">Daily Challenge</span><span class="ja">デイリーチャレンジ</span></h3>
+          <p><span class="ko">하루에 한 판, 전 세계 플레이어가 같은 보드로 겨룹니다. 오늘의 랭킹과 연속 클리어 기록이 남습니다.</span><span class="en">One board a day, the same for every player worldwide. See today's ranking and keep your clear streak going.</span><span class="ja">1日1回、世界中のプレイヤーが同じボードで競います。今日のランキングと連続クリア記録が残ります。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></div>
+          <h3><span class="ko">주간 챌린지</span><span class="en">Weekly Challenges</span><span class="ja">週間チャレンジ</span></h3>
+          <p><span class="ko">퍼펙트 클리어, 안개 속 기억, 잔상, 블라인드 등 6가지 과제 중 매주 3개가 나옵니다.</span><span class="en">Each week brings three of six challenges, such as Perfect Clear, Foggy Memory, Afterimage and Blind.</span><span class="ja">パーフェクトクリア、霧の中の記憶、残像、ブラインドなど6種類の課題から毎週3つが出題されます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg></div>
+          <h3><span class="ko">타임어택</span><span class="en">Time Attack</span><span class="ja">タイムアタック</span></h3>
+          <p><span class="ko">60초 안에 최대한 많이 맞추세요. 3연속 성공하면 콤보 점수 1.5배, 틀리면 3초가 줄어듭니다. 주간·월간·전체 랭킹이 있습니다.</span><span class="en">Match as many pairs as you can in 60 seconds. Three in a row gives a 1.5× combo; a miss costs three seconds. Weekly, monthly and all-time rankings.</span><span class="ja">60秒でできるだけ多くそろえましょう。3連続成功でコンボ1.5倍、ミスすると3秒減ります。週間・月間・総合ランキングがあります。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.2 8.2a5 5 0 1 1 0 7.6L12 12 5.8 8.2a5 5 0 1 0 0 7.6L12 12z"/></svg></div>
+          <h3><span class="ko">무한 모드</span><span class="en">Endless</span><span class="ja">エンドレスモード</span></h3>
+          <p><span class="ko">6장에서 시작해 판을 깰 때마다 카드가 늘어납니다. 시간 제한은 없고, 실수가 10번 쌓이면 끝납니다.</span><span class="en">Start with six cards and get more each time you clear a board. No time limit — the run ends at ten mistakes.</span><span class="ja">6枚から始まり、クリアするたびにカードが増えます。制限時間はなく、ミスが10回たまると終了です。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.8"/><path d="M2 20a6 6 0 0 1 12 0M14.5 15.5A5 5 0 0 1 22 19.5"/></svg></div>
+          <h3><span class="ko">2인 대전</span><span class="en">Versus</span><span class="ja">対戦モード</span></h3>
+          <p><span class="ko">한 기기로 번갈아 뒤집습니다. 짝을 맞추면 점수를 얻고 한 번 더 할 수 있습니다. 가족이나 친구와 함께하기 좋습니다.</span><span class="en">Two players take turns on one device. Make a match and you score and go again — great with family or friends.</span><span class="ja">1台の端末で交代にめくります。ペアをそろえると得点し、もう1回めくれます。家族や友だちと遊ぶのにぴったりです。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></div>
+          <h3><span class="ko">커스텀 게임</span><span class="en">Custom Game</span><span class="ja">カスタムゲーム</span></h3>
+          <p><span class="ko">카드 배열, 테마, 시간·실수 제한, 특수 규칙을 직접 골라 1인 또는 2인으로 즐깁니다.</span><span class="en">Pick the board size, theme, time and mistake limits and special rules yourself, for one or two players.</span><span class="ja">カード配列、テーマ、時間・ミス制限、特殊ルールを自分で選んで、1人または2人で遊べます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="12" height="16" rx="2.5"/><path d="M8 21h10a2 2 0 0 0 2-2V7"/></svg></div>
+          <h3><span class="ko">카드 스킨과 아이템</span><span class="en">Card skins and items</span><span class="ja">カードスキンとアイテム</span></h3>
+          <p><span class="ko">게임에서 모은 코인으로 카드 뒷면 스킨 7종과 힌트·미리보기·실수 초기화 아이템을 삽니다. 결제는 없습니다.</span><span class="en">Spend coins earned in play on seven card-back skins and on Hint, Preview and Mistake Reset items. No purchases with real money.</span><span class="ja">ゲームで集めたコインで、カード裏面のスキン7種とヒント・プレビュー・ミスリセットのアイテムを買えます。課金はありません。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg></div>
+          <h3><span class="ko">업적과 통계</span><span class="en">Achievements and stats</span><span class="ja">実績と統計</span></h3>
+          <p><span class="ko">콤보, 퍼펙트 클리어, 연속 출석 등 업적 18개와 월드별 진행 상황을 확인합니다. 라이트·다크 화면을 지원합니다.</span><span class="en">Track 18 achievements — combos, perfect clears, daily streaks — and your progress in each world. Light and dark themes included.</span><span class="ja">コンボ、パーフェクトクリア、連続クリアなど18個の実績と、ワールドごとの進み具合を確認できます。ライト・ダーク表示に対応しています。</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">FAQ</span>
+        <h2><span class="ko">자주 묻는 질문</span><span class="en">Questions</span><span class="ja">よくある質問</span></h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary><span class="ko">무료인가요?</span><span class="en">Is it free?</span><span class="ja">無料ですか？</span></summary>
+          <p><span class="ko">네. 모든 모드와 스테이지를 무료로 즐길 수 있고, 광고로 운영됩니다. 앱 안에서 결제하는 상품은 없습니다. 처음 5개 스테이지에는 전면 광고가 나오지 않습니다.</span><span class="en">Yes. Every mode and stage is free and supported by ads; there are no in-app purchases. The first five stages show no full-screen ads.</span><span class="ja">はい。すべてのモードとステージを無料で遊べ、広告で運営しています。アプリ内課金はありません。最初の5ステージでは全画面広告は表示されません。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">계정이 필요한가요?</span><span class="en">Do I need an account?</span><span class="ja">アカウントは必要ですか？</span></summary>
+          <p><span class="ko">아니요. 회원가입 없이 바로 시작합니다. 랭킹에 기록을 올릴 때만 익명 로그인을 사용하고, 랭킹에 보일 닉네임은 직접 정합니다.</span><span class="en">No. You can start right away without signing up. Rankings use an anonymous sign-in, and you choose the nickname shown there.</span><span class="ja">いいえ。会員登録なしですぐに始められます。ランキングに記録を送るときだけ匿名ログインを使い、表示されるニックネームはご自身で決めます。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">어떤 언어를 지원하나요?</span><span class="en">Which languages does it support?</span><span class="ja">対応言語は？</span></summary>
+          <p><span class="ko">한국어, 영어, 일본어를 지원합니다.</span><span class="en">Korean, English and Japanese.</span><span class="ja">日本語、英語、韓国語に対応しています。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">아이폰에서도 쓸 수 있나요?</span><span class="en">Is it on iPhone?</span><span class="ja">iPhoneでも使えますか？</span></summary>
+          <p><span class="ko">네. 구글플레이와 앱스토어 모두에서 받을 수 있습니다.</span><span class="en">Yes. It's on both Google Play and the App Store.</span><span class="ja">はい。Google Play と App Store の両方からダウンロードできます。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">후반 스테이지가 너무 어려워요.</span><span class="en">The later stages are too hard.</span><span class="ja">後半のステージが難しすぎます。</span></summary>
+          <p><span class="ko">설정에서 특수 규칙을 끄면 클래식 모드가 쉬워집니다. 상점의 힌트·미리보기 아이템도 도움이 됩니다.</span><span class="en">Turn off special rules in Settings to make Classic easier. Hint and Preview items from the shop also help.</span><span class="ja">設定で特殊ルールをオフにすると、クラシックモードがやさしくなります。ショップのヒント・プレビューアイテムも役立ちます。</span></p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="cta-band">
+      <img class="icon" src="assets/icons/twinflip.webp" alt="" width="112" height="112">
+      <div>
+        <h2><span class="ko">하루 5분, 카드 한 판</span><span class="en">Five minutes, one board</span><span class="ja">1日5分、カードを1回</span></h2>
+        <p><span class="ko">무료로 설치하고 오늘의 데일리 챌린지부터 시작해 보세요.</span><span class="en">Free to install. Start with today's Daily Challenge.</span><span class="ja">無料でインストールして、今日のデイリーチャレンジから始めましょう。</span></p>
+        <div class="badges">
+          <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.twinflip"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ja" src="https://play.google.com/intl/en_us/badges/static/images/badges/ja_badge_web_generic.png" alt="Google Play で手に入れよう" loading="lazy"></a>
+          <a class="badge as" href="https://apps.apple.com/app/id6820092728"><img class="ko" src="assets/badges/appstore-ko.svg" alt="App Store에서 다운로드" loading="lazy"><img class="en" src="assets/badges/appstore-en.svg" alt="Download on the App Store" loading="lazy"><img class="ja" src="assets/badges/appstore-ja.svg" alt="App Store からダウンロード" loading="lazy"></a>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </main>
 
+<footer class="site-foot">
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> RedMoon Lab</span>
+    <a href="index.html"><span class="ko">전체 앱</span><span class="en">All apps</span><span class="ja">アプリ一覧</span></a>
+    <a href="privacy.html"><span class="ko">개인정보처리방침</span><span class="en">Privacy policy</span><span class="ja">プライバシーポリシー</span></a>
+    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
+    <span class="legal">
+      <span class="ko">Google Play 및 Google Play 로고는 Google LLC의 상표이고, App Store는 Apple Inc.의 서비스 마크입니다.</span>
+      <span class="en">Google Play and the Google Play logo are trademarks of Google LLC. App Store is a service mark of Apple Inc.</span>
+      <span class="ja">Google Play および Google Play ロゴは Google LLC の商標です。App Store は Apple Inc. のサービスマークです。</span>
+    </span>
+  </div>
+</footer>
+
 <script>
-(function(){
-  var root=document.documentElement, btns=document.querySelectorAll('.lang');
-  function setLang(l){
-    root.setAttribute('data-lang',l);
-    root.setAttribute('lang',l==='ko'?'ko':'en');
-    btns.forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.set===l)); });
-    try{ localStorage.setItem('rml-lang',l); }catch(e){}
+(function () {
+  // 12 animals from the app's first world; each game draws 6 at random, as the app does
+  var pool = [], faces;
+  for (var p = 1; p <= 12; p++) pool.push('assets/shots/twinflip/cards/a' + (p < 10 ? '0' : '') + p + '.webp');
+  var board = document.getElementById('board'), bar = document.getElementById('bar');
+  var triesEl = document.getElementById('tries'), pairsEl = document.getElementById('pairs');
+  var cards = [], open = [], tries = 0, pairs = 0, busy = true, gen = 0;
+
+  function shuffle(a) {
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
   }
-  btns.forEach(function(b){ b.addEventListener('click',function(){ setLang(b.dataset.set); }); });
-  var saved=null;
-  try{ saved=localStorage.getItem('rml-lang'); }catch(e){}
-  if(saved!=='ko'&&saved!=='en'){ saved=(navigator.language||'').toLowerCase().indexOf('ko')===0?'ko':'en'; }
-  setLang(saved);
-  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  function deal() {
+    faces = shuffle(pool.slice()).slice(0, 6);
+    var deck = shuffle(faces.concat(faces));
+    board.innerHTML = '';
+    cards = deck.map(function (f, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'tile'; b.dataset.face = f;
+      b.setAttribute('aria-label', 'Card ' + (i + 1));
+      b.innerHTML = '<span class="in"><span class="bk">?</span><span class="fc"><img src="' + f + '" alt="" width="192" height="192"></span></span>';
+      b.addEventListener('click', function () { flip(b); });
+      board.appendChild(b);
+      return b;
+    });
+    open = []; tries = 0; pairs = 0; busy = true; gen++;
+    triesEl.textContent = 0; pairsEl.textContent = 0;
+    bar.classList.remove('cleared');
+  }
+
+  function flip(b) {
+    if (busy || b.classList.contains('up') || b.classList.contains('done')) return;
+    b.classList.add('up'); open.push(b);
+    if (open.length < 2) return;
+    tries++; triesEl.textContent = tries;
+    var a = open[0], c = open[1]; open = [];
+    if (a.dataset.face === c.dataset.face) {
+      a.classList.add('done'); c.classList.add('done');
+      pairs++; pairsEl.textContent = pairs;
+      if (pairs === faces.length) bar.classList.add('cleared');
+    } else {
+      busy = true; a.classList.add('miss'); c.classList.add('miss');
+      var g = gen;
+      setTimeout(function () {
+        if (g !== gen) return;
+        a.classList.remove('up', 'miss'); c.classList.remove('up', 'miss'); busy = false;
+      }, 800);
+    }
+  }
+
+  document.getElementById('start').addEventListener('click', function () {
+    deal();
+    cards.forEach(function (b) { b.classList.add('up'); });
+    var g = gen;
+    setTimeout(function () {
+      if (g !== gen) return;
+      cards.forEach(function (b) { b.classList.remove('up'); });
+      busy = false;
+    }, 3000);
+  });
+
+  deal();
 })();
 </script>
-<script src="assets/store-links.js" defer></script>
+<script src="assets/site.js?v=3" defer></script>
 <script src="assets/analytics.js?v=1" defer></script>
 </body>
 </html>
