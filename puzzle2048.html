@@ -3,221 +3,324 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>2048 Rich Puzzle — 2048 with 15 tiers of assets to build | RedMoon Lab</title>
-<meta name="description" content="2048 Rich Puzzle is an Android 2048 variant with a 15-tier asset theme from coins to cities, four powerups, a 15-stage story mode, a daily challenge and a stock-like portfolio meta-game.">
+<script src="assets/lang.js?v=3"></script>
+<title>2048 Rich Puzzle — 동전에서 우주까지, 자산을 키우는 2048 | RedMoon Lab</title>
+<meta name="description" content="2048 Rich Puzzle은 동전·지폐·금괴·아파트·도시를 지나 우주까지 15단계 자산 타일을 합치는 2048 퍼즐입니다. 매일 바뀌는 시세의 자산 포트폴리오, 파워업 4종, 스토리 15스테이지, 오늘의 챌린지, 리더보드.">
 <link rel="canonical" href="https://heyday07.github.io/puzzle2048.html">
-<meta property="og:title" content="2048 Rich Puzzle — 15 tiers, coins to cities">
-<meta property="og:description" content="2048, with a 15-tier asset theme, powerups, story mode and a daily challenge.">
+<meta property="og:title" content="2048 Rich Puzzle — 동전에서 우주까지 15단계">
+<meta property="og:description" content="타일을 합칠 때마다 자산이 쌓이는 2048. 시세는 매일 바뀝니다.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://heyday07.github.io/puzzle2048.html">
 <meta property="og:image" content="https://heyday07.github.io/assets/og-logo.png">
+<meta name="theme-color" content="#B7811A">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=10">
 <style>
-:root{
-  --paper:#E6E8EA;--panel:#EFF1F2;--ink:#14171B;--dim:#5C636B;--rule:#C6CBD0;--seal:#A8231E;
-  --sans:"IBM Plex Sans KR",system-ui,sans-serif;--serif:"Noto Serif KR",serif;--mono:"IBM Plex Mono",monospace;
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}
-a{color:inherit}
-.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
-[data-lang="en"] .ko,[data-lang="ko"] .en{display:none}
-
-.cell{position:relative;display:grid;place-items:center;border:1px solid var(--rule);background:var(--panel);
-  font-family:var(--serif);font-weight:600;line-height:1;color:var(--ink)}
-.cell::before,.cell::after{content:"";position:absolute;border-color:var(--rule);border-style:dashed;border-width:0}
-.cell::before{left:0;right:0;top:50%;border-top-width:1px}
-.cell::after{top:0;bottom:0;left:50%;border-left-width:1px}
-.cell > span{position:relative;z-index:1;background:var(--panel);padding:0 .04em}
-
-header{border-bottom:1px solid var(--rule)}
-.bar{display:flex;align-items:center;gap:14px;height:64px}
-.mark{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
-.moon{width:22px;height:22px;border-radius:50%;flex:none;display:block}
-.bar nav{margin-left:auto;display:flex;gap:6px;align-items:center}
-.back{font-size:13.5px;color:var(--dim);text-decoration:none;margin-right:10px}
-.back:hover{color:var(--ink)}
-.lang{font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:none;border:1px solid var(--rule);color:var(--dim);padding:5px 10px;cursor:pointer}
-.lang[aria-pressed="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink)}
-.lang:focus-visible,a:focus-visible,.badge:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
-
-.hero{display:grid;grid-template-columns:200px 1fr;gap:44px;align-items:center;padding:72px 0 60px}
-.glyphbox{width:200px;height:200px;font-size:96px}
-.eyebrow-app{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
-h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4.8vw,46px);line-height:1.25;margin:0 0 18px;letter-spacing:-.015em}
-.lede{max-width:50ch;color:var(--dim);margin:0 0 28px}
-/* official store badges — Google PNG has transparent padding, cropped so both read at the same height */
-.badges{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.tail .badges{justify-content:center}
-.badge{--bh:44px;display:inline-block;height:var(--bh);overflow:hidden;line-height:0;border-radius:7px;transition:opacity .16s}
-.badge:hover{opacity:.8}
-.badge img{display:block;height:var(--bh);width:auto}
-.badge.gp img.en{height:calc(var(--bh)*250/168);width:calc(var(--bh)*646/168);margin:calc(var(--bh)*-41/168)}
-.badge.gp img.ko{height:calc(var(--bh)*250/192);width:calc(var(--bh)*646/192);margin:calc(var(--bh)*-29/192) 0}
-/* fixed widths so the row does not shift while badges load */
-.badge.as img.en{width:calc(var(--bh)*119.66/40)}
-.badge.as img.ko{width:calc(var(--bh)*129.7/40)}
-
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
-.stat{background:var(--paper);padding:24px 20px}
-.stat b{display:block;font-family:var(--serif);font-weight:800;font-size:clamp(24px,3.2vw,32px);line-height:1.1;letter-spacing:-.02em}
-.stat span{display:block;margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
-
-section{padding:62px 0;border-top:1px solid var(--rule)}
-.eyebrow{display:flex;align-items:baseline;gap:12px;margin:0 0 26px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-.eyebrow s{flex:1;height:1px;background:var(--rule);text-decoration:none}
-.eyebrow em{font-style:normal;color:var(--ink)}
-h2{font-family:var(--serif);font-weight:600;font-size:clamp(22px,3vw,28px);line-height:1.35;margin:0 0 14px;letter-spacing:-.01em}
-.body{max-width:60ch;color:var(--dim)}
-.body p{margin:0 0 14px}
-.body strong{color:var(--ink);font-weight:600}
-
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:30px}
-.col{background:var(--paper);padding:28px 26px}
-.col h3{font-family:var(--serif);font-size:17px;font-weight:600;margin:0 0 9px}
-.col p{margin:0;font-size:14.5px;color:var(--dim);line-height:1.6}
-
-.faq{border-top:1px solid var(--rule);margin-top:8px}
-details{border-bottom:1px solid var(--rule)}
-summary{cursor:pointer;padding:17px 2px;font-weight:500;font-size:15.5px;list-style:none;display:flex;gap:14px;align-items:baseline}
-summary::-webkit-details-marker{display:none}
-summary::before{content:"+";font-family:var(--mono);color:var(--seal);flex:none}
-details[open] summary::before{content:"−"}
-details p{margin:0 0 18px 26px;color:var(--dim);font-size:15px;max-width:62ch}
-
-.tail{text-align:center;padding:70px 0 80px;border-top:1px solid var(--rule)}
-.tail h2{margin-bottom:22px}
-footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color:var(--dim);display:flex;flex-wrap:wrap;gap:6px 20px}
-
-@media (max-width:860px){
-  .hero{grid-template-columns:1fr;gap:28px;padding:48px 0}
-  .glyphbox{width:128px;height:128px;font-size:64px}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .cols{grid-template-columns:1fr}
-}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* page-only: playable 4×4 board with the app's real tiles */
+.play{background:var(--surface);border:1px solid var(--rule);border-radius:28px;padding:20px;box-shadow:var(--shadow-lg);max-width:440px;margin-left:auto}
+.play-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.score{display:flex;gap:8px}
+.score div{background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:12px;padding:5px 12px;text-align:center;min-width:72px}
+.score small{display:block;font-size:11.5px;font-weight:700;color:var(--accent-text)}
+.score b{font-size:17px;font-variant-numeric:tabular-nums}
+.play-top button{font:inherit;font-size:14px;font-weight:700;color:#fff;background:var(--accent);border:0;border-radius:999px;padding:8px 16px;cursor:pointer}
+.board{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:#3B2F22;border-radius:18px;padding:8px;touch-action:none;user-select:none;outline:none}
+.board:focus-visible{box-shadow:0 0 0 3px var(--accent)}
+.cell{aspect-ratio:1;border-radius:10px;background:rgba(255,255,255,.08);overflow:hidden}
+.cell img{width:100%;height:100%;display:block;border-radius:10px}
+.cell img.pop{animation:pop .16s ease-out}
+@keyframes pop{0%{transform:scale(.6)}100%{transform:scale(1)}}
+.over{position:absolute;inset:0;display:none;place-items:center;text-align:center;background:rgba(32,24,14,.72);border-radius:18px;color:#FFE9B8;font-weight:800;font-size:20px;padding:20px}
+.over.show{display:grid}
+.play-hint{font-size:13.5px;color:var(--dim);text-align:center;margin-top:12px}
+.ladder{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}
+.ladder figure{margin:0;text-align:center}
+.ladder img{width:100%;height:auto;border-radius:14px;display:block;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.ladder figcaption{font-size:13px;font-weight:650;margin-top:6px}
+.market{margin-top:26px;border-radius:20px;border:1px solid var(--accent-line);background:var(--accent-soft);padding:18px 20px;max-width:48em}
+.market b{display:block;font-size:16px;margin-bottom:4px}
+.market p{font-size:15px;color:var(--dim)}
+html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
+@media (max-width:1000px){.app-hero .play{margin:28px auto 0}.ladder{grid-template-columns:repeat(5,1fr)}}
+@media (max-width:480px){.ladder{grid-template-columns:repeat(3,1fr)}.board{gap:6px;padding:6px}}
+@media (prefers-reduced-motion:reduce){.cell img.pop{animation:none}}
 </style>
 </head>
-<body>
+<body style="--accent:#B7811A">
 
-<header>
-  <div class="wrap bar">
-    <a class="mark" href="index.html"><img class="moon" src="assets/logo-moon.png" alt="" width="22" height="22">RedMoon Lab</a>
-    <nav aria-label="Language">
-      <a class="back" href="index.html"><span class="en">All apps</span><span class="ko">전체 앱</span></a>
-      <button class="lang" data-set="en" aria-pressed="true">EN</button>
-      <button class="lang" data-set="ko" aria-pressed="false">KO</button>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="assets/logo-moon.png" alt="" width="26" height="26">RedMoon Lab</a>
+    <nav class="head-nav" aria-label="Site">
+      <a class="hide-sm" href="index.html"><span class="ko">전체 앱</span><span class="en">All apps</span><span class="ja">アプリ一覧</span></a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button data-set="ko" aria-pressed="false">KO</button>
+        <button data-set="en" aria-pressed="false">EN</button>
+        <button data-set="ja" aria-pressed="false">JP</button>
+      </div>
     </nav>
   </div>
 </header>
 
-<main class="wrap">
+<main>
 
-  <div class="hero">
-    <div class="cell glyphbox" aria-hidden="true"><img src="assets/icon-puzzle2048.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-    <div>
-      <p class="eyebrow-app"><span class="en">2048 Rich Puzzle · Android</span><span class="ko">2048 Rich Puzzle · Android</span></p>
-      <h1>
-        <span class="en">2048, with 15 tiers<br>of stuff to get rich on.</span>
-        <span class="ko">동전에서 도시까지,<br>15단계로 불어나는 2048.</span>
-      </h1>
-      <p class="lede">
-        <span class="en">The classic merge-the-tiles puzzle, reskinned as an asset ladder — coins merge into bills, bills into gold, all the way up to a city. Four powerups, a 15-stage story mode, and a daily challenge everyone plays the same board.</span>
-        <span class="ko">타일을 합치는 클래식 2048에 자산 테마를 입혔습니다. 동전이 지폐로, 지폐가 금괴로, 마지막에는 도시까지 커집니다. 파워업 4종, 15스테이지 스토리 모드, 모두가 같은 보드로 겨루는 데일리 챌린지가 있습니다.</span>
-      </p>
-      <div class="badges"><a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.richpuzzle2048"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"></a></div>
-    </div>
-  </div>
-
-  <div class="stats">
-    <div class="stat"><b>15</b><span class="en">asset tiers</span><span class="ko">자산 단계</span></div>
-    <div class="stat"><b>4</b><span class="en">powerups</span><span class="ko">파워업</span></div>
-    <div class="stat"><b>15</b><span class="en">story stages</span><span class="ko">스토리 스테이지</span></div>
-    <div class="stat"><b>1</b><span class="en">daily challenge</span><span class="ko">데일리 챌린지</span></div>
-  </div>
-
-  <section>
-    <p class="eyebrow"><em><span class="en">The twist</span><span class="ko">달라진 점</span></em> <s></s></p>
-    <h2><span class="en">Merging tiles builds a portfolio, not just a score.</span><span class="ko">타일을 합치면 점수뿐 아니라 자산도 쌓입니다.</span></h2>
-    <div class="body">
-      <p>
-        <span class="en">Every merge earns a share of that tier's asset, tracked in a running portfolio with a daily market that moves the "price" of each tier ±30% on a shared seed — so your stock of gold or real estate is worth a little more or less depending on the day.</span>
-        <span class="ko">타일을 합칠 때마다 그 단계의 자산 주식을 얻어 포트폴리오에 쌓입니다. 단계별 가격은 매일 모든 플레이어에게 똑같이 ±30% 안에서 바뀌어, 가진 금괴나 부동산의 가치가 날마다 조금씩 달라집니다.</span>
-      </p>
-    </div>
-
-    <div class="cols">
-      <div class="col">
-        <h3><span class="en">Four powerups</span><span class="ko">파워업 4종</span></h3>
-        <p><span class="en">Undo, shuffle, remove-a-tile and double — earned through play or bought with in-game stock, not just a hint button.</span>
-           <span class="ko">되돌리기·섞기·제거·더블. 플레이하며 얻거나 게임 속 주식으로 바꿀 수 있습니다. 단순한 힌트 버튼이 아닙니다.</span></p>
+  <section class="app-hero">
+    <div class="wrap">
+      <div>
+        <div class="app-id">
+          <img src="assets/icons/puzzle2048.webp" alt="" width="72" height="72">
+          <div>
+            <div class="name">2048 Rich Puzzle</div>
+            <div class="chips"><span class="chip and">Android</span></div>
+          </div>
+        </div>
+        <h1>
+          <span class="ko">동전 한 닢에서<br><em>우주까지 키우는 2048</em></span>
+          <span class="en">From a single coin<br><em>all the way to space</em></span>
+          <span class="ja">コイン1枚から<br><em>宇宙まで育てる2048</em></span>
+        </h1>
+        <p class="lede">
+          <span class="ko">같은 타일을 합치는 2048에 자산을 입혔습니다. 동전이 지폐로, 지폐가 저금통으로, 그렇게 15단계를 거쳐 우주까지 커집니다. 합칠 때마다 그 자산의 주식이 쌓이고, 시세는 매일 바뀝니다.</span>
+          <span class="en">Classic 2048 where every tile is an asset. Coins merge into bills, bills into piggy banks, and on through 15 tiers all the way to space. Each merge adds shares of that asset to your portfolio, and prices change every day.</span>
+          <span class="ja">同じタイルを合わせる2048に資産テーマを加えました。コインが紙幣に、紙幣が貯金箱に、15段階を経て宇宙まで大きくなります。合わせるたびにその資産の株がたまり、相場は毎日変わります。</span>
+        </p>
+        <div class="badges">
+          <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.richpuzzle2048"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ja" src="https://play.google.com/intl/en_us/badges/static/images/badges/ja_badge_web_generic.png" alt="Google Play で手に入れよう" loading="lazy"></a>
+        </div>
+        <p class="fine">
+          <span class="ko">무료 · 광고 포함 · 앱 내 구매 선택 · 한국어·영어·일본어</span>
+          <span class="en">Free · Contains ads · Optional in-app purchases · English, Korean, Japanese</span>
+          <span class="ja">無料・広告あり・アプリ内課金（任意）・日本語・英語・韓国語</span>
+        </p>
       </div>
-      <div class="col">
-        <h3><span class="en">Story mode, 15 stages</span><span class="ko">스토리 모드 15스테이지</span></h3>
-        <p><span class="en">Each stage has its own goal — reach a tile, hit a score, finish within a move limit — with short dialogue between them.</span>
-           <span class="ko">스테이지마다 목표가 다릅니다. 특정 타일 만들기, 목표 점수 달성, 정해진 이동 횟수 안에 끝내기 등이 있고, 스테이지 사이에 짧은 이야기도 나옵니다.</span></p>
+      <div class="play">
+        <div class="play-top">
+          <div class="score">
+            <div><small><span class="ko">점수</span><span class="en">Score</span><span class="ja">スコア</span></small><b id="score">0</b></div>
+            <div><small><span class="ko">최고 자산</span><span class="en">Top asset</span><span class="ja">最高資産</span></small><b id="best">2</b></div>
+          </div>
+          <button type="button" id="restart"><span class="ko">새 게임</span><span class="en">New game</span><span class="ja">ニューゲーム</span></button>
+        </div>
+        <div class="board" id="board" tabindex="0" aria-label="2048 board">
+          <div class="over" id="over"></div>
+        </div>
+        <p class="play-hint"><span class="ko">밀어서(스와이프) 또는 방향키로 움직이세요.</span><span class="en">Swipe, or click the board and use the arrow keys.</span><span class="ja">スワイプ、または盤面をクリックして矢印キーで動かします。</span></p>
       </div>
     </div>
   </section>
 
-  <section>
-    <p class="eyebrow"><em>FAQ</em> <s></s></p>
-    <div class="faq">
-      <details>
-        <summary><span class="en">Is it free?</span><span class="ko">무료인가요?</span></summary>
-        <p><span class="en">Yes. The app is free to install and supported by ads. Classic mode, story mode and the daily challenge are all free. Ad removal and powerup packs are available as optional purchases.</span>
-           <span class="ko">네. 무료로 설치해 쓸 수 있고, 광고가 포함되어 있습니다. 클래식 모드·스토리 모드·데일리 챌린지 모두 무료입니다. 광고 제거와 파워업 팩은 원할 때만 구매하면 됩니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">Do I need an account?</span><span class="ko">계정이 필요한가요?</span></summary>
-        <p><span class="en">No sign-up is required to play. The game signs you in anonymously in the background so your score can appear on the leaderboard; no name, email or phone number is collected.</span>
-           <span class="ko">회원가입 없이 바로 플레이할 수 있습니다. 리더보드에 점수를 올리기 위해 백그라운드에서 익명으로 로그인되며, 이름·이메일·전화번호는 수집하지 않습니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">Is it available on iPhone?</span><span class="ko">아이폰에서도 쓸 수 있나요?</span></summary>
-        <p><span class="en">Not at the moment. The app is Android only, on Google Play.</span>
-           <span class="ko">현재는 안드로이드 전용이며 구글플레이에서만 제공됩니다.</span></p>
-      </details>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>15</b><span class="ko">단계 자산 타일</span><span class="en">asset tiers</span><span class="ja">段階の資産タイル</span></div>
+      <div class="stat"><b>15</b><span class="ko">스토리 스테이지</span><span class="en">story stages</span><span class="ja">ストーリーステージ</span></div>
+      <div class="stat"><b>4</b><span class="ko">가지 파워업</span><span class="en">powerups</span><span class="ja">種類のパワーアップ</span></div>
+      <div class="stat"><b>20</b><span class="ko">개 업적</span><span class="en">achievements</span><span class="ja">個の実績</span></div>
+    </div>
+  </div>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">자산 15단계</span><span class="en">15 asset tiers</span><span class="ja">資産15段階</span></span>
+        <h2><span class="ko">2048은 도시, 그다음은 왕관·섬·지구·우주</span><span class="en">2048 is a city. After that: crown, island, globe, space</span><span class="ja">2048は都市、その先は王冠・島・地球・宇宙</span></h2>
+        <p><span class="ko">평범한 2048은 2048 타일에서 끝나지만, 여기서는 32768 우주까지 이어집니다. 만든 자산은 도감에 모입니다.</span><span class="en">Most 2048 games stop at 2048. Here the ladder runs up to 32768, and every asset you make goes into your collection.</span><span class="ja">ふつうの2048は2048タイルで終わりますが、ここでは32768の宇宙まで続きます。作った資産は図鑑に集まります。</span></p>
+      </div>
+      <div class="ladder">
+        <figure><img src="assets/shots/puzzle2048/tiles/2.webp" alt="" width="160" height="160" loading="lazy"><figcaption><span class="ko">동전</span><span class="en">Coin</span><span class="ja">コイン</span></figcaption></figure>
+        <figure><img src="assets/shots/puzzle2048/tiles/4.webp" alt="" width="160" height="160" loading="lazy"><figcaption><span class="ko">지폐</span><span class="en">Bill</span><span class="ja">紙幣</span></figcaption></figure>
+        <figure><img src="assets/shots/puzzle2048/tiles/8.webp" alt="" width="160" height="160" loading="lazy"><figcaption><span class="ko">저금통</span><span class="en">Piggy Bank</span><span class="ja">貯金箱</span></figcaption></figure>
+        <figure><img src="assets/shots/puzzle2048/tiles/16.webp" alt="" width="160" height="160" loading="lazy"><figcaption><span class="ko">지갑</span><span class="en">Wallet</span><span class="ja">財布</span></figcaption></figure>
+        <figure><img src="assets/shots/puzzle2048/tiles/32.webp" alt="" width="160" height="160" loading="lazy"><figcaption><span class="ko">주식</span><span class="en">Stocks</span><span class="ja">株式</span></figcaption></figure>
+        <figure><img src="assets/shots/puzzle2048/tiles/64.webp" alt="" width="160" height="160" loading="lazy"><figcaption><span class="ko">금괴</span><span class="en">Gold Bar</span><span class="ja">金塊</span></figcaption></figure>
+        <figure><img src="assets/shots/puzzle2048/tiles/128.webp" alt="" width="160" height="160" loading="lazy"><figcaption><span class="ko">자동차</span><span class="en">Car</span><span class="ja">車</span></figcaption></figure>
+        <figure><img src="assets/shots/puzzle2048/tiles/256.webp" alt="" width="160" height="160" loading="lazy"><figcaption><span class="ko">아파트</span><span class="en">Apartment</span><span class="ja">マンション</span></figcaption></figure>
+        <figure><img src="assets/shots/puzzle2048/tiles/512.webp" alt="" width="160" height="160" loading="lazy"><figcaption><span class="ko">빌딩</span><span class="en">Building</span><span class="ja">ビル</span></figcaption></figure>
+        <figure><img src="assets/shots/puzzle2048/tiles/1024.webp" alt="" width="160" height="160" loading="lazy"><figcaption><span class="ko">타워</span><span class="en">Tower</span><span class="ja">タワー</span></figcaption></figure>
+        <figure><img src="assets/shots/puzzle2048/tiles/2048.webp" alt="" width="160" height="160" loading="lazy"><figcaption><span class="ko">도시</span><span class="en">City</span><span class="ja">都市</span></figcaption></figure>
+        <figure><img src="assets/shots/puzzle2048/tiles/4096.webp" alt="" width="160" height="160" loading="lazy"><figcaption><span class="ko">왕관</span><span class="en">Crown</span><span class="ja">王冠</span></figcaption></figure>
+        <figure><img src="assets/shots/puzzle2048/tiles/8192.webp" alt="" width="160" height="160" loading="lazy"><figcaption><span class="ko">섬</span><span class="en">Island</span><span class="ja">島</span></figcaption></figure>
+        <figure><img src="assets/shots/puzzle2048/tiles/16384.webp" alt="" width="160" height="160" loading="lazy"><figcaption><span class="ko">지구</span><span class="en">Globe</span><span class="ja">地球</span></figcaption></figure>
+        <figure><img src="assets/shots/puzzle2048/tiles/32768.webp" alt="" width="160" height="160" loading="lazy"><figcaption><span class="ko">우주</span><span class="en">Space</span><span class="ja">宇宙</span></figcaption></figure>
+      </div>
+      <div class="market">
+        <b><span class="ko">오늘의 시장</span><span class="en">Today's Market</span><span class="ja">今日の市場</span></b>
+        <p><span class="ko">타일을 합치면 그 자산의 주식이 포트폴리오에 쌓입니다. 자산별 시세는 매일 기준가의 ±30% 안에서 바뀌고, 같은 날에는 모든 플레이어가 같은 시세를 봅니다. 모은 주식은 파워업으로 바꿀 수 있습니다.</span><span class="en">Every merge adds shares of that asset to your portfolio. Each asset's price moves within ±30% of its base every day, and everyone sees the same prices on the same day. You can trade shares for powerups.</span><span class="ja">タイルを合わせると、その資産の株がポートフォリオにたまります。資産ごとの相場は毎日基準価格の±30%以内で変わり、同じ日はすべてのプレイヤーが同じ相場を見ます。集めた株はパワーアップと交換できます。</span></p>
+      </div>
     </div>
   </section>
 
-  <div class="tail">
-    <h2><span class="en">Start with a coin. End with a city.</span><span class="ko">동전에서 시작해 도시까지 키워 보세요.</span></h2>
-    <div class="badges"><a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.richpuzzle2048"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"></a></div>
-    <p class="note" style="margin-top:18px;font-family:var(--mono);font-size:11.5px;color:var(--dim)">com.redmoon.richpuzzle2048</p>
-  </div>
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">기능</span><span class="en">Features</span><span class="ja">機能</span></span>
+        <h2><span class="ko">클래식 2048, 그리고 그 이상</span><span class="en">Classic 2048, and then some</span><span class="ja">クラシック2048、さらにその先へ</span></h2>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h10a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"/><path d="M8 9h6M8 13h6"/></svg></div>
+          <h3><span class="ko">스토리 모드 15스테이지</span><span class="en">Story Mode, 15 stages</span><span class="ja">ストーリー15ステージ</span></h3>
+          <p><span class="ko">동전에서 우주까지 자산마다 한 스테이지. 목표 타일을 만들거나 정해진 이동 수 안에 끝내야 하고, 깨면 파워업을 받습니다.</span><span class="en">One stage per asset, from coin to space. Reach the target tile, sometimes within a move limit, and earn powerups for clearing.</span><span class="ja">コインから宇宙まで資産ごとに1ステージ。目標タイルを作ったり、決められた手数以内に達成したりして、クリアするとパワーアップがもらえます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+          <h3><span class="ko">오늘의 챌린지</span><span class="en">Today's Challenge</span><span class="ja">今日のチャレンジ</span></h3>
+          <p><span class="ko">매일 모든 플레이어가 같은 보드로 시작합니다.</span><span class="en">Everyone starts from the same board each day.</span><span class="ja">毎日、すべてのプレイヤーが同じ盤面から始めます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
+          <h3><span class="ko">파워업 4종</span><span class="en">Four powerups</span><span class="ja">パワーアップ4種</span></h3>
+          <p><span class="ko">되돌리기, 섞기, 제거, 더블. 스토리 보상과 출석 보상으로 받고, 모은 주식으로 바꿀 수도 있습니다.</span><span class="en">Undo, Shuffle, Purge and Double. Earn them from story rewards and daily logins, or trade in your shares.</span><span class="ja">戻す・シャッフル・除去・ダブル。ストーリー報酬や出席報酬でもらえ、集めた株と交換することもできます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M6 20v-7M11 20V5M16 20v-10"/></svg></div>
+          <h3><span class="ko">자산 포트폴리오</span><span class="en">Asset Portfolio</span><span class="ja">資産ポートフォリオ</span></h3>
+          <p><span class="ko">보유 주식과 오늘 시세로 계산한 총자산을 한눈에 봅니다.</span><span class="en">See your shares and total wealth at today's prices.</span><span class="ja">保有株と今日の相場で計算した総資産をひと目で確認できます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></div>
+          <h3><span class="ko">리더보드와 업적 20개</span><span class="en">Leaderboard and 20 achievements</span><span class="ja">ランキングと実績20個</span></h3>
+          <p><span class="ko">닉네임으로 다른 플레이어와 점수를 겨루고, 업적과 자산 도감을 채웁니다.</span><span class="en">Compete for scores under a nickname, and fill in achievements and your asset collection.</span><span class="ja">ニックネームでほかのプレイヤーとスコアを競い、実績と資産図鑑を埋めていきます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 21V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg></div>
+          <h3><span class="ko">일일 출석 보상</span><span class="en">Daily login reward</span><span class="ja">デイリー出席報酬</span></h3>
+          <p><span class="ko">매일 접속하면 파워업을 받습니다.</span><span class="en">Log in each day to collect powerups.</span><span class="ja">毎日ログインするとパワーアップがもらえます。</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <footer>
-    <span>© <span id="yr">2026</span> RedMoon Lab</span>
-    <a href="privacy.html"><span class="en">Privacy policy</span><span class="ko">개인정보처리방침</span></a>
-    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
-  </footer>
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">FAQ</span>
+        <h2><span class="ko">자주 묻는 질문</span><span class="en">Questions</span><span class="ja">よくある質問</span></h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary><span class="ko">무료인가요?</span><span class="en">Is it free?</span><span class="ja">無料ですか？</span></summary>
+          <p><span class="ko">네. 클래식·스토리·오늘의 챌린지 모두 무료이고 광고로 운영됩니다. 광고 제거(한 번 구매)와 파워업 묶음(3·10·30개)은 원할 때만 구매하면 됩니다.</span><span class="en">Yes. Classic, Story and Today's Challenge are all free and supported by ads. Ad removal (a one-time purchase) and powerup packs (3, 10 or 30) are optional.</span><span class="ja">はい。クラシック・ストーリー・今日のチャレンジはすべて無料で、広告で運営しています。広告除去（1回購入）とパワーアップパック（3・10・30個）は必要なときだけ購入できます。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">계정이 필요한가요?</span><span class="en">Do I need an account?</span><span class="ja">アカウントは必要ですか？</span></summary>
+          <p><span class="ko">아니요. 회원가입 없이 바로 플레이합니다. 리더보드에 점수를 올리기 위해 백그라운드에서 익명으로 로그인되며, 리더보드에는 직접 정한 닉네임만 표시됩니다.</span><span class="en">No. You can play right away. The game signs you in anonymously in the background for the leaderboard, which shows only the nickname you choose.</span><span class="ja">いいえ。会員登録なしですぐに遊べます。ランキングのためにバックグラウンドで匿名ログインし、ランキングには自分で決めたニックネームだけが表示されます。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">어떤 언어를 지원하나요?</span><span class="en">Which languages does it support?</span><span class="ja">対応言語は？</span></summary>
+          <p><span class="ko">한국어, 영어, 일본어를 지원합니다.</span><span class="en">English, Korean and Japanese.</span><span class="ja">日本語、英語、韓国語に対応しています。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">아이폰에서도 쓸 수 있나요?</span><span class="en">Is it on iPhone?</span><span class="ja">iPhoneでも使えますか？</span></summary>
+          <p><span class="ko">현재는 안드로이드 전용이며 구글플레이에서만 받을 수 있습니다.</span><span class="en">Not at the moment. It's Android only, on Google Play.</span><span class="ja">現在はAndroid専用で、Google Playでのみ配信しています。</span></p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="cta-band">
+      <img class="icon" src="assets/icons/puzzle2048.webp" alt="" width="112" height="112">
+      <div>
+        <h2><span class="ko">동전 한 닢부터 시작해 보세요</span><span class="en">Start with a single coin</span><span class="ja">コイン1枚から始めましょう</span></h2>
+        <p><span class="ko">무료로 설치하고 우주까지 키워 보세요.</span><span class="en">Free to install. See how far you can grow it.</span><span class="ja">無料でインストールして、宇宙まで育ててみましょう。</span></p>
+        <div class="badges">
+          <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.richpuzzle2048"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ja" src="https://play.google.com/intl/en_us/badges/static/images/badges/ja_badge_web_generic.png" alt="Google Play で手に入れよう" loading="lazy"></a>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </main>
 
+<footer class="site-foot">
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> RedMoon Lab</span>
+    <a href="index.html"><span class="ko">전체 앱</span><span class="en">All apps</span><span class="ja">アプリ一覧</span></a>
+    <a href="privacy.html"><span class="ko">개인정보처리방침</span><span class="en">Privacy policy</span><span class="ja">プライバシーポリシー</span></a>
+    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
+    <span class="legal">
+      <span class="ko">Google Play 및 Google Play 로고는 Google LLC의 상표입니다.</span>
+      <span class="en">Google Play and the Google Play logo are trademarks of Google LLC.</span>
+      <span class="ja">Google Play および Google Play ロゴは Google LLC の商標です。</span>
+    </span>
+  </div>
+</footer>
+
 <script>
+// Mini 2048 on a 4×4 board using the app's asset tiles.
 (function(){
-  var root=document.documentElement, btns=document.querySelectorAll('.lang');
-  function setLang(l){
-    root.setAttribute('data-lang',l);
-    root.setAttribute('lang',l==='ko'?'ko':'en');
-    btns.forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.set===l)); });
-    try{ localStorage.setItem('rml-lang',l); }catch(e){}
+  var board=document.getElementById('board'), over=document.getElementById('over'),
+      scoreEl=document.getElementById('score'), bestEl=document.getElementById('best');
+  var N=4, grid, score, fresh;
+  var cells=[];
+  for(var i=0;i<N*N;i++){var c=document.createElement('div');c.className='cell';board.insertBefore(c,over);cells.push(c);}
+  function empty(){var e=[];grid.forEach(function(v,i){if(!v)e.push(i);});return e;}
+  function spawn(){var e=empty();if(!e.length)return;var i=e[Math.floor(Math.random()*e.length)];grid[i]=Math.random()<.9?2:4;fresh[i]=1;}
+  function line(idx){return idx.map(function(i){return grid[i];});}
+  function slide(vals,pos){
+    var a=vals.filter(Boolean),out=[];
+    for(var k=0;k<a.length;k++){
+      if(a[k]===a[k+1]){out.push(a[k]*2);score+=a[k]*2;fresh[pos[out.length-1]]=1;k++;}
+      else out.push(a[k]);
+    }
+    while(out.length<N)out.push(0);
+    return out;
   }
-  btns.forEach(function(b){ b.addEventListener('click',function(){ setLang(b.dataset.set); }); });
-  var saved=null;
-  try{ saved=localStorage.getItem('rml-lang'); }catch(e){}
-  if(saved!=='ko'&&saved!=='en'){ saved=(navigator.language||'').toLowerCase().indexOf('ko')===0?'ko':'en'; }
-  setLang(saved);
-  document.getElementById('yr').textContent=new Date().getFullYear();
+  function move(dir){
+    var moved=false;fresh={};
+    for(var r=0;r<N;r++){
+      var idx=[];
+      for(var k=0;k<N;k++){
+        idx.push(dir==='left'?r*N+k:dir==='right'?r*N+(N-1-k):dir==='up'?k*N+r:(N-1-k)*N+r);
+      }
+      var res=slide(line(idx),idx);
+      idx.forEach(function(i,k){if(grid[i]!==res[k]){moved=true;grid[i]=res[k];}});
+    }
+    if(!moved){fresh={};return;}
+    spawn();draw();
+    if(!canMove()) end(false);
+  }
+  function canMove(){
+    if(empty().length)return true;
+    for(var i=0;i<N*N;i++){var r=Math.floor(i/N),c=i%N;
+      if(c<N-1&&grid[i]===grid[i+1])return true;
+      if(r<N-1&&grid[i]===grid[i+N])return true;}
+    return false;
+  }
+  function end(){
+    over.innerHTML='<div><span class="ko">더 움직일 수 없어요</span><span class="en">No moves left</span><span class="ja">もう動かせません</span><br><small style="font-size:14px;font-weight:600"><span class="ko">새 게임으로 다시 시작하세요</span><span class="en">Start a new game</span><span class="ja">ニューゲームで再挑戦</span></small></div>';
+    over.classList.add('show');
+  }
+  function draw(){
+    var top=2;
+    grid.forEach(function(v,i){
+      var c=cells[i];c.innerHTML='';
+      if(v){var im=document.createElement('img');im.src='assets/shots/puzzle2048/tiles/'+Math.min(v,32768)+'.webp';im.alt=String(v);if(fresh[i])im.className='pop';c.appendChild(im);if(v>top)top=v;}
+    });
+    scoreEl.textContent=score;bestEl.textContent=top;
+  }
+  function reset(){grid=new Array(N*N).fill(0);score=0;fresh={};spawn();spawn();over.classList.remove('show');draw();}
+  var KEYS={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'};
+  board.addEventListener('keydown',function(e){if(KEYS[e.key]){e.preventDefault();move(KEYS[e.key]);}});
+  var sx=0,sy=0,down=false;
+  board.addEventListener('pointerdown',function(e){down=true;sx=e.clientX;sy=e.clientY;board.focus({preventScroll:true});});
+  board.addEventListener('pointerup',function(e){
+    if(!down)return;down=false;var dx=e.clientX-sx,dy=e.clientY-sy;
+    if(Math.max(Math.abs(dx),Math.abs(dy))<24)return;
+    move(Math.abs(dx)>Math.abs(dy)?(dx>0?'right':'left'):(dy>0?'down':'up'));
+  });
+  board.addEventListener('pointercancel',function(){down=false;});
+  document.getElementById('restart').addEventListener('click',reset);
+  reset();
 })();
 </script>
-<script src="assets/store-links.js" defer></script>
+<script src="assets/site.js?v=3" defer></script>
 <script src="assets/analytics.js?v=1" defer></script>
 </body>
 </html>
