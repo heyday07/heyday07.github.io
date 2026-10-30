@@ -3,226 +3,359 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Potion Lab — 1,000 color-sort puzzle levels, every one solvable | RedMoon Lab</title>
-<meta name="description" content="Potion Lab is an Android water-sort puzzle game with 1,000 levels — every one verified solvable by an automated solver — plus daily challenges, seasonal themes, achievements and a colorblind mode.">
+<script src="assets/lang.js?v=3"></script>
+<title>Potion Lab — 물약 색 정렬 퍼즐 1,000레벨 | RedMoon Lab</title>
+<meta name="description" content="Potion Lab은 섞인 물약을 같은 색끼리 시험관에 모으는 정렬 퍼즐입니다. 1,000개 레벨, 5단계 난이도, 3색에서 12색까지, 얼음·잠금·폭탄 블록, 오늘의 도전, 퍼즐 만들기, 친구 리더보드, 업적 55개.">
 <link rel="canonical" href="https://heyday07.github.io/potionlab.html">
-<meta property="og:title" content="Potion Lab — 1,000 levels, every one solvable">
-<meta property="og:description" content="A color-sort puzzle game with 1,000 levels, each verified solvable before it ships.">
+<meta property="og:title" content="Potion Lab — 물약 색 정렬 퍼즐 1,000레벨">
+<meta property="og:description" content="섞인 물약을 색깔별로. 3색으로 시작해 12색까지, 모든 레벨은 풀 수 있게 만들어집니다.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://heyday07.github.io/potionlab.html">
 <meta property="og:image" content="https://heyday07.github.io/assets/og-logo.png">
+<meta name="theme-color" content="#7A3FC4">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=10">
 <style>
-:root{
-  --paper:#E6E8EA;--panel:#EFF1F2;--ink:#14171B;--dim:#5C636B;--rule:#C6CBD0;--seal:#A8231E;
-  --sans:"IBM Plex Sans KR",system-ui,sans-serif;--serif:"Noto Serif KR",serif;--mono:"IBM Plex Mono",monospace;
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}
-a{color:inherit}
-.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
-[data-lang="en"] .ko,[data-lang="ko"] .en{display:none}
-
-.cell{position:relative;display:grid;place-items:center;border:1px solid var(--rule);background:var(--panel);
-  font-family:var(--serif);font-weight:600;line-height:1;color:var(--ink)}
-.cell::before,.cell::after{content:"";position:absolute;border-color:var(--rule);border-style:dashed;border-width:0}
-.cell::before{left:0;right:0;top:50%;border-top-width:1px}
-.cell::after{top:0;bottom:0;left:50%;border-left-width:1px}
-.cell > span{position:relative;z-index:1;background:var(--panel);padding:0 .04em}
-
-header{border-bottom:1px solid var(--rule)}
-.bar{display:flex;align-items:center;gap:14px;height:64px}
-.mark{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
-.moon{width:22px;height:22px;border-radius:50%;flex:none;display:block}
-.bar nav{margin-left:auto;display:flex;gap:6px;align-items:center}
-.back{font-size:13.5px;color:var(--dim);text-decoration:none;margin-right:10px}
-.back:hover{color:var(--ink)}
-.lang{font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:none;border:1px solid var(--rule);color:var(--dim);padding:5px 10px;cursor:pointer}
-.lang[aria-pressed="true"]{color:var(--paper);background:var(--ink);border-color:var(--ink)}
-.lang:focus-visible,a:focus-visible,.badge:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
-
-.hero{display:grid;grid-template-columns:200px 1fr;gap:44px;align-items:center;padding:72px 0 60px}
-.glyphbox{width:200px;height:200px;font-size:100px}
-.eyebrow-app{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
-h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4.8vw,46px);line-height:1.25;margin:0 0 18px;letter-spacing:-.015em}
-.lede{max-width:50ch;color:var(--dim);margin:0 0 28px}
-/* official store badges — Google PNG has transparent padding, cropped so both read at the same height */
-.badges{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.tail .badges{justify-content:center}
-.badge{--bh:44px;display:inline-block;height:var(--bh);overflow:hidden;line-height:0;border-radius:7px;transition:opacity .16s}
-.badge:hover{opacity:.8}
-.badge img{display:block;height:var(--bh);width:auto}
-.badge.gp img.en{height:calc(var(--bh)*250/168);width:calc(var(--bh)*646/168);margin:calc(var(--bh)*-41/168)}
-.badge.gp img.ko{height:calc(var(--bh)*250/192);width:calc(var(--bh)*646/192);margin:calc(var(--bh)*-29/192) 0}
-/* fixed widths so the row does not shift while badges load */
-.badge.as img.en{width:calc(var(--bh)*119.66/40)}
-.badge.as img.ko{width:calc(var(--bh)*129.7/40)}
-
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:0}
-.stat{background:var(--paper);padding:24px 20px}
-.stat b{display:block;font-family:var(--serif);font-weight:800;font-size:clamp(24px,3.2vw,32px);line-height:1.1;letter-spacing:-.02em}
-.stat span{display:block;margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
-
-section{padding:62px 0;border-top:1px solid var(--rule)}
-.eyebrow{display:flex;align-items:baseline;gap:12px;margin:0 0 26px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-.eyebrow s{flex:1;height:1px;background:var(--rule);text-decoration:none}
-.eyebrow em{font-style:normal;color:var(--ink)}
-h2{font-family:var(--serif);font-weight:600;font-size:clamp(22px,3vw,28px);line-height:1.35;margin:0 0 14px;letter-spacing:-.01em}
-.body{max-width:60ch;color:var(--dim)}
-.body p{margin:0 0 14px}
-.body strong{color:var(--ink);font-weight:600}
-
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:30px}
-.col{background:var(--paper);padding:28px 26px}
-.col h3{font-family:var(--serif);font-size:17px;font-weight:600;margin:0 0 9px}
-.col p{margin:0;font-size:14.5px;color:var(--dim);line-height:1.6}
-
-.faq{border-top:1px solid var(--rule);margin-top:8px}
-details{border-bottom:1px solid var(--rule)}
-summary{cursor:pointer;padding:17px 2px;font-weight:500;font-size:15.5px;list-style:none;display:flex;gap:14px;align-items:baseline}
-summary::-webkit-details-marker{display:none}
-summary::before{content:"+";font-family:var(--mono);color:var(--seal);flex:none}
-details[open] summary::before{content:"−"}
-details p{margin:0 0 18px 26px;color:var(--dim);font-size:15px;max-width:62ch}
-
-.tail{text-align:center;padding:70px 0 80px;border-top:1px solid var(--rule)}
-.tail h2{margin-bottom:22px}
-footer{padding:28px 0 60px;border-top:1px solid var(--rule);font-size:13px;color:var(--dim);display:flex;flex-wrap:wrap;gap:6px 20px}
-
-@media (max-width:860px){
-  .hero{grid-template-columns:1fr;gap:28px;padding:48px 0}
-  .glyphbox{width:128px;height:128px;font-size:70px}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .cols{grid-template-columns:1fr}
-}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* page-only: a small playable sorting board (always dark, like the app's lab table) */
+.lab{background:radial-gradient(120% 90% at 50% 0%,#3A2466 0%,#1B1330 62%,#130E22 100%);border-radius:28px;padding:22px 22px 18px;color:#EDE6FF;box-shadow:var(--shadow-lg);max-width:460px;margin-left:auto}
+.lab-top{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;color:#C9BCF0}
+.lab-top b{color:#fff;font-size:16px}
+.tubes{display:flex;justify-content:center;gap:14px;padding:34px 0 18px;min-height:228px;align-items:flex-end}
+.tube{width:44px;height:168px;border:2px solid rgba(225,214,255,.55);border-top-width:0;border-radius:0 0 22px 22px;background:rgba(255,255,255,.06);display:flex;flex-direction:column-reverse;padding:3px;gap:2px;cursor:pointer;transition:transform .18s ease;position:relative;overflow:hidden}
+.tube::before{content:"";position:absolute;top:-2px;left:-6px;right:-6px;height:6px;border-radius:4px;background:rgba(225,214,255,.55)}
+.tube:focus-visible{outline:2px solid #FFD54F;outline-offset:4px}
+.tube.sel{transform:translateY(-14px)}
+.tube.done{border-color:#FFD54F}
+.drop{height:38px;flex:none;border-radius:4px}
+.tube .drop:first-child{border-radius:4px 4px 18px 18px}
+.lab-msg{min-height:24px;text-align:center;font-weight:700;color:#FFD54F}
+.lab-btns{display:flex;justify-content:center;gap:8px;margin-top:10px}
+.lab-btns button{font:inherit;font-size:14px;font-weight:650;color:#EDE6FF;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:7px 16px;cursor:pointer}
+.lab-btns button:hover{background:rgba(255,255,255,.18)}
+.lab-btns button:disabled{opacity:.4;cursor:default}
+.tiers{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.tier{background:var(--surface);border:1px solid var(--rule);border-radius:20px;padding:18px}
+.tier b{display:block;font-size:17px;font-weight:750}
+.tier .lv{font-size:13.5px;color:var(--accent-text);font-weight:700;font-variant-numeric:tabular-nums}
+.tier p{font-size:14px;color:var(--dim);margin-top:8px;line-height:1.55}
+.tier .dots{display:flex;flex-wrap:wrap;gap:3px;margin-top:10px}
+.tier .dots i{width:10px;height:10px;border-radius:50%}
+html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
+.nb{white-space:nowrap}
+br.sm-only{display:none}
+@media (max-width:520px){br.sm-only{display:inline}}
+@media (max-width:1000px){.app-hero .lab{margin:28px auto 0}.tiers{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:760px){.tiers{grid-template-columns:1fr}}
+@media (max-width:420px){.tubes{gap:9px}.tube{width:38px}}
+@media (prefers-reduced-motion:reduce){.tube{transition:none}}
 </style>
 </head>
-<body>
+<body style="--accent:#7A3FC4">
 
-<header>
-  <div class="wrap bar">
-    <a class="mark" href="index.html"><img class="moon" src="assets/logo-moon.png" alt="" width="22" height="22">RedMoon Lab</a>
-    <nav aria-label="Language">
-      <a class="back" href="index.html"><span class="en">All apps</span><span class="ko">전체 앱</span></a>
-      <button class="lang" data-set="en" aria-pressed="true">EN</button>
-      <button class="lang" data-set="ko" aria-pressed="false">KO</button>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="assets/logo-moon.png" alt="" width="26" height="26">RedMoon Lab</a>
+    <nav class="head-nav" aria-label="Site">
+      <a class="hide-sm" href="index.html"><span class="ko">전체 앱</span><span class="en">All apps</span><span class="ja">アプリ一覧</span></a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button data-set="ko" aria-pressed="false">KO</button>
+        <button data-set="en" aria-pressed="false">EN</button>
+        <button data-set="ja" aria-pressed="false">JP</button>
+      </div>
     </nav>
   </div>
 </header>
 
-<main class="wrap">
+<main>
 
-  <div class="hero">
-    <div class="cell glyphbox" aria-hidden="true"><img src="assets/icon-potionlab.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-    <div>
-      <p class="eyebrow-app"><span class="en">Potion Lab · Android</span><span class="ko">Potion Lab · Android</span></p>
-      <h1>
-        <span class="en">1,000 levels.<br>Every one solvable.</span>
-        <span class="ko">1,000개 레벨,<br>모두 풀 수 있습니다.</span>
-      </h1>
-      <p class="lede">
-        <span class="en">Sort mixed-color potions into matching tubes. Five handcrafted levels start you off; the other 995 are generated and checked by an automated solver before they ship, so you never hit a puzzle that can't be finished.</span>
-        <span class="ko">섞인 색깔의 물약을 같은 색끼리 시험관에 정렬하는 퍼즐입니다. 처음 5개 레벨은 직접 만들었고, 나머지 995개는 자동으로 만든 뒤 풀이 알고리즘으로 검증했습니다. 풀 수 없는 레벨은 없습니다.</span>
-      </p>
-      <div class="badges"><a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.potionlab"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"></a></div>
-    </div>
-  </div>
-
-  <div class="stats">
-    <div class="stat"><b>1,000</b><span class="en">levels</span><span class="ko">레벨</span></div>
-    <div class="stat"><b>5</b><span class="en">difficulty tiers</span><span class="ko">난이도 단계</span></div>
-    <div class="stat"><b>55</b><span class="en">achievements</span><span class="ko">도전 과제</span></div>
-    <div class="stat"><b>4</b><span class="en">seasonal themes</span><span class="ko">시즌 테마</span></div>
-  </div>
-
-  <section>
-    <p class="eyebrow"><em><span class="en">Difficulty</span><span class="ko">난이도</span></em> <s></s></p>
-    <h2><span class="en">Five tiers, from Beginner to Grandmaster.</span><span class="ko">초보부터 그랜드마스터까지 5단계.</span></h2>
-    <div class="body">
-      <p>
-        <span class="en">Levels climb through five tiers — Beginner, Apprentice, Expert, Master, Grandmaster — increasing both the number of colors and the amount of shuffling behind each puzzle. Every generated level is solved by a breadth-first search before it's allowed into the game, so the difficulty curve is real and never a dead end.</span>
-        <span class="ko">초보·견습·전문가·마스터·그랜드마스터 5단계를 거치며 색상 수와 섞임 정도가 함께 올라갑니다. 자동으로 만든 레벨은 게임에 넣기 전에 너비우선탐색(BFS)으로 풀이를 검증하므로, 난이도가 단계적으로 올라가고 풀 수 없는 레벨이 없습니다.</span>
-      </p>
-    </div>
-
-    <div class="cols">
-      <div class="col">
-        <h3><span class="en">Daily challenge, seasonal themes</span><span class="ko">데일리 챌린지 · 시즌 테마</span></h3>
-        <p><span class="en">A seeded puzzle everyone gets the same day, plus four seasonal color palettes that switch automatically with the calendar.</span>
-           <span class="ko">모두가 같은 날 같은 퍼즐을 받는 데일리 챌린지, 그리고 달력에 맞춰 자동 전환되는 4계절 색상 테마가 있습니다.</span></p>
+  <section class="app-hero">
+    <div class="wrap">
+      <div>
+        <div class="app-id">
+          <img src="assets/icons/potionlab.webp" alt="" width="72" height="72">
+          <div>
+            <div class="name">Potion Lab</div>
+            <div class="chips"><span class="chip and">Android</span></div>
+          </div>
+        </div>
+        <h1>
+          <span class="ko">섞인 물약을<br><em>색깔별로 정리하세요</em></span>
+          <span class="en">Sort the mixed potions<br><em>back into their colors</em></span>
+          <span class="ja">混ざった<br class="sm-only"><span class="nb">ポーションを</span><br><em>色ごとに分けよう</em></span>
+        </h1>
+        <p class="lede">
+          <span class="ko">시험관 위쪽 물약을 같은 색 위나 빈 시험관으로 옮겨, 한 시험관에 한 색만 남기면 됩니다. 3색으로 시작해 12색까지, 1,000개 레벨이 기다립니다. 이 페이지에서 바로 한 판 해 보세요.</span>
+          <span class="en">Pour the top potion onto the same color or into an empty tube until every tube holds a single color. It starts with three colors and climbs to twelve across 1,000 levels. Try a round right here.</span>
+          <span class="ja">試験管のいちばん上のポーションを同じ色の上か空の試験管に注ぎ、1本に1色だけになるようにします。3色から始まって12色まで、1,000レベルが待っています。このページですぐに遊べます。</span>
+        </p>
+        <div class="badges">
+          <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.potionlab"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ja" src="https://play.google.com/intl/en_us/badges/static/images/badges/ja_badge_web_generic.png" alt="Google Play で手に入れよう" loading="lazy"></a>
+        </div>
+        <p class="fine">
+          <span class="ko">무료 · 광고 포함 · 앱 내 구매 선택 · 5개 언어</span>
+          <span class="en">Free · Contains ads · Optional in-app purchases · 5 languages</span>
+          <span class="ja">無料・広告あり・アプリ内課金（任意）・5言語</span>
+        </p>
       </div>
-      <div class="col">
-        <h3><span class="en">Colorblind mode</span><span class="ko">색각 보조 모드</span></h3>
-        <p><span class="en">An accessible palette with icons layered on each color, so the puzzle stays solvable without relying on color alone.</span>
-           <span class="ko">색상마다 아이콘을 함께 표시하는 접근성 팔레트가 있어, 색만으로 구분하지 않아도 퍼즐을 풀 수 있습니다.</span></p>
+      <div class="lab" id="lab">
+        <div class="lab-top">
+          <span><span class="ko">미니 퍼즐 · 4색</span><span class="en">Mini puzzle · 4 colors</span><span class="ja">ミニパズル・4色</span></span>
+          <span><span class="ko">이동</span><span class="en">Moves</span><span class="ja">手数</span> <b id="moves">0</b></span>
+        </div>
+        <div class="tubes" id="tubes" role="group" aria-label="Tubes"></div>
+        <div class="lab-msg" id="msg" aria-live="polite"></div>
+        <div class="lab-btns">
+          <button type="button" id="undo"><span class="ko">되돌리기</span><span class="en">Undo</span><span class="ja">戻す</span></button>
+          <button type="button" id="again"><span class="ko">새 퍼즐</span><span class="en">New puzzle</span><span class="ja">新しいパズル</span></button>
+        </div>
       </div>
     </div>
   </section>
 
-  <section>
-    <p class="eyebrow"><em>FAQ</em> <s></s></p>
-    <div class="faq">
-      <details>
-        <summary><span class="en">Is it free?</span><span class="ko">무료인가요?</span></summary>
-        <p><span class="en">Yes. The app is free to install and supported by ads. All 1,000 levels are free. An optional one-time purchase removes the ads.</span>
-           <span class="ko">네. 무료로 설치해 쓸 수 있고, 광고가 포함되어 있습니다. 1,000개 레벨 모두 무료입니다. 광고 없이 즐기고 싶다면 한 번 구매로 광고를 없앨 수 있습니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">Do I need an account?</span><span class="ko">계정이 필요한가요?</span></summary>
-        <p><span class="en">No sign-up is required to play. The game signs you in anonymously in the background so your score can appear on the leaderboard; no name, email or phone number is collected.</span>
-           <span class="ko">회원가입 없이 바로 플레이할 수 있습니다. 리더보드에 점수를 올리기 위해 백그라운드에서 익명으로 로그인되며, 이름·이메일·전화번호는 수집하지 않습니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">Is it available on iPhone?</span><span class="ko">아이폰에서도 쓸 수 있나요?</span></summary>
-        <p><span class="en">Not at the moment. The app is Android only, on Google Play.</span>
-           <span class="ko">현재는 안드로이드 전용이며 구글플레이에서만 제공됩니다.</span></p>
-      </details>
-      <details>
-        <summary><span class="en">I found a level that seems unsolvable.</span><span class="ko">풀 수 없어 보이는 레벨을 발견했습니다.</span></summary>
-        <p><span class="en">Email the level number to teamstar13000@gmail.com. Every level is checked by an automated solver before release, but I look into any report personally.</span>
-           <span class="ko">해당 레벨 번호를 teamstar13000@gmail.com으로 보내 주세요. 모든 레벨은 출시 전에 자동으로 풀이를 검증하지만, 제보를 받으면 직접 다시 확인합니다.</span></p>
-      </details>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>1,000</b><span class="ko">레벨</span><span class="en">levels</span><span class="ja">レベル</span></div>
+      <div class="stat"><b>5</b><span class="ko">단계 난이도</span><span class="en">difficulty tiers</span><span class="ja">段階の難易度</span></div>
+      <div class="stat"><b>12</b><span class="ko">색까지</span><span class="en">colors at most</span><span class="ja">色まで</span></div>
+      <div class="stat"><b>55</b><span class="ko">개 업적</span><span class="en">achievements</span><span class="ja">個の実績</span></div>
+    </div>
+  </div>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">난이도</span><span class="en">Difficulty</span><span class="ja">難易度</span></span>
+        <h2><span class="ko">초보부터 그랜드 마스터까지 5단계</span><span class="en">Five tiers, Beginner to Grand Master</span><span class="ja">初心者からグランドマスターまで5段階</span></h2>
+        <p><span class="ko">모든 레벨은 다 맞춘 상태에서 거꾸로 섞어 만들기 때문에, 반드시 풀 수 있습니다. 단계가 오를수록 색이 늘고 시험관이 깊어지며, 특별한 블록이 하나씩 더해집니다.</span><span class="en">Every level is made by shuffling a solved board backwards, so every level can be solved. Higher tiers add colors, deeper tubes and special blocks.</span><span class="ja">すべてのレベルは完成した状態から逆向きに混ぜて作るため、必ず解けます。段階が上がるほど色が増え、試験管が深くなり、特殊ブロックが加わります。</span></p>
+      </div>
+      <div class="tiers">
+        <div class="tier">
+          <span class="lv">Lv.1–50</span>
+          <b><span class="ko">초보</span><span class="en">Beginner</span><span class="ja">初心者</span></b>
+          <div class="dots" aria-hidden="true"><i style="background:#FF1744"></i><i style="background:#2979FF"></i><i style="background:#00E676"></i><i style="background:#FFD600"></i><i style="background:#651FFF"></i><i style="background:#FFAB00"></i><i style="background:#00B8D4"></i></div>
+          <p><span class="ko">3색으로 규칙을 익히고 7색까지.</span><span class="en">Learn the rules with 3 colors, up to 7.</span><span class="ja">3色でルールを覚え、7色まで。</span></p>
+        </div>
+        <div class="tier">
+          <span class="lv">Lv.51–200</span>
+          <b><span class="ko">견습</span><span class="en">Apprentice</span><span class="ja">見習い</span></b>
+          <div class="dots" aria-hidden="true"><i style="background:#FF1744"></i><i style="background:#2979FF"></i><i style="background:#00E676"></i><i style="background:#FFD600"></i><i style="background:#651FFF"></i><i style="background:#FFAB00"></i><i style="background:#00B8D4"></i><i style="background:#FF80AB"></i><i style="background:#A1887F"></i></div>
+          <p><span class="ko">9색까지. 101레벨부터 시험관이 5칸으로 깊어지고 얼음 블록이 나옵니다.</span><span class="en">Up to 9 colors. From level 101, tubes hold 5 and Frozen Blocks appear.</span><span class="ja">9色まで。101レベルから試験管が5段になり、氷ブロックが登場します。</span></p>
+        </div>
+        <div class="tier">
+          <span class="lv">Lv.201–700</span>
+          <b><span class="ko">전문가</span><span class="en">Expert</span><span class="ja">エキスパート</span></b>
+          <div class="dots" aria-hidden="true"><i style="background:#FF1744"></i><i style="background:#2979FF"></i><i style="background:#00E676"></i><i style="background:#FFD600"></i><i style="background:#651FFF"></i><i style="background:#FFAB00"></i><i style="background:#00B8D4"></i><i style="background:#FF80AB"></i><i style="background:#A1887F"></i><i style="background:#90A4AE"></i><i style="background:#C6FF00"></i></div>
+          <p><span class="ko">11색까지. 잠금 블록, 401레벨부터 폭탄 블록.</span><span class="en">Up to 11 colors. Locked Blocks, then Bomb Blocks from level 401.</span><span class="ja">11色まで。ロックブロック、401レベルから爆弾ブロック。</span></p>
+        </div>
+        <div class="tier">
+          <span class="lv">Lv.701–900</span>
+          <b><span class="ko">마스터</span><span class="en">Master</span><span class="ja">マスター</span></b>
+          <div class="dots" aria-hidden="true"><i style="background:#FF1744"></i><i style="background:#2979FF"></i><i style="background:#00E676"></i><i style="background:#FFD600"></i><i style="background:#651FFF"></i><i style="background:#FFAB00"></i><i style="background:#00B8D4"></i><i style="background:#FF80AB"></i><i style="background:#A1887F"></i><i style="background:#90A4AE"></i><i style="background:#C6FF00"></i><i style="background:#3D5AFE"></i></div>
+          <p><span class="ko">12색까지. 특별 블록이 섞여 나옵니다.</span><span class="en">Up to 12 colors, with special blocks combined.</span><span class="ja">12色まで。特殊ブロックが組み合わさります。</span></p>
+        </div>
+        <div class="tier">
+          <span class="lv">Lv.901–1000</span>
+          <b><span class="ko">그랜드 마스터</span><span class="en">Grand Master</span><span class="ja">グランドマスター</span></b>
+          <div class="dots" aria-hidden="true"><i style="background:#FF1744"></i><i style="background:#2979FF"></i><i style="background:#00E676"></i><i style="background:#FFD600"></i><i style="background:#651FFF"></i><i style="background:#FFAB00"></i><i style="background:#00B8D4"></i><i style="background:#FF80AB"></i><i style="background:#A1887F"></i><i style="background:#90A4AE"></i><i style="background:#C6FF00"></i><i style="background:#3D5AFE"></i></div>
+          <p><span class="ko">12색, 6칸 시험관, 모든 블록이 등장하는 마지막 100레벨.</span><span class="en">The final 100: 12 colors, 6-deep tubes, every special block.</span><span class="ja">12色・6段の試験管・すべての特殊ブロックが登場する最後の100レベル。</span></p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <div class="tail">
-    <h2><span class="en">Start sorting. 1,000 tubes are waiting.</span><span class="ko">지금 정렬을 시작해 보세요. 1,000개 레벨이 기다립니다.</span></h2>
-    <div class="badges"><a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.potionlab"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"></a></div>
-    <p class="note" style="margin-top:18px;font-family:var(--mono);font-size:11.5px;color:var(--dim)">com.redmoon.potionlab</p>
-  </div>
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">기능</span><span class="en">Features</span><span class="ja">機能</span></span>
+        <h2><span class="ko">혼자 풀고, 만들고, 친구와 겨루고</span><span class="en">Solve, create, and compete with friends</span><span class="ja">解いて、作って、友達と競う</span></h2>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+          <h3><span class="ko">오늘의 도전</span><span class="en">Daily Challenge</span><span class="ja">今日の挑戦</span></h3>
+          <p><span class="ko">매일 모든 플레이어에게 같은 퍼즐이 주어집니다.</span><span class="en">Everyone gets the same puzzle each day.</span><span class="ja">毎日、すべてのプレイヤーに同じパズルが出題されます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
+          <h3><span class="ko">퍼즐 만들기와 커뮤니티 퍼즐</span><span class="en">Puzzle maker and community puzzles</span><span class="ja">パズル作成とコミュニティパズル</span></h3>
+          <p><span class="ko">직접 퍼즐을 만들어 올리고, 다른 플레이어가 만든 퍼즐을 풀어 봅니다.</span><span class="en">Build your own puzzles, publish them, and play ones other players made.</span><span class="ja">自分でパズルを作って公開し、ほかのプレイヤーが作ったパズルに挑戦できます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/></svg></div>
+          <h3><span class="ko">친구와 리더보드</span><span class="en">Friends and leaderboards</span><span class="ja">友達とランキング</span></h3>
+          <p><span class="ko">친구 코드로 친구를 추가하고 전체·주간·친구 순위를 확인합니다.</span><span class="en">Add friends with a friend code and check overall, weekly and friends-only rankings.</span><span class="ja">フレンドコードで友達を追加し、全体・週間・友達のランキングを確認できます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/></svg></div>
+          <h3><span class="ko">힌트·되돌리기·시험관 추가</span><span class="en">Hints, undo and extra tubes</span><span class="ja">ヒント・戻す・試験管追加</span></h3>
+          <p><span class="ko">막히면 힌트를 보고, 되돌리기는 짧은 광고나 코인으로 다시 채웁니다. 코인으로 빈 시험관을 하나 더할 수도 있습니다.</span><span class="en">Use a hint when you're stuck, refill undos with a short ad or coins, or spend coins on an extra empty tube.</span><span class="ja">行き詰まったらヒントを使い、戻すは短い広告かコインで補充できます。コインで空の試験管を1本追加することもできます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9.5c0-1.4 1.3-2 3-2s3 .7 3 2-1.3 1.8-3 2.2-3 .9-3 2.3 1.3 2 3 2 3-.6 3-2"/></svg></div>
+          <h3><span class="ko">별과 코인</span><span class="en">Stars and coins</span><span class="ja">星とコイン</span></h3>
+          <p><span class="ko">적은 이동으로 풀수록 별이 늘고, 별에 따라 코인을 받습니다. 매일 출석 보상과 10레벨마다 보너스도 있습니다.</span><span class="en">Fewer moves earn more stars, and stars earn coins. There's also a daily login reward and a bonus every 10 levels.</span><span class="ja">少ない手数で解くほど星が増え、星に応じてコインがもらえます。毎日のログインボーナスと10レベルごとのボーナスもあります。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></div>
+          <h3><span class="ko">업적 55개</span><span class="en">55 achievements</span><span class="ja">実績55個</span></h3>
+          <p><span class="ko">진행, 별, 점수, 숙련, 속도, 도전 6개 분야로 나뉩니다.</span><span class="en">Across six groups: progress, stars, score, mastery, speed and challenge.</span><span class="ja">進行・星・スコア・熟練・スピード・チャレンジの6分野に分かれています。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2.3A4.7 4.7 0 0 0 22 10.7C22 5.9 17.5 2 12 2z"/></svg></div>
+          <h3><span class="ko">계절 테마와 이벤트</span><span class="en">Seasonal themes and events</span><span class="ja">季節テーマとイベント</span></h3>
+          <p><span class="ko">봄·여름·가을·겨울 테마가 계절에 맞춰 바뀌고, 시즌 이벤트도 열립니다.</span><span class="en">Spring, summer, autumn and winter themes follow the calendar, and seasonal events run during the year.</span><span class="ja">春・夏・秋・冬のテーマが季節に合わせて変わり、シーズンイベントも開催されます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <h3><span class="ko">색각 이상 모드</span><span class="en">Colorblind mode</span><span class="ja">色覚サポート</span></h3>
+          <p><span class="ko">색마다 기호를 함께 표시해, 색만으로 구분하지 않아도 풀 수 있습니다.</span><span class="en">Each color also gets a symbol, so you can play without telling colors apart.</span><span class="ja">色ごとに記号も表示するので、色だけで見分けなくても遊べます。</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <footer>
-    <span>© <span id="yr">2026</span> RedMoon Lab</span>
-    <a href="privacy.html"><span class="en">Privacy policy</span><span class="ko">개인정보처리방침</span></a>
-    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
-  </footer>
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">FAQ</span>
+        <h2><span class="ko">자주 묻는 질문</span><span class="en">Questions</span><span class="ja">よくある質問</span></h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary><span class="ko">무료인가요?</span><span class="en">Is it free?</span><span class="ja">無料ですか？</span></summary>
+          <p><span class="ko">네. 1,000개 레벨을 모두 무료로 즐길 수 있고 광고로 운영됩니다. 광고를 없애고 싶다면 한 번 구매로 광고를 끌 수 있고(코인 200개 보너스 포함), 코인 묶음도 따로 팝니다. 코인은 레벨을 깨면서 무료로도 모읍니다.</span><span class="en">Yes. All 1,000 levels are free and supported by ads. A one-time purchase removes the ads (with 200 bonus coins), and coin packs are sold separately. You also earn coins for free by clearing levels.</span><span class="ja">はい。1,000レベルすべてを無料で遊べ、広告で運営しています。1回の購入で広告を消せ（コイン200枚のボーナスつき）、コインパックも別途販売しています。コインはレベルをクリアして無料で集めることもできます。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">계정이 필요한가요?</span><span class="en">Do I need an account?</span><span class="ja">アカウントは必要ですか？</span></summary>
+          <p><span class="ko">아니요. 회원가입 없이 바로 플레이합니다. 리더보드와 친구 기능을 위해 백그라운드에서 익명으로 로그인되며, 이메일이나 전화번호는 받지 않습니다.</span><span class="en">No. You can play right away without signing up. The game signs you in anonymously in the background for leaderboards and friends; it doesn't ask for an email or phone number.</span><span class="ja">いいえ。会員登録なしですぐに遊べます。ランキングとフレンド機能のためにバックグラウンドで匿名ログインしますが、メールアドレスや電話番号は求めません。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">어떤 언어를 지원하나요?</span><span class="en">Which languages does it support?</span><span class="ja">対応言語は？</span></summary>
+          <p><span class="ko">한국어, 영어, 일본어, 스페인어, 중국어(번체) 5개 언어를 지원합니다.</span><span class="en">Five: English, Korean, Japanese, Spanish and Traditional Chinese.</span><span class="ja">日本語、英語、韓国語、スペイン語、中国語（繁体字）の5言語に対応しています。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">아이폰에서도 쓸 수 있나요?</span><span class="en">Is it on iPhone?</span><span class="ja">iPhoneでも使えますか？</span></summary>
+          <p><span class="ko">현재는 안드로이드 전용이며 구글플레이에서만 받을 수 있습니다.</span><span class="en">Not at the moment. It's Android only, on Google Play.</span><span class="ja">現在はAndroid専用で、Google Playでのみ配信しています。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">도저히 안 풀리는 레벨이 있어요.</span><span class="en">I'm stuck on a level.</span><span class="ja">どうしても解けないレベルがあります。</span></summary>
+          <p><span class="ko">모든 레벨은 풀 수 있게 만들어집니다. 힌트나 시험관 추가를 써 보시고, 그래도 이상하면 레벨 번호를 teamstar13000@gmail.com으로 보내 주세요.</span><span class="en">Every level is built to be solvable. Try a hint or an extra tube, and if something still seems wrong, email the level number to teamstar13000@gmail.com.</span><span class="ja">すべてのレベルは解けるように作られています。ヒントや試験管追加を試して、それでもおかしい場合はレベル番号を teamstar13000@gmail.com までお送りください。</span></p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="cta-band">
+      <img class="icon" src="assets/icons/potionlab.webp" alt="" width="112" height="112">
+      <div>
+        <h2><span class="ko">1,000개 레벨이 기다립니다</span><span class="en">1,000 levels are waiting</span><span class="ja">1,000レベルが待っています</span></h2>
+        <p><span class="ko">무료로 설치하고 첫 레벨부터 시작해 보세요.</span><span class="en">Free to install. Start with level one.</span><span class="ja">無料でインストールして、最初のレベルから始めましょう。</span></p>
+        <div class="badges">
+          <a class="badge gp" href="https://play.google.com/store/apps/details?id=com.redmoon.potionlab"><img class="ko" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드" loading="lazy"><img class="en" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" loading="lazy"><img class="ja" src="https://play.google.com/intl/en_us/badges/static/images/badges/ja_badge_web_generic.png" alt="Google Play で手に入れよう" loading="lazy"></a>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </main>
 
+<footer class="site-foot">
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> RedMoon Lab</span>
+    <a href="index.html"><span class="ko">전체 앱</span><span class="en">All apps</span><span class="ja">アプリ一覧</span></a>
+    <a href="privacy.html"><span class="ko">개인정보처리방침</span><span class="en">Privacy policy</span><span class="ja">プライバシーポリシー</span></a>
+    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
+    <span class="legal">
+      <span class="ko">Google Play 및 Google Play 로고는 Google LLC의 상표입니다.</span>
+      <span class="en">Google Play and the Google Play logo are trademarks of Google LLC.</span>
+      <span class="ja">Google Play および Google Play ロゴは Google LLC の商標です。</span>
+    </span>
+  </div>
+</footer>
+
 <script>
+// Mini sorting board: deal 4 colors × 4 into 4 tubes + 2 empty, keep only boards a search can solve.
 (function(){
-  var root=document.documentElement, btns=document.querySelectorAll('.lang');
-  function setLang(l){
-    root.setAttribute('data-lang',l);
-    root.setAttribute('lang',l==='ko'?'ko':'en');
-    btns.forEach(function(b){ b.setAttribute('aria-pressed',String(b.dataset.set===l)); });
-    try{ localStorage.setItem('rml-lang',l); }catch(e){}
+  var COLORS=['#FF1744','#2979FF','#00E676','#FFD600'], CAP=4, N=6;
+  var box=document.getElementById('tubes'), movesEl=document.getElementById('moves'),
+      msg=document.getElementById('msg'), undoBtn=document.getElementById('undo');
+  var tubes, sel=-1, moves=0, hist=[];
+  var T={win:{ko:'완성! 모든 시험관이 한 색입니다',en:'Solved! Every tube is one color',ja:'完成！すべての試験管が1色になりました'}};
+  function say(k){msg.innerHTML=k?'<span class="ko">'+T[k].ko+'</span><span class="en">'+T[k].en+'</span><span class="ja">'+T[k].ja+'</span>':'';}
+  function top(t){return t.length?t[t.length-1]:-1;}
+  function full(t){return t.length===CAP&&t.every(function(c){return c===t[0];});}
+  function canPour(a,b){
+    if(a===b||!a.length||b.length>=CAP) return false;
+    if(b.length&&top(b)!==top(a)) return false;
+    if(full(a)) return false;
+    if(!b.length&&a.every(function(c){return c===a[0];})) return false;
+    return true;
   }
-  btns.forEach(function(b){ b.addEventListener('click',function(){ setLang(b.dataset.set); }); });
-  var saved=null;
-  try{ saved=localStorage.getItem('rml-lang'); }catch(e){}
-  if(saved!=='ko'&&saved!=='en'){ saved=(navigator.language||'').toLowerCase().indexOf('ko')===0?'ko':'en'; }
-  setLang(saved);
-  document.getElementById('yr').textContent=new Date().getFullYear();
+  function pour(a,b){var c=top(a);while(a.length&&top(a)===c&&b.length<CAP){b.push(a.pop());}}
+  function key(ts){return ts.map(function(t){return t.join('');}).sort().join('|');}
+  function solved(ts){return ts.every(function(t){return !t.length||full(t);});}
+  function solvable(start){
+    var seen={},q=[start];seen[key(start)]=1;
+    while(q.length){
+      var s=q.shift(); if(solved(s)) return true;
+      for(var i=0;i<N;i++)for(var j=0;j<N;j++){
+        if(!canPour(s[i],s[j])) continue;
+        var n=s.map(function(t){return t.slice();}); pour(n[i],n[j]);
+        var k=key(n); if(!seen[k]){seen[k]=1;q.push(n);}
+      }
+      if(q.length>40000) return false;
+    }
+    return false;
+  }
+  function deal(){
+    for(var tries=0;tries<200;tries++){
+      var pool=[];COLORS.forEach(function(_,c){for(var k=0;k<CAP;k++)pool.push(c);});
+      for(var i=pool.length-1;i>0;i--){var r=Math.floor(Math.random()*(i+1)),x=pool[i];pool[i]=pool[r];pool[r]=x;}
+      var ts=[];for(var t=0;t<COLORS.length;t++)ts.push(pool.slice(t*CAP,t*CAP+CAP));
+      ts.push([]);ts.push([]);
+      var bad=ts.some(function(t){for(var i=2;i<t.length;i++)if(t[i]===t[i-1]&&t[i]===t[i-2])return true;return full(t);});
+      if(!bad&&solvable(ts)) return ts;
+    }
+    return ts;
+  }
+  function draw(){
+    box.innerHTML='';
+    tubes.forEach(function(t,i){
+      var el=document.createElement('div');
+      el.className='tube'+(i===sel?' sel':'')+(full(t)?' done':'');
+      el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label','Tube '+(i+1));
+      t.forEach(function(c){var d=document.createElement('div');d.className='drop';d.style.background=COLORS[c];el.appendChild(d);});
+      el.addEventListener('click',function(){tap(i);});
+      el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tap(i);}});
+      box.appendChild(el);
+    });
+    movesEl.textContent=moves; undoBtn.disabled=!hist.length;
+  }
+  function tap(i){
+    if(solved(tubes)) return;
+    if(sel<0){ if(tubes[i].length) sel=i; }
+    else if(sel===i){ sel=-1; }
+    else if(canPour(tubes[sel],tubes[i])){
+      hist.push(tubes.map(function(t){return t.slice();}));
+      pour(tubes[sel],tubes[i]); moves++; sel=-1;
+      if(solved(tubes)) say('win');
+    } else { sel=tubes[i].length?i:-1; }
+    draw();
+  }
+  function reset(){tubes=deal();sel=-1;moves=0;hist=[];say();draw();}
+  undoBtn.addEventListener('click',function(){if(!hist.length)return;tubes=hist.pop();moves=Math.max(0,moves-1);sel=-1;say();draw();});
+  document.getElementById('again').addEventListener('click',reset);
+  reset();
 })();
 </script>
-<script src="assets/store-links.js" defer></script>
+<script src="assets/site.js?v=3" defer></script>
 <script src="assets/analytics.js?v=1" defer></script>
 </body>
 </html>
