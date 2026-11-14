@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="assets/lang.js?v=3"></script>
+<title>기우뚱 동물나라 — 기울기를 지키며 줄을 지우는 동물 쌓기 퍼즐 | RedMoon Lab</title>
+<meta name="description" content="기우뚱 동물나라(Tilt Zoo)는 시소 같은 판 위에 동물을 올려 균형을 지키며 줄을 지우는 퍼즐 게임입니다. 14개 지역 220판, 입체 동물 30종, 오늘의 도전·한 수 퍼즐·타임어택·2인 대결.">
+<link rel="canonical" href="https://heyday07.github.io/tiltzoo.html">
+<meta property="og:title" content="기우뚱 동물나라 — 220판, 동물 30종의 균형 퍼즐">
+<meta property="og:description" content="무거운 동물일수록 판이 기웁니다. 줄을 지운 뒤 판이 어느 쪽으로 넘어갈지, 한 수 앞을 읽는 퍼즐.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://heyday07.github.io/tiltzoo.html">
+<meta property="og:image" content="https://heyday07.github.io/assets/og-logo.png">
+<meta name="theme-color" content="#3B7A3E">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=10">
+<style>
+/* page-only: the 14 regions as a ladder of chips */
+.regions{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.regions span{font-size:14px;font-weight:650;border:1px solid var(--accent-line);background:var(--accent-soft);color:var(--accent-text);border-radius:999px;padding:5px 13px}
+.regions span small{font-weight:500;opacity:.75;margin-left:6px}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+.mode{background:var(--surface);border:1px solid var(--rule);border-radius:20px;padding:18px 18px 20px;display:flex;flex-direction:column;gap:6px}
+.mode b{font-size:17px;font-weight:750}
+.mode p{font-size:14.5px;color:var(--dim);line-height:1.6}
+html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
+@media (max-width:760px){.modes{grid-template-columns:1fr}}
+</style>
+</head>
+<body style="--accent:#3B7A3E">
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="assets/logo-moon.png" alt="" width="26" height="26">RedMoon Lab</a>
+    <nav class="head-nav" aria-label="Site">
+      <a class="hide-sm" href="index.html"><span class="ko">전체 앱</span><span class="en">All apps</span><span class="ja">アプリ一覧</span></a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button data-set="ko" aria-pressed="false">KO</button>
+        <button data-set="en" aria-pressed="false">EN</button>
+        <button data-set="ja" aria-pressed="false">JP</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="app-hero">
+    <div class="wrap">
+      <div>
+        <div class="app-id">
+          <img src="assets/icons/tiltzoo.webp" alt="" width="72" height="72">
+          <div>
+            <div class="name"><span class="ko">기우뚱 동물나라</span><span class="en">Tilt Zoo</span><span class="ja">Tilt Zoo</span></div>
+            <div class="chips"><span class="chip ios">iOS</span></div>
+          </div>
+        </div>
+        <h1>
+          <span class="ko">한쪽으로 기울면<br><em>전부 쏟아져요</em></span>
+          <span class="en">Tip too far<br><em>and everything slides off</em></span>
+          <span class="ja">傾きすぎたら<br><em>ぜんぶ落ちちゃう</em></span>
+        </h1>
+        <p class="lede">
+          <span class="ko">시소 같은 판 위에 동물을 올립니다. 무거운 동물일수록 세게 누르고, 가로·세로 한 줄을 채우면 사라집니다. 지운 쪽이 가벼워지면 판은 반대로 기울죠. 그 한 수 뒤까지 읽는 것이 이 퍼즐의 전부입니다.</span>
+          <span class="en">Place animals on a seesaw board. Heavier animals push harder, and a full row or column clears. Once that weight is gone, the board tilts the other way. Reading one move ahead is the whole game.</span>
+          <span class="ja">シーソーのようなボードにどうぶつを乗せます。重いどうぶつほど強く押し、縦か横のラインを埋めると消えます。消えた側が軽くなると、ボードは反対へ傾きます。その一手先まで読むのが、このパズルのすべてです。</span>
+        </p>
+        <div class="badges">
+          <a class="badge as" href="https://apps.apple.com/app/id6832592807"><img class="ko" src="assets/badges/appstore-ko.svg" alt="App Store에서 다운로드" loading="lazy"><img class="en" src="assets/badges/appstore-en.svg" alt="Download on the App Store" loading="lazy"><img class="ja" src="assets/badges/appstore-ja.svg" alt="App Store からダウンロード" loading="lazy"></a>
+        </div>
+        <p class="fine">
+          <span class="ko">무료 · 광고 포함 · 앱 내 구매(선택) · 5개 언어</span>
+          <span class="en">Free · Contains ads · Optional in-app purchase · 5 languages</span>
+          <span class="ja">無料・広告あり・アプリ内課金（任意）・5言語</span>
+        </p>
+      </div>
+      <div class="phones" aria-hidden="true">
+        <img class="p2 ko" src="assets/shots/tiltzoo/ko_01.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p1 ko" src="assets/shots/tiltzoo/ko_02.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p2 en" src="assets/shots/tiltzoo/en_01.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p1 en" src="assets/shots/tiltzoo/en_02.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p2 ja" src="assets/shots/tiltzoo/ja_01.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p1 ja" src="assets/shots/tiltzoo/ja_02.webp" alt="" width="600" height="1304" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>220</b><span class="ko">판</span><span class="en">levels</span><span class="ja">レベル</span></div>
+      <div class="stat"><b>14</b><span class="ko">개 지역</span><span class="en">regions</span><span class="ja">エリア</span></div>
+      <div class="stat"><b>30</b><span class="ko">종 입체 동물</span><span class="en">animals in 3D</span><span class="ja">種の3Dどうぶつ</span></div>
+      <div class="stat"><b>33</b><span class="ko">개 업적</span><span class="en">achievements</span><span class="ja">個の実績</span></div>
+    </div>
+  </div>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">14개 지역</span><span class="en">14 regions</span><span class="ja">14のエリア</span></span>
+        <h2><span class="ko">지역마다 새 규칙이 하나씩</span><span class="en">Every region adds one new rule</span><span class="ja">エリアごとに新しいルールがひとつ</span></h2>
+        <p><span class="ko">얼음 칸은 미끄러지고, 금 간 칸은 깨지고, 받침점이 옮겨집니다. 초급부터 폭풍 호수까지 220판이 이어집니다.</span><span class="en">Ice cells slide, cracked cells break, the pivot moves. 220 levels run from Beginner to Storm Lake.</span><span class="ja">氷のマスはすべり、ひびの入ったマスは割れ、支点が動きます。初級から嵐の湖まで220レベルが続きます。</span></p>
+      </div>
+      <div class="regions">
+        <span><span class="ko">초급</span><span class="en">Beginner</span><span class="ja">初級</span></span>
+        <span><span class="ko">중급</span><span class="en">Intermediate</span><span class="ja">中級</span></span>
+        <span><span class="ko">고급</span><span class="en">Advanced</span><span class="ja">上級</span></span>
+        <span><span class="ko">특급</span><span class="en">Expert</span><span class="ja">特級</span></span>
+        <span><span class="ko">벌집</span><span class="en">Hive</span><span class="ja">ハチの巣</span></span>
+        <span><span class="ko">얼음 호수</span><span class="en">Ice Lake</span><span class="ja">氷の湖</span></span>
+        <span><span class="ko">낡은 다리</span><span class="en">Old Bridge</span><span class="ja">古い橋</span></span>
+        <span><span class="ko">풍선 축제</span><span class="en">Balloon Festival</span><span class="ja">風船まつり</span></span>
+        <span><span class="ko">잡동사니 창고</span><span class="en">Junk Shed</span><span class="ja">がらくた倉庫</span></span>
+        <span><span class="ko">특별한 손님</span><span class="en">Special Guests</span><span class="ja">特別なお客さん</span></span>
+        <span><span class="ko">둥근 무대</span><span class="en">Round Stage</span><span class="ja">まるい舞台</span></span>
+        <span><span class="ko">흔들 받침</span><span class="en">Wobbly Pivot</span><span class="ja">ゆれる支点</span></span>
+        <span><span class="ko">달인의 정원</span><span class="en">Master's Garden</span><span class="ja">達人の庭</span></span>
+        <span><span class="ko">폭풍 호수</span><span class="en">Storm Lake</span><span class="ja">嵐の湖</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0;padding-bottom:56px">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">앱 화면</span><span class="en">Inside the app</span><span class="ja">アプリ画面</span></span>
+        <h2><span class="ko">공원, 판, 지역, 도감, 대결</span><span class="en">Park, board, regions, collection and duels</span><span class="ja">公園、ボード、エリア、図鑑、対戦</span></h2>
+        <p><span class="ko">옆으로 넘겨 실제 화면을 보세요.</span><span class="en">Swipe through the actual screens.</span><span class="ja">横にスクロールして実際の画面をご覧ください。</span></p>
+      </div>
+    </div>
+    <div class="gallery-wrap">
+      <div class="gallery ko" tabindex="0" aria-label="스크린샷">
+        <img src="assets/shots/tiltzoo/ko_01.webp" alt="홈과 공원" width="600" height="1304" loading="lazy"><img src="assets/shots/tiltzoo/ko_02.webp" alt="게임 판" width="600" height="1304" loading="lazy"><img src="assets/shots/tiltzoo/ko_03.webp" alt="레벨과 지역" width="600" height="1304" loading="lazy"><img src="assets/shots/tiltzoo/ko_04.webp" alt="동물 도감" width="600" height="1304" loading="lazy"><img src="assets/shots/tiltzoo/ko_05.webp" alt="2인 대결" width="600" height="1304" loading="lazy">
+      </div>
+      <div class="gallery en" tabindex="0" aria-label="Screenshots">
+        <img src="assets/shots/tiltzoo/en_01.webp" alt="Home and park" width="600" height="1304" loading="lazy"><img src="assets/shots/tiltzoo/en_02.webp" alt="Game board" width="600" height="1304" loading="lazy"><img src="assets/shots/tiltzoo/en_03.webp" alt="Levels and regions" width="600" height="1304" loading="lazy"><img src="assets/shots/tiltzoo/en_04.webp" alt="Animal collection" width="600" height="1304" loading="lazy"><img src="assets/shots/tiltzoo/en_05.webp" alt="Duel" width="600" height="1304" loading="lazy">
+      </div>
+      <div class="gallery ja" tabindex="0" aria-label="スクリーンショット">
+        <img src="assets/shots/tiltzoo/ja_01.webp" alt="ホームと公園" width="600" height="1304" loading="lazy"><img src="assets/shots/tiltzoo/ja_02.webp" alt="ゲームボード" width="600" height="1304" loading="lazy"><img src="assets/shots/tiltzoo/ja_03.webp" alt="レベルとエリア" width="600" height="1304" loading="lazy"><img src="assets/shots/tiltzoo/ja_04.webp" alt="どうぶつ図鑑" width="600" height="1304" loading="lazy"><img src="assets/shots/tiltzoo/ja_05.webp" alt="2人対戦" width="600" height="1304" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:32px">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">여섯 가지 놀이</span><span class="en">Six ways to play</span><span class="ja">6つの遊び方</span></span>
+        <h2><span class="ko">레벨부터 친구와의 대결까지</span><span class="en">From levels to duels with a friend</span><span class="ja">レベルから友だちとの対戦まで</span></h2>
+      </div>
+      <div class="modes">
+        <div class="mode"><b><span class="ko">레벨</span><span class="en">Levels</span><span class="ja">レベル</span></b><p><span class="ko">14개 지역 220판을 차례로 깹니다.</span><span class="en">Clear 220 levels across 14 regions.</span><span class="ja">14エリア・220レベルを順にクリアします。</span></p></div>
+        <div class="mode"><b><span class="ko">끝없이</span><span class="en">Endless</span><span class="ja">エンドレス</span></b><p><span class="ko">판 10개 중 하나를 골라 쏟아질 때까지 계속합니다.</span><span class="en">Pick one of 10 boards and keep going until it spills.</span><span class="ja">10種のボードから選び、落ちるまで続けます。</span></p></div>
+        <div class="mode"><b><span class="ko">오늘의 도전</span><span class="en">Daily Challenge</span><span class="ja">今日のチャレンジ</span></b><p><span class="ko">요일마다 다른 판이 나옵니다.</span><span class="en">A different board for each day of the week.</span><span class="ja">曜日ごとに違うボードが出ます。</span></p></div>
+        <div class="mode"><b><span class="ko">한 수 퍼즐</span><span class="en">One-Move Puzzle</span><span class="ja">一手パズル</span></b><p><span class="ko">딱 한 수로 판을 지켜야 하는 문제입니다.</span><span class="en">Find the single move that saves the board.</span><span class="ja">たった一手でボードを守る問題です。</span></p></div>
+        <div class="mode"><b><span class="ko">타임어택</span><span class="en">Time Attack</span><span class="ja">タイムアタック</span></b><p><span class="ko">60초 안에 줄을 최대한 많이 지웁니다.</span><span class="en">Clear as many lines as you can in 60 seconds.</span><span class="ja">60秒でできるだけ多くのラインを消します。</span></p></div>
+        <div class="mode"><b><span class="ko">2인 대결</span><span class="en">Duel</span><span class="ja">2人対戦</span></b><p><span class="ko">친구와 한 폰으로, 또는 올빼미 박사와 겨룹니다. 마지막에 판을 쏟으면 집니다.</span><span class="en">Play a friend on one phone, or Professor Owl. Whoever spills the board loses.</span><span class="ja">1台で友だちと、またはフクロウ博士と対戦。最後にボードを落とした方の負けです。</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:32px">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">기능</span><span class="en">Features</span><span class="ja">機能</span></span>
+        <h2><span class="ko">동물을 모으고 공원을 키우세요</span><span class="en">Collect animals, grow your park</span><span class="ja">どうぶつを集めて公園を育てよう</span></h2>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v15M5 21h14M3 9l9-3 9 3M3 9l-1.5 5a3 3 0 0 0 3 0zM21 9l1.5 5a3 3 0 0 1-3 0z"/></svg></div>
+          <h3><span class="ko">무게마다 다른 동물</span><span class="en">Every weight, its own animals</span><span class="ja">重さごとに違うどうぶつ</span></h3>
+          <p><span class="ko">병아리부터 코끼리까지 무게마다 세 마리. 나무늘보는 줄이 지워져도 한 번은 남고, 앵무새는 반대편으로 날아가고, 올빼미는 판이 가장 평평해지는 무게가 됩니다.</span><span class="en">Three animals per weight, chick to elephant. The sloth stays one extra turn, the parrot flies to the far side, and the owl becomes whatever weight balances the board.</span><span class="ja">ひよこからゾウまで、重さごとに3匹。ナマケモノはラインが消えても一度だけ残り、オウムは反対側へ飛び、フクロウはボードがいちばん平らになる重さに変わります。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.5 7 .9-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.9z"/></svg></div>
+          <h3><span class="ko">별을 모으면 공원으로</span><span class="en">Stars bring them to your park</span><span class="ja">星が集まれば公園へ</span></h3>
+          <p><span class="ko">같은 동물을 자주 올리면 별이 차고, 별 다섯이면 공원에 놀러 옵니다. 도감 30종을 채워 보세요.</span><span class="en">Place an animal often and it earns stars; with five stars it moves into your park. Fill the 30-animal collection.</span><span class="ja">同じどうぶつをよく乗せると星がたまり、星5つで公園に遊びに来ます。図鑑30種を集めましょう。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/></svg></div>
+          <h3><span class="ko">힌트와 기울기 안경</span><span class="en">Hints and Tilt Glasses</span><span class="ja">ヒントと傾きメガネ</span></h3>
+          <p><span class="ko">코인으로 힌트 꾸러미와 기울기 안경을 사서 막힌 판을 넘깁니다. 무르기도 있습니다.</span><span class="en">Spend coins on Hint Packs and Tilt Glasses to get past a tough board. You can undo, too.</span><span class="ja">コインでヒントパックや傾きメガネを買って、詰まったボードを乗り越えます。やり直しもできます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M12 8c-2-4-6-4-6-1.5S9 8 12 8zM12 8c2-4 6-4 6-1.5S15 8 12 8z"/></svg></div>
+          <h3><span class="ko">출석 선물과 미션</span><span class="en">Daily gifts and missions</span><span class="ja">毎日のプレゼントとミッション</span></h3>
+          <p><span class="ko">매일 출석 선물을 받고, 오늘의 미션과 이번 주 특별 판으로 코인을 모읍니다.</span><span class="en">Claim a gift every day, and earn coins from daily missions and the weekly special board.</span><span class="ja">毎日プレゼントを受け取り、今日のミッションや今週の特別ボードでコインを集めます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M6 20v-7M11 20V5M16 20v-10"/></svg></div>
+          <h3><span class="ko">조련사 등급과 주간 기록</span><span class="en">Keeper ranks and weekly records</span><span class="ja">飼育員ランクと週間記録</span></h3>
+          <p><span class="ko">조련사 등급을 올리고, 이번 주 기록을 지난주와 견줍니다. 업적은 33개입니다.</span><span class="en">Climb the Keeper ranks and compare this week with last week. 33 achievements to earn.</span><span class="ja">飼育員ランクを上げ、今週の記録を先週と比べます。実績は33個です。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2.3A4.7 4.7 0 0 0 22 10.7C22 5.9 17.5 2 12 2z"/></svg></div>
+          <h3><span class="ko">배경 테마와 판 재질</span><span class="en">Themes and board materials</span><span class="ja">背景テーマとボードの素材</span></h3>
+          <p><span class="ko">모은 코인으로 배경 테마와 판 재질을 바꿔 나만의 동물나라를 꾸밉니다.</span><span class="en">Use your coins to change background themes and board materials.</span><span class="ja">集めたコインで背景テーマやボードの素材を変えられます。</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">FAQ</span>
+        <h2><span class="ko">자주 묻는 질문</span><span class="en">Questions</span><span class="ja">よくある質問</span></h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary><span class="ko">무료인가요?</span><span class="en">Is it free?</span><span class="ja">無料ですか？</span></summary>
+          <p><span class="ko">네. 모든 판과 놀이를 무료로 즐길 수 있고 광고로 운영됩니다(화면 아래 배너, 판 사이 전면 광고, 원할 때만 보는 보상형 광고). 코인으로 며칠 동안 광고를 끌 수 있고, 광고 제거(무기한)를 따로 구입할 수도 있습니다.</span><span class="en">Yes. Every level and mode is free and supported by ads (a banner at the bottom, full-screen ads between games, and optional rewarded ads). You can turn ads off for a few days with coins, or buy Remove Ads (no expiry).</span><span class="ja">はい。すべてのレベルと遊び方を無料で楽しめ、広告で運営しています（画面下のバナー、プレイの合間の全画面広告、自分で選んで見るリワード広告）。コインで数日間広告を消せるほか、広告削除（無期限）を購入することもできます。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">계정이 필요한가요?</span><span class="en">Do I need an account?</span><span class="ja">アカウントは必要ですか？</span></summary>
+          <p><span class="ko">아니요. 회원가입이나 로그인 없이 바로 플레이합니다. 진행 상황은 기기에 저장됩니다.</span><span class="en">No. There's no sign-up or login; your progress is stored on your device.</span><span class="ja">いいえ。会員登録やログインなしですぐに遊べます。進み具合は端末に保存されます。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">어떤 언어를 지원하나요?</span><span class="en">Which languages does it support?</span><span class="ja">対応言語は？</span></summary>
+          <p><span class="ko">한국어, 영어, 일본어, 스페인어, 중국어(번체) 5개 언어를 지원합니다.</span><span class="en">Five: English, Korean, Japanese, Spanish and Traditional Chinese.</span><span class="ja">日本語、英語、韓国語、スペイン語、中国語（繁体字）の5言語に対応しています。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">안드로이드에서도 쓸 수 있나요?</span><span class="en">Is it on Android?</span><span class="ja">Androidでも使えますか？</span></summary>
+          <p><span class="ko">현재는 앱스토어에서만 받을 수 있습니다. 아이폰과 아이패드를 지원합니다.</span><span class="en">Not yet. It's on the App Store for iPhone and iPad.</span><span class="ja">現在は App Store でのみ配信しています。iPhone と iPad に対応しています。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">자꾸 쏟아져요.</span><span class="en">My board keeps spilling.</span><span class="ja">すぐに落ちてしまいます。</span></summary>
+          <p><span class="ko">무거운 동물은 받침점 가까이에 두고, 줄을 지우기 전에 지운 뒤 어느 쪽이 가벼워질지 먼저 보세요. 기울기 안경을 쓰면 놓았을 때 쏟아지는 칸이 붉게 보입니다.</span><span class="en">Keep heavy animals close to the pivot, and before you clear a line, check which side will get lighter. With Tilt Glasses on, cells that would tip the board turn red.</span><span class="ja">重いどうぶつは支点の近くに置き、ラインを消す前に、消したあとどちらが軽くなるかを先に見ましょう。傾きメガネをかけると、置くとひっくり返るマスが赤く表示されます。</span></p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="cta-band">
+      <img class="icon" src="assets/icons/tiltzoo.webp" alt="" width="112" height="112">
+      <div>
+        <h2><span class="ko">첫 동물을 올려 보세요</span><span class="en">Place your first animal</span><span class="ja">最初のどうぶつを乗せてみよう</span></h2>
+        <p><span class="ko">무료로 설치하고 초급 1판부터 시작하세요.</span><span class="en">Free to install. Start with Beginner, level one.</span><span class="ja">無料でインストールして、初級の1レベルから始めましょう。</span></p>
+        <div class="badges">
+          <a class="badge as" href="https://apps.apple.com/app/id6832592807"><img class="ko" src="assets/badges/appstore-ko.svg" alt="App Store에서 다운로드" loading="lazy"><img class="en" src="assets/badges/appstore-en.svg" alt="Download on the App Store" loading="lazy"><img class="ja" src="assets/badges/appstore-ja.svg" alt="App Store からダウンロード" loading="lazy"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> RedMoon Lab</span>
+    <a href="index.html"><span class="ko">전체 앱</span><span class="en">All apps</span><span class="ja">アプリ一覧</span></a>
+    <a href="https://heyday07.github.io/tilt-zoo-privacy/"><span class="ko">개인정보처리방침</span><span class="en">Privacy policy</span><span class="ja">プライバシーポリシー</span></a>
+    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
+    <span class="legal">
+      <span class="ko">App Store는 Apple Inc.의 서비스 마크입니다.</span>
+      <span class="en">App Store is a service mark of Apple Inc.</span>
+      <span class="ja">App Store は Apple Inc. のサービスマークです。</span>
+    </span>
+  </div>
+</footer>
+
+<script src="assets/site.js?v=3" defer></script>
+<script src="assets/analytics.js?v=1" defer></script>
+</body>
+</html>
