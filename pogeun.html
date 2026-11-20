@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="assets/lang.js?v=3"></script>
+<title>포근숲 온천장 — 동물 손님을 모시는 힐링 온천 경영 게임 | RedMoon Lab</title>
+<meta name="description" content="포근숲 온천장(Cozy Hot Spring: Animal Spa)은 숲속 작은 온천장에 카피바라·토끼·고양이 같은 동물 손님을 모시는 방치형 경영 게임입니다. 시설 13곳, 단골손님 16마리, 사계절 축제, 연못 낚시. 갑자기 뜨는 광고 없음.">
+<link rel="canonical" href="https://heyday07.github.io/pogeun.html">
+<meta property="og:title" content="포근숲 온천장 — 동물 손님과 사계절을 보내는 온천 경영 게임">
+<meta property="og:description" content="수건을 개고, 우유를 채우고, 따끈한 차를 우려 동물 손님을 모셔요. 재촉하는 타이머도, 갑자기 뜨는 광고도 없이 내 속도로.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://heyday07.github.io/pogeun.html">
+<meta property="og:image" content="https://heyday07.github.io/assets/og-logo.png">
+<meta name="theme-color" content="#2A8577">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=10">
+<style>
+/* page-only: the 13 rooms as chips, and the four seasons as cards */
+.regions{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.regions span{font-size:14px;font-weight:650;border:1px solid var(--accent-line);background:var(--accent-soft);color:var(--accent-text);border-radius:999px;padding:5px 13px}
+.modes{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px}
+.mode{background:var(--surface);border:1px solid var(--rule);border-radius:20px;padding:18px 18px 20px;display:flex;flex-direction:column;gap:6px}
+.mode b{font-size:17px;font-weight:750}
+.mode p{font-size:14.5px;color:var(--dim);line-height:1.6}
+html[data-lang="ko"] h1,html[data-lang="ko"] h2{word-break:keep-all}
+@media (max-width:900px){.modes{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:760px){.modes{grid-template-columns:1fr}}
+</style>
+</head>
+<body style="--accent:#2A8577">
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="assets/logo-moon.png" alt="" width="26" height="26">RedMoon Lab</a>
+    <nav class="head-nav" aria-label="Site">
+      <a class="hide-sm" href="index.html"><span class="ko">전체 앱</span><span class="en">All apps</span><span class="ja">アプリ一覧</span></a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button data-set="ko" aria-pressed="false">KO</button>
+        <button data-set="en" aria-pressed="false">EN</button>
+        <button data-set="ja" aria-pressed="false">JP</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="app-hero">
+    <div class="wrap">
+      <div>
+        <div class="app-id">
+          <img src="assets/icons/pogeun.webp" alt="" width="72" height="72">
+          <div>
+            <div class="name"><span class="ko">포근숲 온천장</span><span class="en">Cozy Hot Spring</span><span class="ja">ぽかぽか森の温泉</span></div>
+            <div class="chips"><span class="chip ios">iOS</span></div>
+          </div>
+        </div>
+        <h1>
+          <span class="ko">숲속 작은 온천장에<br><em>동물 손님이 찾아와요</em></span>
+          <span class="en">A little forest hot spring,<br><em>full of animal guests</em></span>
+          <span class="ja">森の小さな温泉に<br><em>どうぶつのお客さん</em></span>
+        </h1>
+        <p class="lede">
+          <span class="ko">너구리 동글이와 친구들이 토끼, 고양이, 카피바라 같은 동물 손님을 기다리고 있어요. 수건을 개고, 우유를 채우고, 따끈한 차를 우려 손님을 모셔 보세요. 재촉하는 타이머도, 갑자기 뜨는 광고도 없어요. 내 속도로 천천히 즐기면 돼요.</span>
+          <span class="en">Roly the raccoon dog and friends are waiting for guests: rabbits, cats, capybaras and more. Fold towels, stock milk and brew warm tea to make every guest feel at home. No rushing timers and no pop-up ads. Play at your own pace.</span>
+          <span class="ja">タヌキのころんと仲間たちが、ウサギやネコ、カピバラなど動物のお客さんを待っています。タオルをたたんで、牛乳を並べて、あたたかいお茶をいれておもてなし。急かすタイマーも、突然出てくる広告もありません。自分のペースでのんびり遊べます。</span>
+        </p>
+        <div class="badges">
+          <a class="badge as" href="https://apps.apple.com/app/id6836583718"><img class="ko" src="assets/badges/appstore-ko.svg" alt="App Store에서 다운로드" loading="lazy"><img class="en" src="assets/badges/appstore-en.svg" alt="Download on the App Store" loading="lazy"><img class="ja" src="assets/badges/appstore-ja.svg" alt="App Store からダウンロード" loading="lazy"></a>
+        </div>
+        <p class="fine">
+          <span class="ko">무료 · 보상형 광고(선택) · 앱 내 구매(선택) · 6개 언어</span>
+          <span class="en">Free · Optional rewarded ads · Optional in-app purchase · 6 languages</span>
+          <span class="ja">無料・リワード広告（任意）・アプリ内課金（任意）・6言語</span>
+        </p>
+      </div>
+      <div class="phones" aria-hidden="true">
+        <img class="p2 ko" src="assets/shots/pogeun/ko_01.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p1 ko" src="assets/shots/pogeun/ko_06.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p2 en" src="assets/shots/pogeun/en_01.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p1 en" src="assets/shots/pogeun/en_06.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p2 ja" src="assets/shots/pogeun/ja_01.webp" alt="" width="600" height="1304" loading="lazy">
+        <img class="p1 ja" src="assets/shots/pogeun/ja_06.webp" alt="" width="600" height="1304" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>13</b><span class="ko">곳 시설</span><span class="en">rooms</span><span class="ja">の施設</span></div>
+      <div class="stat"><b>16</b><span class="ko">마리 단골손님</span><span class="en">regular guests</span><span class="ja">匹の常連さん</span></div>
+      <div class="stat"><b>4</b><span class="ko">계절 축제</span><span class="en">seasonal festivals</span><span class="ja">つの季節まつり</span></div>
+      <div class="stat"><b>12</b><span class="ko">종 물고기</span><span class="en">kinds of fish</span><span class="ja">種の魚</span></div>
+    </div>
+  </div>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">시설 13곳</span><span class="en">13 rooms</span><span class="ja">13の施設</span></span>
+        <h2><span class="ko">방마다 손님이 좋아하는 것이 달라요</span><span class="en">Every room has its own favorite</span><span class="ja">部屋ごとに好きなものがちがいます</span></h2>
+        <p><span class="ko">수건, 우유, 차, 구운 달걀, 식혜…. 손님을 모실수록 동전이 쌓이고, 노천탕부터 별보기 다락까지 하나씩 열어 갑니다. 만드는 속도와 자리 수를 올리고, 방을 단장해 값을 올려요.</span><span class="en">Towels, milk, tea, baked eggs, rice punch and more. Every guest brings coins, and you open rooms one by one, from the Open Bath to the Stargazing Attic. Upgrade speed and seats, and renovate rooms to raise prices.</span><span class="ja">タオル、牛乳、お茶、温泉たまご、甘酒…。おもてなしするほどコインがたまり、露天風呂から星見の屋根裏まで、ひとつずつオープン。作る速さや席数を強化し、部屋をリフォームして値段もアップ。</span></p>
+      </div>
+      <div class="regions">
+        <span><span class="ko">노천탕</span><span class="en">Open Bath</span><span class="ja">露天風呂</span></span>
+        <span><span class="ko">매점</span><span class="en">Snack Shop</span><span class="ja">売店</span></span>
+        <span><span class="ko">찻집</span><span class="en">Tea House</span><span class="ja">茶屋</span></span>
+        <span><span class="ko">찜질방</span><span class="en">Sauna</span><span class="ja">サウナ</span></span>
+        <span><span class="ko">휴게실</span><span class="en">Lounge</span><span class="ja">休憩室</span></span>
+        <span><span class="ko">식당</span><span class="en">Diner</span><span class="ja">食堂</span></span>
+        <span><span class="ko">수면실</span><span class="en">Nap Room</span><span class="ja">仮眠室</span></span>
+        <span><span class="ko">족욕장</span><span class="en">Foot Bath</span><span class="ja">足湯</span></span>
+        <span><span class="ko">마사지방</span><span class="en">Massage Room</span><span class="ja">マッサージ室</span></span>
+        <span><span class="ko">빙수 가게</span><span class="en">Shaved Ice Stand</span><span class="ja">かき氷屋</span></span>
+        <span><span class="ko">군고구마 가게</span><span class="en">Sweet Potato Stand</span><span class="ja">焼きいも屋</span></span>
+        <span><span class="ko">유자차 다방</span><span class="en">Citron Tea Room</span><span class="ja">ゆず茶房</span></span>
+        <span><span class="ko">별보기 다락</span><span class="en">Stargazing Attic</span><span class="ja">星見の屋根裏</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0;padding-bottom:56px">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">앱 화면</span><span class="en">Inside the app</span><span class="ja">アプリ画面</span></span>
+        <h2><span class="ko">온천장, 시설, 축제, 직원, 도감, 이야기, 낚시</span><span class="en">Spa, rooms, festivals, staff, guest book, stories and fishing</span><span class="ja">温泉、施設、まつり、スタッフ、図鑑、お話、釣り</span></h2>
+        <p><span class="ko">옆으로 넘겨 실제 화면을 보세요.</span><span class="en">Swipe through the actual screens.</span><span class="ja">横にスクロールして実際の画面をご覧ください。</span></p>
+      </div>
+    </div>
+    <div class="gallery-wrap">
+      <div class="gallery ko" tabindex="0" aria-label="스크린샷">
+        <img src="assets/shots/pogeun/ko_01.webp" alt="온천장" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/ko_02.webp" alt="자리를 비운 사이 쌓인 동전" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/ko_03.webp" alt="시설" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/ko_04.webp" alt="계절 축제" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/ko_05.webp" alt="동물 직원" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/ko_06.webp" alt="손님 도감" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/ko_07.webp" alt="단골손님 이야기" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/ko_08.webp" alt="연못 낚시" width="600" height="1304" loading="lazy">
+      </div>
+      <div class="gallery en" tabindex="0" aria-label="Screenshots">
+        <img src="assets/shots/pogeun/en_01.webp" alt="The hot spring" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/en_02.webp" alt="Coins earned while away" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/en_03.webp" alt="Rooms" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/en_04.webp" alt="Seasonal festival" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/en_05.webp" alt="Animal staff" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/en_06.webp" alt="Guest book" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/en_07.webp" alt="Regulars' stories" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/en_08.webp" alt="Pond fishing" width="600" height="1304" loading="lazy">
+      </div>
+      <div class="gallery ja" tabindex="0" aria-label="スクリーンショット">
+        <img src="assets/shots/pogeun/ja_01.webp" alt="温泉" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/ja_02.webp" alt="お留守番のあいだにたまったコイン" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/ja_03.webp" alt="施設" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/ja_04.webp" alt="季節のおまつり" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/ja_05.webp" alt="動物スタッフ" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/ja_06.webp" alt="お客さん図鑑" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/ja_07.webp" alt="常連さんのお話" width="600" height="1304" loading="lazy"><img src="assets/shots/pogeun/ja_08.webp" alt="池の釣り" width="600" height="1304" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:32px">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">사계절과 축제</span><span class="en">Four seasons, four festivals</span><span class="ja">四季とおまつり</span></span>
+        <h2><span class="ko">계절마다 축제가 열려요</span><span class="en">A festival every season</span><span class="ja">季節ごとにおまつり</span></h2>
+        <p><span class="ko">축제를 열면 손님이 두 배로 몰려와요. 계절이 끝나면 다음 계절로 '이사'하며 별빛을 받고, 해를 거듭하며 새내기 온천에서 숲속 궁궐 온천까지 등급을 올립니다.</span><span class="en">Open a festival and guests pour in at double the pace. When a season ends, move on to the next one and earn starlight, and year by year raise your grade from Fledgling Spa to Forest Palace Spa.</span><span class="ja">おまつりを開くとお客さんが2倍。季節が終わったら次の季節へお引っ越しして星あかりをもらい、年を重ねて「はじめての湯」から「森の御殿湯」までランクを上げます。</span></p>
+      </div>
+      <div class="modes">
+        <div class="mode"><b><span class="ko">봄 · 벚꽃 축제</span><span class="en">Spring · Blossom Festival</span><span class="ja">春・桜まつり</span></b><p><span class="ko">벚꽃 아래 첫 손님을 맞아요.</span><span class="en">Welcome your first guests under the cherry blossoms.</span><span class="ja">桜の下で最初のお客さんを迎えます。</span></p></div>
+        <div class="mode"><b><span class="ko">여름 · 수박 축제</span><span class="en">Summer · Melon Festival</span><span class="ja">夏・スイカまつり</span></b><p><span class="ko">시원한 수박과 빙수가 기다려요.</span><span class="en">Cool watermelon and shaved ice await.</span><span class="ja">冷たいスイカとかき氷が待っています。</span></p></div>
+        <div class="mode"><b><span class="ko">가을 · 단풍 축제</span><span class="en">Autumn · Maple Festival</span><span class="ja">秋・もみじまつり</span></b><p><span class="ko">붉게 물든 숲에서 온천 한 번.</span><span class="en">A warm soak in the red autumn forest.</span><span class="ja">色づいた森でひと風呂。</span></p></div>
+        <div class="mode"><b><span class="ko">겨울 · 눈꽃 축제</span><span class="en">Winter · Snowflake Festival</span><span class="ja">冬・雪の花まつり</span></b><p><span class="ko">눈 내리는 노천탕이 가장 포근해요.</span><span class="en">The open bath is coziest when it snows.</span><span class="ja">雪の露天風呂がいちばんぽかぽか。</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:32px">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker"><span class="ko">기능</span><span class="en">Features</span><span class="ja">機能</span></span>
+        <h2><span class="ko">천천히, 포근하게 키우는 나만의 온천장</span><span class="en">Grow your hot spring, slowly and cozily</span><span class="ja">ゆっくり、ぽかぽか育てる温泉</span></h2>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14.5 20c.2-2.6 1.8-4.5 4-4.5 1.5 0 2.5.8 2.5.8"/></svg></div>
+          <h3><span class="ko">일 잘하는 동물 직원</span><span class="en">Hard-working animal staff</span><span class="ja">はたらきものの動物スタッフ</span></h3>
+          <p><span class="ko">너구리, 여우, 곰, 판다, 수달 직원마다 힘·속도·말솜씨 같은 특기가 있어요. 쓰다듬어 하트를 모으고, 모자도 씌워 줄 수 있어요.</span><span class="en">Raccoon dog, fox, bear, panda and otter, each with a skill like strength, speed or kind words. Pet them to collect hearts and dress them up in hats.</span><span class="ja">タヌキ、キツネ、クマ、パンダ、カワウソ。それぞれに力持ち・早足・やさしい言葉などの特技があります。なでてハートを集め、ぼうしもかぶせられます。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></div>
+          <h3><span class="ko">단골손님과 이야기</span><span class="en">Regulars and their stories</span><span class="ja">常連さんとお話</span></h3>
+          <p><span class="ko">16마리 단골손님이 찾아와 저마다의 이야기를 조금씩 들려줘요. 손님 도감을 채우고, 손님의 부탁도 들어줘 보세요.</span><span class="en">16 regular guests visit and share their stories a little at a time. Fill your guest book and help them with their requests.</span><span class="ja">16匹の常連さんが、それぞれのお話を少しずつ聞かせてくれます。図鑑をうめて、おねがいもかなえてあげましょう。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12c3-4 6-6 9.5-6S21 9 22 12c-1 3-3 6-6.5 6S9 16 6 12z"/><path d="M6 12L2 8v8z"/><circle cx="17" cy="11" r="1"/></svg></div>
+          <h3><span class="ko">연못과 낚시</span><span class="en">The pond and fishing</span><span class="ja">池と釣り</span></h3>
+          <p><span class="ko">마당 연못에서 계절마다 다른 물고기 12종을 낚아요. 연못을 가꾸면 비단잉어와 거북이 찾아오고 모든 수입이 늘어요.</span><span class="en">Fish for 12 kinds of fish that change with the seasons. Tend the pond and koi and a turtle move in, raising all your income.</span><span class="ja">お庭の池で、季節ごとにちがう12種の魚を釣りましょう。池を育てると錦鯉やカメがやってきて、すべての収入もアップ。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <h3><span class="ko">자리를 비워도 괜찮아요</span><span class="en">Fine to step away</span><span class="ja">留守にしても大丈夫</span></h3>
+          <p><span class="ko">잠깐 자리를 비워도 직원들이 일해 둔 동전이 기다리고 있어요. 재촉하는 타이머는 없어요.</span><span class="en">Step away for a while and the coins your staff earned will be waiting. No timers rushing you.</span><span class="ja">少し目を離しているあいだも、スタッフがかせいだコインが待っています。急かすタイマーはありません。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3 4-6 6-6 10a6 6 0 0 0 12 0c0-4-3-6-6-10z"/><path d="M12 21v-6"/></svg></div>
+          <h3><span class="ko">마당 꾸미기</span><span class="en">Decorate the yard</span><span class="ja">お庭のもようがえ</span></h3>
+          <p><span class="ko">벤치, 석등, 벚나무, 풍경, 눈사람 같은 소품으로 마당을 꾸미고, 축제를 열면 노점이 생겨요.</span><span class="en">Decorate with benches, stone lanterns, cherry trees, wind chimes and snowmen, and festival stalls appear as you hold festivals.</span><span class="ja">ベンチ、石灯籠、桜の木、風鈴、雪だるまでお庭を飾り、おまつりを開くと屋台も登場します。</span></p>
+        </div>
+        <div class="feature">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+          <h3><span class="ko">친구와 함께</span><span class="en">With friends</span><span class="ja">フレンドと一緒に</span></h3>
+          <p><span class="ko">로그인하면 친구 코드로 서로의 온천장을 구경하고, 하루 한 번 하트를 보내요. 채팅이나 자유 입력은 없어요.</span><span class="en">Sign in to swap friend codes, visit each other's hot springs and send a heart once a day. There is no chat or free-text input.</span><span class="ja">ログインするとフレンドコードでおたがいの温泉を見に行き、1日1回ハートを送れます。チャットや自由入力はありません。</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">FAQ</span>
+        <h2><span class="ko">자주 묻는 질문</span><span class="en">Questions</span><span class="ja">よくある質問</span></h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary><span class="ko">무료인가요? 광고가 많나요?</span><span class="en">Is it free? Are there many ads?</span><span class="ja">無料ですか？広告は多いですか？</span></summary>
+          <p><span class="ko">무료입니다. 광고는 원할 때 버튼을 눌러 보는 보상형 광고뿐이고, 배너나 갑자기 뜨는 전면 광고는 없습니다. 선택 상품인 포근 패스(7·30·90일)를 사면 기간 동안 광고 없이 보상을 받고, 자리 비운 보상 +4시간, 무료 선물 2배, 미끼 +2 혜택이 붙습니다. 자동으로 갱신되지 않습니다.</span><span class="en">Yes. The only ads are optional rewarded ads you choose to watch — no banners and no pop-up ads. The optional Cozy Pass (7, 30 or 90 days) gives ad rewards without ads, +4 hours of away earnings, double free gifts and +2 bait for its period. It does not renew automatically.</span><span class="ja">はい、無料です。広告はボタンを押して見たいときだけ見るリワード広告のみで、バナーや突然出てくる全画面広告はありません。任意のぽかぽかパス（7日・30日・90日）を買うと、期間中は広告なしでごほうび、お留守番のごほうび+4時間、無料プレゼント2倍、エサ+2。自動更新はされません。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">계정이 필요한가요?</span><span class="en">Do I need an account?</span><span class="ja">アカウントは必要ですか？</span></summary>
+          <p><span class="ko">아니요. 로그인 없이 바로 플레이하고, 진행 상황은 기기에 저장됩니다. Apple 또는 구글로 로그인하면 클라우드에 저장돼 폰을 바꿔도 이어서 할 수 있고, 친구 기능도 쓸 수 있습니다. 설정에서 계정을 삭제할 수 있습니다.</span><span class="en">No. Play right away without signing in; progress is saved on your device. Sign in with Apple or Google to back it up to the cloud, keep playing on a new phone and use friends. You can delete the account in Settings.</span><span class="ja">いいえ。ログインなしですぐに遊べ、進み具合は端末に保存されます。Apple または Google でログインするとクラウドに保存され、機種変更しても続きから遊べ、フレンド機能も使えます。アカウントは設定から削除できます。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">어떤 언어를 지원하나요?</span><span class="en">Which languages does it support?</span><span class="ja">対応言語は？</span></summary>
+          <p><span class="ko">한국어, 영어, 일본어, 스페인어, 중국어(번체·간체) 6개 언어를 지원합니다.</span><span class="en">Six: English, Korean, Japanese, Spanish, and Traditional and Simplified Chinese.</span><span class="ja">日本語、英語、韓国語、スペイン語、中国語（繁体字・簡体字）の6言語に対応しています。</span></p>
+        </details>
+        <details>
+          <summary><span class="ko">안드로이드에서도 쓸 수 있나요?</span><span class="en">Is it on Android?</span><span class="ja">Androidでも使えますか？</span></summary>
+          <p><span class="ko">현재는 App Store에서만 받을 수 있습니다. 아이폰용으로 만들었습니다.</span><span class="en">Not yet. It's on the App Store, made for iPhone.</span><span class="ja">現在は App Store でのみ配信しています。iPhone 向けに作りました。</span></p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="cta-band">
+      <img class="icon" src="assets/icons/pogeun.webp" alt="" width="112" height="112">
+      <div>
+        <h2><span class="ko">오늘도 수고한 나에게, 따뜻한 온천 한 번</span><span class="en">You worked hard today. How about a warm soak?</span><span class="ja">今日もがんばったあなたに、あたたかい温泉を</span></h2>
+        <p><span class="ko">무료로 설치하고 1년차 봄부터 시작하세요.</span><span class="en">Free to install. Start in Year 1 Spring.</span><span class="ja">無料でインストールして、1年目の春から始めましょう。</span></p>
+        <div class="badges">
+          <a class="badge as" href="https://apps.apple.com/app/id6836583718"><img class="ko" src="assets/badges/appstore-ko.svg" alt="App Store에서 다운로드" loading="lazy"><img class="en" src="assets/badges/appstore-en.svg" alt="Download on the App Store" loading="lazy"><img class="ja" src="assets/badges/appstore-ja.svg" alt="App Store からダウンロード" loading="lazy"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> RedMoon Lab</span>
+    <a href="index.html"><span class="ko">전체 앱</span><span class="en">All apps</span><span class="ja">アプリ一覧</span></a>
+    <a href="https://heyday07.github.io/cozy-hot-spring-privacy/"><span class="ko">개인정보처리방침</span><span class="en">Privacy policy</span><span class="ja">プライバシーポリシー</span></a>
+    <a href="mailto:teamstar13000@gmail.com">teamstar13000@gmail.com</a>
+    <span class="legal">
+      <span class="ko">App Store는 Apple Inc.의 서비스 마크입니다.</span>
+      <span class="en">App Store is a service mark of Apple Inc.</span>
+      <span class="ja">App Store は Apple Inc. のサービスマークです。</span>
+    </span>
+  </div>
+</footer>
+
+<script src="assets/site.js?v=3" defer></script>
+<script src="assets/analytics.js?v=1" defer></script>
+</body>
+</html>
